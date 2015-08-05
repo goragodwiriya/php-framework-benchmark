@@ -6,10 +6,10 @@ cd `dirname $0`
 base="$1"
 bm_name=`basename $0 .sh`
 
-results_file="output/results.$bm_name.log"
-check_file="output/check.$bm_name.log"
-error_file="output/error.$bm_name.log"
-url_file="output/urls.log"
+results_file="output/$2/results.$bm_name.log"
+check_file="output/$2/check.$bm_name.log"
+error_file="output/$2/error.$bm_name.log"
+url_file="output/$2/urls.log"
 
 cd ..
 
@@ -23,7 +23,18 @@ do
     if [ -d "$fw" ]; then
         echo "$fw"
         . "$fw/_benchmark/hello_world.sh"
-        benchmark "$fw" "$url"
+        if [ "$2" = "hello" ]; then
+            benchmark "$fw" "$url" "$2"
+        fi
+        if [ "$2" = "orm" ]; then
+            benchmark "$fw" "$orm" "$2"
+        fi
+         if [ "$2" = "select" ]; then
+            benchmark "$fw" "$select" "$2"
+        fi
+         if [ "$2" = "gcms" ]; then
+            benchmark "$fw" "$gcms" "$2"
+        fi
     fi
 done
 

@@ -7,7 +7,12 @@ $app = new \Slim\Slim();
 $app->get('/hello/index', function () {
     echo 'Hello World!';
 });
-
+$app->get('/hello/orm', function () {
+    echo 'Hello Orm!';
+});
+$app->get('/hello/select', function () {
+    echo 'Hello Select!';
+});
 $app->run();
 
 printf(

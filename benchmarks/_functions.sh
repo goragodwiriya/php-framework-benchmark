@@ -2,8 +2,9 @@ benchmark ()
 {
     fw="$1"
     url="$2"
-    ab_log="output/$fw.ab.log"
-    output="output/$fw.output"
+
+    ab_log="output/$3/$fw.ab.log"
+    output="output/$3/$fw.output"
 
     echo "ab -c 10 -t 3 $url"
     ab -c 10 -t 3 "$url" > "$ab_log"
