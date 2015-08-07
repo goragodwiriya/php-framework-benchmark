@@ -12,7 +12,7 @@ class OrmController extends Controller
     public function actionIndex()
     {
         World::updateAll(array('name' => ''));
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $rnd = mt_rand(1, 10000);
             $result = World::findOne($rnd);
             $result->name = 'Hello World!';

@@ -20,7 +20,7 @@ class HelloController extends AppController
     {
         $world = TableRegistry::get('world', array('cache' => false));
         $world->updateAll(array('name' => ''), array(1 => 1));
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $rnd = mt_rand(1, 10000);
             $result = $world->get($rnd);
             $result->name = 'Hello World!';
@@ -35,7 +35,7 @@ class HelloController extends AppController
     {
         $world = TableRegistry::get('world', array('cache' => false));
         $world->updateAll(array('name' => 'Hello World!'), array(1 => 1));
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $rnd = mt_rand(1, 10000);
             $result = $world->get($rnd);
         }
