@@ -12,7 +12,7 @@ DirectoryIndex app.php
 </IfModule>
 
 <IfModule mod_rewrite.c>
-    RewriteEngine On
+    RewriteEngine Off
 
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the

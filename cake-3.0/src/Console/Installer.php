@@ -38,7 +38,7 @@ class Installer
         $rootDir = dirname(dirname(__DIR__));
 
         static::createAppConfig($rootDir, $io);
-        static::createWritableDirectories($rootDir, $io);
+        //static::createWritableDirectories($rootDir, $io);
 
         // ask if the permissions should be changed
         if ($io->isInteractive()) {
