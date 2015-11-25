@@ -29,11 +29,14 @@ do
         if [ "$2" = "orm" ]; then
             benchmark "$fw" "$orm" "$2"
         fi
-         if [ "$2" = "select" ]; then
+        if [ "$2" = "select" ]; then
             benchmark "$fw" "$select" "$2"
         fi
-         if [ "$2" = "gcms" ]; then
-            benchmark "$fw" "$gcms" "$2"
+        if [ "$2" = "cms" ]; then
+            benchmark "$fw" "$cms" "$2"
+        fi
+        if [ "$2" = "db" ]; then
+            benchmark "$fw" "$db" "$2"
         fi
     fi
 done

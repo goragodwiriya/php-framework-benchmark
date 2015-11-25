@@ -62,7 +62,7 @@ class CI_DB_result {
 	 *
 	 * @var	resource|object
 	 */
-	public $result_id;
+	public $resurlt_id;
 
 	/**
 	 * Result Array

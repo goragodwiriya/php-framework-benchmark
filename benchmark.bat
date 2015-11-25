@@ -1,0 +1,2 @@
+D:\xampp\apache\bin\ab.exe -c 20 -n 20 -t 3 http://localhost/php-framework-benchmark/phalcon-2.0/public/index.php?_url=/hello/index
+D:\xampp\apache\bin\ab.exe -c 20 -n 20 -t 3 http://localhost/kotchasan/projects/benchmark/index.php?action=hello

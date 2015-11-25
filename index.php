@@ -1,7 +1,7 @@
 <?php
 require __DIR__.'/libs/php-recipe-2nd/make_chart_parts.php';
 require __DIR__.'/libs/parse_results.php';
-$module = $_GET['module'];
+$module = isset($_GET['module']) ? $_GET['module'] : '';
 $m = array_keys($modules);
 if (!isset($modules[$module])) {
     $module = $m[0];
@@ -10,12 +10,12 @@ if (!isset($modules[$module])) {
 $results = parse_results(__DIR__.'/output/'.$module.'/results.hello_world.log');
 
 $barColors = array(
-    'DarkBlue', 'DarkCyan', 'DarkGoldenRod', 'DarkOrange', 'DarkGreen',
-    'DarkKhaki', 'DarkMagenta', 'DarkOliveGreen', 'DarkSeaGreen', 'DarkOrchid',
-    'DarkRed', 'DarkSalmon', 'DarkGray', 'DarkSlateBlue', 'DarkSlateGray',
+  'DarkBlue', 'DarkCyan', 'DarkGoldenRod', 'DarkOrange', 'DarkGreen',
+  'DarkKhaki', 'DarkMagenta', 'DarkOliveGreen', 'DarkSeaGreen', 'DarkOrchid',
+  'DarkRed', 'DarkSalmon', 'DarkGray', 'DarkSlateBlue', 'DarkSlateGray',
 );
 
-$graphWidth  = 800;
+$graphWidth = 800;
 $graphHeight = 400;
 
 // RPS Benchmark
@@ -28,15 +28,15 @@ foreach ($results as $fw => $result) {
 //var_dump($data); exit;
 
 $options = array(
-    'title' => 'Throughput',
-    'titleTextStyle' => array('fontSize' => 16),
-    'hAxis' => array('title' => 'requests per second',
-        'titleTextStyle' => array('bold' => true)),
-    'vAxis' => array('minValue' => 0, 'maxValue' => 0.01),
-    'width' => $graphWidth,
-    'height' => $graphHeight,
-    'bar' => array('groupWidth' => '90%'),
-    'legend' => array('position' => 'none')
+  'title' => 'Throughput',
+  'titleTextStyle' => array('fontSize' => 16),
+  'hAxis' => array('title' => 'requests per second',
+    'titleTextStyle' => array('bold' => true)),
+  'vAxis' => array('minValue' => 0, 'maxValue' => 0.01),
+  'width' => $graphWidth,
+  'height' => $graphHeight,
+  'bar' => array('groupWidth' => '90%'),
+  'legend' => array('position' => 'none')
 );
 $type = 'ColumnChart';
 list($chart_rpm, $div_rpm) = makeChartParts($data, $options, $type);
@@ -51,15 +51,15 @@ foreach ($results as $fw => $result) {
 }
 
 $options = array(
-    'title' => 'Memory',
-    'titleTextStyle' => array('fontSize' => 16),
-    'hAxis' => array('title' => 'peak memory (MB)',
-        'titleTextStyle' => array('bold' => true)),
-    'vAxis' => array('minValue' => 0, 'maxValue' => 1),
-    'width' => $graphWidth,
-    'height' => $graphHeight,
-    'bar' => array('groupWidth' => '90%'),
-    'legend' => array('position' => 'none')
+  'title' => 'Memory',
+  'titleTextStyle' => array('fontSize' => 16),
+  'hAxis' => array('title' => 'peak memory (MB)',
+    'titleTextStyle' => array('bold' => true)),
+  'vAxis' => array('minValue' => 0, 'maxValue' => 1),
+  'width' => $graphWidth,
+  'height' => $graphHeight,
+  'bar' => array('groupWidth' => '90%'),
+  'legend' => array('position' => 'none')
 );
 $type = 'ColumnChart';
 list($chart_mem, $div_mem) = makeChartParts($data, $options, $type);
@@ -74,15 +74,15 @@ foreach ($results as $fw => $result) {
 }
 
 $options = array(
-    'title' => 'Exec Time',
-    'titleTextStyle' => array('fontSize' => 16),
-    'hAxis' => array('title' => 'ms',
-        'titleTextStyle' => array('bold' => true)),
-    'vAxis' => array('minValue' => 0, 'maxValue' => 1),
-    'width' => $graphWidth,
-    'height' => $graphHeight,
-    'bar' => array('groupWidth' => '90%'),
-    'legend' => array('position' => 'none')
+  'title' => 'Exec Time',
+  'titleTextStyle' => array('fontSize' => 16),
+  'hAxis' => array('title' => 'ms',
+    'titleTextStyle' => array('bold' => true)),
+  'vAxis' => array('minValue' => 0, 'maxValue' => 1),
+  'width' => $graphWidth,
+  'height' => $graphHeight,
+  'bar' => array('groupWidth' => '90%'),
+  'legend' => array('position' => 'none')
 );
 $type = 'ColumnChart';
 list($chart_time, $div_time) = makeChartParts($data, $options, $type);

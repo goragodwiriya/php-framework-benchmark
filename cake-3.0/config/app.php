@@ -228,9 +228,9 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'nonstandard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
+            'username' => 'plus',
+            'password' => '1234',
+            'database' => 'gcms_plus',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,

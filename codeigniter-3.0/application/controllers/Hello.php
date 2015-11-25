@@ -17,7 +17,7 @@ class Hello extends CI_Controller
 
     public function select()
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $rnd = mt_rand(1, 10000);
             $query = $this->db->query('SELECT * FROM world WHERE id='.$rnd.' LIMIT 1');
             $row = $query->row();
@@ -27,7 +27,7 @@ class Hello extends CI_Controller
 
     public function orm()
     {
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $rnd = mt_rand(1, 10000);
             $query = $this->db->query('SELECT * FROM world WHERE id='.$rnd.' LIMIT 1');
             $row = $query->row();
