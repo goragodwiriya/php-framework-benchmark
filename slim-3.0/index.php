@@ -1,5 +1,5 @@
 <?php
-
+define('BEGIN_TIME', microtime(true));
 /**
  * Step 1: Require the Slim Framework using Composer's autoloader
  *
@@ -27,13 +27,13 @@ $app = new Slim\App();
  * is an anonymous function.
  */
 $app->get('/', function ($request, $response, $args) {
-    $response->write('Hello World!');
-    return $response;
+	$response->write('Hello World!');
+	return $response;
 });
 
 $app->get('/hello[/{name}]', function ($request, $response, $args) {
-    $response->write('Hello World!');
-    return $response;
+	$response->write('Hello World!');
+	return $response;
 })->setArgument('name', 'World!');
 
 /**
@@ -45,7 +45,5 @@ $app->get('/hello[/{name}]', function ($request, $response, $args) {
 $app->run();
 
 printf(
-    "\n%' 8d:%f",
-    memory_get_peak_usage(true),
-    microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']
+"\n%' 8d:%f", memory_get_peak_usage(true), microtime(true) - BEGIN_TIME
 );
