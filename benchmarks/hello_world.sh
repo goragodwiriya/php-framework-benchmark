@@ -38,6 +38,12 @@ do
         if [ "$2" = "db" ]; then
             benchmark "$fw" "$db" "$2"
         fi
+        if [ "$2" = "composer" ]; then
+            benchmark "$fw" "$composer" "$2"
+        fi
+        if [ "$2" = "php7" ]; then
+            benchmark "$fw" "$php7" "$2"
+        fi
     fi
 done
 

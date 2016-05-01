@@ -1,6 +1,6 @@
 #!/bin/sh
 
-base="http://127.0.0.1/php-framework-benchmark"
+base="http://localhost/php-framework-benchmark"
 
 cd `dirname $0`
 
@@ -36,4 +36,15 @@ if [ "$1" = "db" ] || [ "$1" = "all" ]; then
     export targets="$db"
     sh hello_world.sh "$base" "db"
     php ../bin/show_results_table.php "db"
+fi
+
+if [ "$1" = "composer" ] || [ "$1" = "all" ]; then
+    export targets="$composer"
+    sh hello_world.sh "$base" "composer"
+    php ../bin/show_results_table.php "composer"
+fi
+if [ "$1" = "php7" ] || [ "$1" = "all" ]; then
+    export targets="$php7"
+    sh hello_world.sh "$base" "php7"
+    php ../bin/show_results_table.php "php7"
 fi

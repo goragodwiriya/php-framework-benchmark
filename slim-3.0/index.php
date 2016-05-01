@@ -17,7 +17,6 @@ require 'vendor/autoload.php';
  * of setting names and values into the application constructor.
  */
 $app = new Slim\App();
-
 /**
  * Step 3: Define the Slim application routes
  *
