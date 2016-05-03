@@ -1,4 +1,5 @@
 <?php
+
 require __DIR__.'/../libs/parse_results.php';
 require __DIR__.'/../libs/build_table.php';
 $module = $_SERVER['argv'][1];

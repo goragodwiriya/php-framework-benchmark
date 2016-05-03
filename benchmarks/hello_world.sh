@@ -26,6 +26,9 @@ do
         if [ "$2" = "hello" ]; then
             benchmark "$fw" "$url" "$2"
         fi
+        if [ "$2" = "php7" ]; then
+            benchmark "$fw" "$url" "$2"
+        fi
         if [ "$2" = "orm" ]; then
             benchmark "$fw" "$orm" "$2"
         fi
@@ -40,9 +43,6 @@ do
         fi
         if [ "$2" = "composer" ]; then
             benchmark "$fw" "$composer" "$2"
-        fi
-        if [ "$2" = "php7" ]; then
-            benchmark "$fw" "$php7" "$2"
         fi
     fi
 done

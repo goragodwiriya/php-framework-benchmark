@@ -1,0 +1,5 @@
+sitemap: http://localhost/php-framework-benchmark/GCMS/sitemap.xml
+User-agent: *
+Disallow: /bin/
+Disallow: /ckeditor/
+Disallow: /skin/fonts/

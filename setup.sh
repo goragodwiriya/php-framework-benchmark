@@ -20,15 +20,17 @@ if [ $# -eq 0 ]; then
     . ./list.sh
     targets="$list"
 else
-    targets="$@"
+    targets="${@%/}"
 fi
 
 for fw in $targets
 do
     if [ -d "$fw" ]; then
-        echo "$fw"
+        echo "***** $fw *****"
         cd "$fw"
         . "_benchmark/setup.sh"
         cd ..
     fi
 done
+
+find . -name ".htaccess" -exec rm -rf {} \;
