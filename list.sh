@@ -9,7 +9,7 @@ fuel-1.8
 yii-2.0
 codeigniter-3.0
 phalcon-2.0
-#ice-1.1.3
+ice-1.1.3
 kotchasan
 "
 

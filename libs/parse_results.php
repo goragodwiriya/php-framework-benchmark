@@ -1,6 +1,6 @@
 <?php
 $modules = array(
-	'hello' => 'Loading Performance (PHP5.5.9)',
+	'hello' => 'Loading Performance (PHP5.6)',
 	'php7' => 'Loading Performance (PHP7)',
 	'orm' => 'ORM Performance (select and update)',
 	'select' => 'ORM Performance (select only)',

@@ -10,7 +10,7 @@ Parse_Results: {
 }
 
 Load_Theme: {
-	$theme = isset($_GET['theme']) ? $_GET['theme'] : 'default';
+	$theme = isset($_GET['theme']) ? $_GET['theme'] : 'mruz';
 	if (!ctype_alnum($theme)) {
 		exit('Invalid theme');
 	}

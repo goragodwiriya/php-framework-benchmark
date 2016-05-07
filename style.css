@@ -1,0 +1,8 @@
+
+.ggraphs canvas {
+	height: 20em;
+	width: 100%;
+}
+.ggraphs table {
+	display: none;
+}
