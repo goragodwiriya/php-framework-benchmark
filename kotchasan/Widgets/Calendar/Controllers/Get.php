@@ -8,6 +8,8 @@
 
 namespace Widgets\Calendar\Controllers;
 
+use \Kotchasan\Http\Request;
+
 /**
  * แสดงปฎิทิน (Ajax called)
  *
@@ -18,16 +20,16 @@ namespace Widgets\Calendar\Controllers;
 class Get extends \Kotchasan\Controller
 {
 
-	/**
-	 * แสดงปฎิทิน
-	 */
-	public function render($query_string)
-	{
-		// settings
-		$settings = include ROOT_PATH.'Widgets/Calendar/settings.php';
-		// render calendar
-		if (method_exists('Widgets\Calendar\Controllers\Calendar', 'render')) {
-			echo createClass('Widgets\Calendar\Controllers\Calendar')->render($query_string, $settings);
-		}
-	}
+  /**
+   * แสดงปฎิทิน
+   */
+  public function render(Request $request)
+  {
+    // settings
+    $settings = include ROOT_PATH.'Widgets/Calendar/settings.php';
+    // render calendar
+    if (method_exists('Widgets\Calendar\Controllers\Calendar', 'render')) {
+      echo createClass('Widgets\Calendar\Controllers\Calendar')->render($request, $settings);
+    }
+  }
 }

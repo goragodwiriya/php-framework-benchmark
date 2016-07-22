@@ -18,12 +18,12 @@ namespace Kotchasan;
 interface LoginInterface
 {
 
-	/**
-	 * ฟังก์ชั่นตรวจสอบการ login
-	 *
-	 * @param string $username
-	 * @param string $password
-	 * @return string|object เข้าระบบสำเร็จคืนค่า Object ข้อมูลสมาชิก, ไม่สำเร็จ คืนค่าข้อความผิดพลาด
-	 */
-	public function checkLogin($username, $password);
+  /**
+   * ฟังก์ชั่นตรวจสอบการ login
+   *
+   * @param string $username
+   * @param string $password
+   * @return string|object เข้าระบบสำเร็จคืนค่า Object ข้อมูลสมาชิก, ไม่สำเร็จ คืนค่าข้อความผิดพลาด
+   */
+  public function checkLogin($username, $password);
 }

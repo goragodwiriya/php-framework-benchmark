@@ -21,21 +21,21 @@ use \Kotchasan\Text;
 class Index extends \Kotchasan\View
 {
 
-	/**
-	 * แสดงผล Widget
-	 *
-	 * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
-	 * @return string
-	 */
-	public static function render($query_string)
-	{
-		// ฟอร์มค้นหา
-		$template = Template::createFromFile(ROOT_PATH.'Widgets/Search/Views/search.html');
-		$template->add(array(
-			'/{ID}/' => Text::rndname(10),
-			'/{SEARCH}/' => self::$request->get('q')->topic(),
-			'/{MODULE}/' => empty($query_string['module']) ? 'search' : $query_string['module']
-		));
-		return $template->render();
-	}
+  /**
+   * แสดงผล Widget
+   *
+   * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
+   * @return string
+   */
+  public static function render($query_string)
+  {
+    // ฟอร์มค้นหา
+    $template = Template::createFromFile(ROOT_PATH.'Widgets/Search/Views/search.html');
+    $template->add(array(
+      '/{ID}/' => Text::rndname(10),
+      '/{SEARCH}/' => self::$request->get('q')->topic(),
+      '/{MODULE}/' => empty($query_string['module']) ? 'search' : $query_string['module']
+    ));
+    return $template->render();
+  }
 }

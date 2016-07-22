@@ -19,28 +19,28 @@ use \Kotchasan\Database\Query;
  */
 class Model extends Query
 {
-	/**
-	 * ชื่อของการเชื่อมต่อ ใช้สำหรับโหลด config จาก settings/database.php
-	 *
-	 * @var string
-	 */
-	protected $conn = 'mysql';
+  /**
+   * ชื่อของการเชื่อมต่อ ใช้สำหรับโหลด config จาก settings/database.php
+   *
+   * @var string
+   */
+  protected $conn = 'mysql';
 
-	/**
-	 * Class constructor
-	 */
-	public function __construct()
-	{
-		parent::__construct($this->conn);
-	}
+  /**
+   * Class constructor
+   */
+  public function __construct()
+  {
+    parent::__construct($this->conn);
+  }
 
-	/**
-	 * create Model
-	 *
-	 * @return \static
-	 */
-	public static function create()
-	{
-		return new static;
-	}
+  /**
+   * create Model
+   *
+   * @return \static
+   */
+  public static function create()
+  {
+    return new static;
+  }
 }

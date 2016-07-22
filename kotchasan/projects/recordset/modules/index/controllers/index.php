@@ -23,50 +23,50 @@ use \Kotchasan\Orm\Recordset;
 class Controller extends \Kotchasan\Controller
 {
 
-	/**
-	 * แสดงผล
-	 *
-	 * @param Request $request
-	 */
-	public function index(Request $request)
-	{
-		// อ่านรายชื่อฟิลด์ของตาราง
-		$rs = Recordset::create('Index\World\Model');
-		$fields = $rs->getFields();
-		echo implode(', ', array_keys($fields)).'<br>';
-		// ลบข้อมูลทั้งตาราง
-		$rs->emptyTable();
-		// insert new record
-		for ($i = 0; $i < 10000; $i++) {
-			$query = World::create();
-			$query->updated_at = Date::mktimeToSqlDateTime();
-			$query->save();
-		}
-		// อัปเดททุก record
-		$rs->updateAll(array('created_at' => Date::mktimeToSqlDateTime()));
-		// อ่านจำนวนข้อมูลทั้งหมดในตาราง
-		echo 'All '.$rs->count().' records.<br>';
-		// สุ่ม record มาแก้ไข
-		for ($i = 0; $i < 5; $i++) {
-			$rnd = rand(1, 10000);
-			$world = $rs->find($rnd);
-			$world->name = 'Hello World!';
-			$world->save();
-		}
-		// query รายการที่มีการแก้ไข
-		$rs->where(array('name', '!=', ''));
-		// อ่านจำนวนข้อมูลที่พบ
-		echo 'Found '.$rs->count().' records.<br>';
-		// แสดงผลรายการที่พบ
-		foreach ($rs->all('id', 'name') as $item) {
-			echo $item->id.'='.$item->name.'<br>';
-			// ลบรายการที่กำลังแสดงผล
-			$item->delete();
-		}
-		// อ่านรายชื่อฟิลด์ของ query
-		$fields = $rs->getFields();
-		echo implode(', ', array_keys($fields)).'<br>';
-		// อ่านจำนวนข้อมูลที่เหลือ
-		echo 'Remain '.Recordset::create('Index\World\Model')->count().' records.<br>';
-	}
+  /**
+   * แสดงผล
+   *
+   * @param Request $request
+   */
+  public function index(Request $request)
+  {
+    // อ่านรายชื่อฟิลด์ของตาราง
+    $rs = Recordset::create('Index\World\Model');
+    $fields = $rs->getFields();
+    echo implode(', ', array_keys($fields)).'<br>';
+    // ลบข้อมูลทั้งตาราง
+    $rs->emptyTable();
+    // insert new record
+    for ($i = 0; $i < 10000; $i++) {
+      $query = World::create();
+      $query->updated_at = Date::mktimeToSqlDateTime();
+      $query->save();
+    }
+    // อัปเดททุก record
+    $rs->updateAll(array('created_at' => Date::mktimeToSqlDateTime()));
+    // อ่านจำนวนข้อมูลทั้งหมดในตาราง
+    echo 'All '.$rs->count().' records.<br>';
+    // สุ่ม record มาแก้ไข
+    for ($i = 0; $i < 5; $i++) {
+      $rnd = rand(1, 10000);
+      $world = $rs->find($rnd);
+      $world->name = 'Hello World!';
+      $world->save();
+    }
+    // query รายการที่มีการแก้ไข
+    $rs->where(array('name', '!=', ''));
+    // อ่านจำนวนข้อมูลที่พบ
+    echo 'Found '.$rs->count().' records.<br>';
+    // แสดงผลรายการที่พบ
+    foreach ($rs->all('id', 'name') as $item) {
+      echo $item->id.'='.$item->name.'<br>';
+      // ลบรายการที่กำลังแสดงผล
+      $item->delete();
+    }
+    // อ่านรายชื่อฟิลด์ของ query
+    $fields = $rs->getFields();
+    echo implode(', ', array_keys($fields)).'<br>';
+    // อ่านจำนวนข้อมูลที่เหลือ
+    echo 'Remain '.Recordset::create('Index\World\Model')->count().' records.<br>';
+  }
 }

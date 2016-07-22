@@ -20,41 +20,57 @@ use \Kotchasan\Http\Request;
 class Controller extends \Kotchasan\Controller
 {
 
-	/**
-	 * แสดงผลฟอร์ม ที่เรียกมาจาก GModal
-	 */
-	public function modal($query_string)
-	{
-		if ($query_string['action'] == 'register') {
-			$page = createClass('Index\Member\View')->register(true);
-		} elseif ($query_string['action'] == 'forgot') {
-			$page = createClass('Index\Member\View')->forgot(true);
-		}
-		echo json_encode($page);
-	}
+  /**
+   * แสดงผลฟอร์ม ที่เรียกมาจาก GModal
+   *
+   * @param Request $request
+   */
+  public function modal(Request $request)
+  {
+    $action = $request->post('action')->toString();
+    if ($action === 'register') {
+      $page = createClass('Index\Register\View')->render($request, true);
+    } elseif ($action === 'forgot') {
+      $page = createClass('Index\Forgot\View')->render($request, true);
+    } else {
+      // 404
+      $page = createClass('Index\PageNotFound\Controller')->init($request, 'index');
+    }
+    echo json_encode($page);
+  }
 
-	public function editprofile(Request $request)
-	{
-		return createClass('Index\Editprofile\View')->render($request);
-	}
+  public function editprofile(Request $request)
+  {
+    return createClass('Index\Editprofile\View')->render($request);
+  }
 
-	public function sendmail(Request $request)
-	{
-		return createClass('Index\Sendmail\View')->render($request);
-	}
+  public function sendmail(Request $request)
+  {
+    return createClass('Index\Sendmail\View')->render($request);
+  }
 
-	public function register()
-	{
-		return createClass('Index\Member\View')->register(false);
-	}
+  public function register(Request $request)
+  {
+    return createClass('Index\Register\View')->render($request, false);
+  }
 
-	public function forgot()
-	{
-		return createClass('Index\Member\View')->forgot();
-	}
+  public function forgot(Request $request)
+  {
+    return createClass('Index\Forgot\View')->render($request);
+  }
 
-	public function dologin()
-	{
-		return createClass('Index\Member\View')->dologin();
-	}
+  public function dologin(Request $request)
+  {
+    return createClass('Index\Dologin\View')->render($request);
+  }
+
+  public function member(Request $request)
+  {
+    return createClass('Index\View\View')->render($request);
+  }
+
+  public function activate(Request $request)
+  {
+    return createClass('Index\Activate\View')->render($request);
+  }
 }

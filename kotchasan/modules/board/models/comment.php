@@ -18,22 +18,22 @@ namespace Board\Comment;
 class Model extends \Kotchasan\Model
 {
 
-	/**
-	 * รายการแสดงความคิดเห็น
-	 *
-	 * @param object $story
-	 * @return array
-	 */
-	public static function get($story)
-	{
-		$model = new static;
-		return $model->db()->createQuery()
-				->select('C.*', 'U.status', "(CASE WHEN ISNULL(U.`id`) THEN C.`email` WHEN U.`displayname`='' THEN U.`email` ELSE U.`displayname` END) AS `displayname`")
-				->from('board_r C')
-				->join('user U', 'LEFT', array('U.id', 'C.member_id'))
-				->where(array(array('C.index_id', (int)$story->id), array('C.module_id', (int)$story->module_id)))
-				->order('C.id')
-				->cacheOn()
-				->execute();
-	}
+  /**
+   * รายการแสดงความคิดเห็น
+   *
+   * @param object $story
+   * @return array
+   */
+  public static function get($story)
+  {
+    $model = new static;
+    return $model->db()->createQuery()
+        ->select('C.*', 'U.status', "(CASE WHEN ISNULL(U.`id`) THEN C.`email` WHEN U.`displayname`='' THEN U.`email` ELSE U.`displayname` END) AS `name`")
+        ->from('board_r C')
+        ->join('user U', 'LEFT', array('U.id', 'C.member_id'))
+        ->where(array(array('C.index_id', (int)$story->id), array('C.module_id', (int)$story->module_id)))
+        ->order('C.id')
+        ->cacheOn()
+        ->execute();
+  }
 }

@@ -22,35 +22,35 @@ use \Kotchasan\Language;
 class Model extends \Kotchasan\KBase
 {
 
-	/**
-	 * รับค่าจาก action
-	 */
-	public function action()
-	{
-		$ret = array();
-		// referer, session, admin
-		if (self::$request->isReferer() && self::$request->inintSession() && $login = Login::isAdmin()) {
-			// ค่าที่ส่งมา
-			$type = self::$request->post('type')->toString();
-			$type = $type == 'js' ? 'js' : 'php';
-			$id = self::$request->post('id')->toString();
-			$action = self::$request->post('action')->toString();
-			if ($action == 'delete') {
-				// โหลดภาษา
-				$datas = Language::installed($type);
-				// ลบรายการที่ส่งมา
-				$datas = ArrayTool::delete($datas, $id);
-				// save
-				$error = Language::save($datas, $type);
-				if (empty($error)) {
-					$ret['location'] = 'reload';
-				} else {
-					$ret['alert'] = $error;
-				}
-			}
-		} else {
-			$ret['alert'] = Language::get('Unable to complete the transaction');
-		}
-		echo json_encode($ret);
-	}
+  /**
+   * รับค่าจาก action
+   */
+  public function action()
+  {
+    $ret = array();
+    // referer, session, admin
+    if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
+      // ค่าที่ส่งมา
+      $type = self::$request->post('type')->toString();
+      $type = $type == 'js' ? 'js' : 'php';
+      $id = self::$request->post('id')->toString();
+      $action = self::$request->post('action')->toString();
+      if ($action == 'delete') {
+        // โหลดภาษา
+        $datas = Language::installed($type);
+        // ลบรายการที่ส่งมา
+        $datas = ArrayTool::delete($datas, $id);
+        // save
+        $error = Language::save($datas, $type);
+        if (empty($error)) {
+          $ret['location'] = 'reload';
+        } else {
+          $ret['alert'] = $error;
+        }
+      }
+    } else {
+      $ret['alert'] = Language::get('Unable to complete the transaction');
+    }
+    echo json_encode($ret);
+  }
 }

@@ -21,24 +21,24 @@ use \Kotchasan\Language;
 class Controller extends \Kotchasan\Controller
 {
 
-	/**
-	 * ประมวลผลหน้า Login
-	 */
-	public function execute()
-	{
-		// โหมดตัวอย่าง
-		if (empty(Login::$text_email) && empty(Login::$text_password) && !empty(self::$cfg->demo_mode)) {
-			Login::$text_email = 'demo';
-			Login::$text_password = 'demo';
-		}
-		return createClass('Index\Login\View')->render();
-	}
+  /**
+   * ประมวลผลหน้า Login
+   */
+  public function execute()
+  {
+    // โหมดตัวอย่าง
+    if (empty(Login::$text_username) && empty(Login::$text_password) && !empty(self::$cfg->demo_mode)) {
+      Login::$text_username = 'demo';
+      Login::$text_password = 'demo';
+    }
+    return createClass('Index\Login\View')->render();
+  }
 
-	/**
-	 * title bar
-	 */
-	public function title()
-	{
-		return Language::get('Administrator Area');
-	}
+  /**
+   * title bar
+   */
+  public function title()
+  {
+    return Language::get('Administrator Area');
+  }
 }

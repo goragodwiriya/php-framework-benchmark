@@ -23,55 +23,55 @@ use \Kotchasan\Email;
 class Model extends \Kotchasan\Model
 {
 
-	/**
-	 * บันทึก
-	 */
-	public function save(Request $request)
-	{
-		// referer, session
-		if ($request->isReferer() && $request->inintSession()) {
-			$ret = array();
-			// ค่าที่ส่งมา
-			$email = $request->post('email')->url();
-			if ($email === '') {
-				$ret['ret_email'] = Language::get('Please fill out this form');
-			} else {
-				$or = $this->groupOr(array('email', $email), array('phone1', $email));
-				$search = $this->db()->createQuery()
-					->from('user')
-					->where(array($or, array('fb', '0')))
-					->toArray()
-					->first('id', 'email');
-				if ($search === false) {
-					$ret['ret_email'] = Language::get('not a registered user');
-				}
-			}
-			if (empty($ret)) {
-				// รหัสผ่านใหม่
-				$password = Text::rndname(6);
-				// ข้อมูลอีเมล์
-				$replace = array(
-					'/%PASSWORD%/' => $password,
-					'/%EMAIL%/' => $search['email']
-				);
-				// send mail
-				$err = Email::send(3, 'member', $replace, $search['email']);
-				if (empty($err)) {
-					// อัปเดทรหัสผ่านใหม่
-					$save = array('password' => md5($password.$search['email']));
-					$this->db()->createQuery()->update('user')->set($save)->where($search['id'])->execute();
-					// คืนค่า
-					$ret['alert'] = Language::get('Your message was sent successfully');
-					$ret['ret_email'] = '';
-					$ret['location'] = $request->post('modal')->toString() === 'true' ? 'close' : WEB_URL.'index.php?module=dologin';
-				} else {
-					$ret['ret_email'] = $err;
-				}
-			} else {
-				$ret['input'] = 'email';
-			}
-			// คืนค่าเป็น JSON
-			echo json_encode($ret);
-		}
-	}
+  /**
+   * บันทึก
+   */
+  public function save(Request $request)
+  {
+    // referer, session
+    if ($request->initSession() && $request->isReferer()) {
+      $ret = array();
+      // ค่าที่ส่งมา
+      $email = $request->post('forgot_email')->url();
+      if ($email === '') {
+        $ret['ret_forgot_email'] = Language::get('Please fill out this form');
+      } else {
+        $search = $this->db()->createQuery()
+          ->from('user')
+          ->where(array(array('email', $email), array('fb', '0')))
+          ->toArray()
+          ->first('id', 'email');
+        if ($search === false) {
+          $ret['ret_forgot_email'] = Language::get('not a registered user');
+        }
+      }
+      if (empty($ret)) {
+        // รหัสผ่านใหม่
+        $password = Text::rndname(6);
+        // ข้อมูลอีเมล์
+        $replace = array(
+          '/%PASSWORD%/' => $password,
+          '/%EMAIL%/' => $search['email']
+        );
+        // send mail
+        $err = Email::send(3, 'member', $replace, $search['email']);
+        if (empty($err)) {
+          // อัปเดทรหัสผ่านใหม่
+          $save = array('password' => md5($password.$search['email']));
+          $this->db()->createQuery()->update('user')->set($save)->where($search['id'])->execute();
+          // คืนค่า
+          $ret['alert'] = Language::get('Your message was sent successfully');
+          $ret['ret_forgot_email'] = '';
+          $location = $request->post('modal')->url();
+          $ret['location'] = $location === 'true' ? 'close' : $location;
+        } else {
+          $ret['ret_forgot_email'] = $err;
+        }
+      } else {
+        $ret['input'] = 'forgot_email';
+      }
+      // คืนค่าเป็น JSON
+      echo json_encode($ret);
+    }
+  }
 }

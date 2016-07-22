@@ -12,7 +12,7 @@ use \Gcms\Login;
 use \Kotchasan\Template;
 
 /**
- * หน้าเพจ 404 (Page Not Found)
+ * กรอบสมาชิก
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -21,50 +21,52 @@ use \Kotchasan\Template;
 class View extends \Kotchasan\View
 {
 
-	/**
-	 * ฟอร์มสมาชิก
-	 *
-	 * @param array $login
-	 * @return string
-	 */
-	public function member($login)
-	{
-		$template = Template::create('member', 'member', 'member');
-		if ($template->isEmpty()) {
-			$template = Template::create('member', 'member', 'memberfrm');
-		}
-		$template->add(array(
-			'/{LNG_([\w\s\.\-\'\(\),%\/:&\#;]+)}/e' => '\Kotchasan\Language::get(array(1=>"$1"))',
-			'/{WEBTITLE}/' => self::$cfg->web_title,
-			'/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
-			'/{DISPLAYNAME}/' => empty($login['displayname']) ? $login['email'] : $login['displayname'],
-			'/{ID}/' => (int)$login['id'],
-			'/{STATUS}/' => (int)$login['status'],
-			'/{ADMIN}/' => $login && Login::isAdmin() ? '' : 'hidden',
-			'/{WEBURL}/' => WEB_URL,
-			'/:name/' => self::$cfg->member_status[1]
-		));
-		return $template->render();
-	}
+  /**
+   * ฟอร์มสมาชิก
+   *
+   * @param array $login
+   * @return string
+   */
+  public function member($login)
+  {
+    $template = Template::create('member', 'member', 'member');
+    if ($template->isEmpty()) {
+      $template = Template::create('member', 'member', 'memberfrm');
+    }
+    $template->add(array(
+      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::get(array(1=>"$1"))',
+      '/{WEBTITLE}/' => self::$cfg->web_title,
+      '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
+      '/{DISPLAYNAME}/' => empty($login['displayname']) ? $login['email'] : $login['displayname'],
+      '/{ID}/' => (int)$login['id'],
+      '/{STATUS}/' => $login['status'],
+      '/{ADMIN}/' => $login && Login::isAdmin() ? '' : 'hidden',
+      '/{WEBURL}/' => WEB_URL,
+      '/:name/' => self::$cfg->member_status[1]
+    ));
+    return $template->render();
+  }
 
-	/**
-	 * ฟอร์มเข้าระบบ
-	 *
-	 * @return string
-	 */
-	public function login()
-	{
-		$template = Template::create('member', 'member', 'login');
-		if ($template->isEmpty()) {
-			$template = Template::create('member', 'member', 'loginfrm');
-		}
-		$template->add(array(
-			'/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
-			'/{EMAIL}/' => Login::$text_email,
-			'/{PASSWORD}/' => Login::$text_password,
-			'/{REMEMBER}/' => self::$request->cookie('login_remember')->toInt() == 1 ? 'checked' : '',
-			'/{FACEBOOK}/' => empty(self::$cfg->facebook_appId) ? 'hidden' : 'facebook'
-		));
-		return $template->render();
-	}
+  /**
+   * ฟอร์มเข้าระบบ
+   *
+   * @return string
+   */
+  public function login()
+  {
+    $template = Template::create('member', 'member', 'login');
+    if ($template->isEmpty()) {
+      $template = Template::create('member', 'member', 'loginfrm');
+    }
+    $template->add(array(
+      '/{LNG_([^}]+)}/e' => '\Kotchasan\Language::get(array(1=>"$1"))',
+      '/{SUBTITLE}/' => empty(Login::$login_message) ? self::$cfg->web_description : '<span class=error>'.Login::$login_message.'</span>',
+      '/{EMAIL}/' => Login::$text_username,
+      '/{PASSWORD}/' => Login::$text_password,
+      '/{TOKEN}/' => self::$request->createToken(),
+      '/{REMEMBER}/' => self::$request->cookie('login_remember')->toInt() == 1 ? 'checked' : '',
+      '/{FACEBOOK}/' => empty(self::$cfg->facebook_appId) ? 'hidden' : 'facebook'
+    ));
+    return $template->render();
+  }
 }

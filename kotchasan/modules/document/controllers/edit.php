@@ -20,28 +20,28 @@ use \Kotchasan\Http\Request;
 class Controller extends \Kotchasan\Controller
 {
 
-	/**
-	 * แก้ไขกระทู้และความคิดเห็น
-	 *
-	 * @param Request $request
-	 * @param object $module ข้อมูลโมดูลจาก database
-	 * @return object
-	 */
-	public function init(Request $request, $module)
-	{
-		// รายการที่แก้ไข
-		$rid = $request->request('rid')->toInt();
-		// ตรวจสอบโมดูลและอ่านข้อมูลโมดูล
-		if ($rid > 0) {
-			$index = \Document\Module\Model::getCommentById($rid, $module);
-		}
-		if (empty($index)) {
-			// 404
-			$list = createClass('Index\PageNotFound\View')->render();
-		} elseif ($rid > 0) {
-			// ฟอร์มแก้ไขความคิดเห็น
-			$list = createClass('Document\Replyedit\View')->index($request, $index);
-		}
-		return $list;
-	}
+  /**
+   * แก้ไขกระทู้และความคิดเห็น
+   *
+   * @param Request $request
+   * @param object $module ข้อมูลโมดูลจาก database
+   * @return object
+   */
+  public function init(Request $request, $module)
+  {
+    // รายการที่แก้ไข
+    $rid = $request->get('rid')->toInt();
+    // ตรวจสอบโมดูลและอ่านข้อมูลโมดูล
+    if ($rid > 0) {
+      $index = \Document\Module\Model::getCommentById($rid, $module);
+    }
+    if (empty($index)) {
+      // 404
+      $page = createClass('Index\PageNotFound\Controller')->init($request, 'document');
+    } elseif ($rid > 0) {
+      // ฟอร์มแก้ไขความคิดเห็น
+      $page = createClass('Document\Replyedit\View')->index($request, $index);
+    }
+    return $page;
+  }
 }

@@ -17,10 +17,10 @@ namespace Index\World;
  */
 class Model extends \Kotchasan\Orm\Field
 {
-	/**
-	 * table name
-	 *
-	 * @var string
-	 */
-	protected $table = 'world';
+  /**
+   * table name
+   *
+   * @var string
+   */
+  protected $table = 'world';
 }

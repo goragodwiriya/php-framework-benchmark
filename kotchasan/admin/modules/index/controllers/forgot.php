@@ -20,19 +20,19 @@ use \Kotchasan\Language;
 class Controller extends \Kotchasan\Controller
 {
 
-	/**
-	 * ประมวลผลหน้า Forgot
-	 */
-	public function execute()
-	{
-		return createClass('Index\Forgot\View')->render();
-	}
+  /**
+   * ประมวลผลหน้า Forgot
+   */
+  public function execute()
+  {
+    return createClass('Index\Forgot\View')->render();
+  }
 
-	/**
-	 * title bar
-	 */
-	public function title()
-	{
-		return Language::get('Request new password');
-	}
+  /**
+   * title bar
+   */
+  public function title()
+  {
+    return Language::get('Request new password');
+  }
 }

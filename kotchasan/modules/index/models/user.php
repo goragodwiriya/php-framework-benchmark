@@ -17,10 +17,10 @@ namespace Index\User;
  */
 class Model extends \Kotchasan\Orm\Field
 {
-	/**
-	 * ชื่อตาราง
-	 *
-	 * @var string
-	 */
-	protected $table = 'user U';
+  /**
+   * ชื่อตาราง
+   *
+   * @var string
+   */
+  protected $table = 'user U';
 }

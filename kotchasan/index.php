@@ -13,4 +13,6 @@ include 'load.php';
 $app = Kotchasan::createWebApplication(Gcms\Config::create());
 $app->defaultRouter = 'Gcms\Router';
 $app->run();
-require $_SERVER['DOCUMENT_ROOT'].'/php-framework-benchmark/libs/output_data.php';
+if (isset($_GET['module']) && $_GET['module'] == 'benchmark') {
+  require $_SERVER['DOCUMENT_ROOT'].'/php-framework-benchmark/libs/output_data.php';
+}

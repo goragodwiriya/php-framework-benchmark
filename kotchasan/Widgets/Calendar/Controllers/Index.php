@@ -18,18 +18,18 @@ namespace Widgets\Calendar\Controllers;
 class Index extends \Kotchasan\Controller
 {
 
-	/**
-	 * แสดงผล Widget
-	 *
-	 * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
-	 * @return string
-	 */
-	public function get($query_string)
-	{
-		$calendar = array(
-			'<div id=widget-calendar></div>',
-			'<script>widgetsCalendarInint("widget-calendar", true);</script>'
-		);
-		return implode('', $calendar);
-	}
+  /**
+   * แสดงผล Widget
+   *
+   * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
+   * @return string
+   */
+  public function get($query_string)
+  {
+    $calendar = array(
+      '<div id=widget-calendar></div>',
+      '<script>widgetsCalendarInit("widget-calendar", true);</script>'
+    );
+    return implode('', $calendar);
+  }
 }

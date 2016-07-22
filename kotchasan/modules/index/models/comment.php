@@ -18,23 +18,23 @@ namespace Index\Comment;
 class Model extends \Kotchasan\Model
 {
 
-	/**
-	 * อัปเดทจำนวนความคิดเห็น
-	 *
-	 * @param int $qid ID ของบทความ
-	 * @param int $module_id ID ของโมดูล
-	 */
-	public static function update($qid, $module_id)
-	{
-		$model = new static;
-		$count = $model->db()->createQuery()
-			->selectCount()
-			->from('comment')
-			->where(array(array('index_id', $qid), array('module_id', $module_id)));
-		$model->db()->createQuery()
-			->update('index')
-			->set(array('comments' => $count))
-			->where(array('id', $qid))
-			->execute();
-	}
+  /**
+   * อัปเดทจำนวนความคิดเห็น
+   *
+   * @param int $qid ID ของบทความ
+   * @param int $module_id ID ของโมดูล
+   */
+  public static function update($qid, $module_id)
+  {
+    $model = new static;
+    $count = $model->db()->createQuery()
+      ->selectCount()
+      ->from('comment')
+      ->where(array(array('index_id', $qid), array('module_id', $module_id)));
+    $model->db()->createQuery()
+      ->update('index')
+      ->set(array('comments' => $count))
+      ->where(array('id', $qid))
+      ->execute();
+  }
 }

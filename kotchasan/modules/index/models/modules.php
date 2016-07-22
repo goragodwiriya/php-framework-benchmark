@@ -17,10 +17,10 @@ namespace Index\Modules;
  */
 class Model extends \Kotchasan\Orm\Field
 {
-	/**
-	 * ชื่อตาราง
-	 *
-	 * @var string
-	 */
-	protected $table = 'modules M';
+  /**
+   * ชื่อตาราง
+   *
+   * @var string
+   */
+  protected $table = 'modules M';
 }

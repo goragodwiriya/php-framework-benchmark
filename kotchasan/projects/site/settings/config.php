@@ -1,5 +1,5 @@
 <?php
 /* settings/config.php */
 return array(
-	'skin' => 'default'
+  'skin' => 'default'
 );

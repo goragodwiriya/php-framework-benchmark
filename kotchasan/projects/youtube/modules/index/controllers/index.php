@@ -20,13 +20,13 @@ use \Kotchasan\Http\Request;
 class Controller extends \Kotchasan\Controller
 {
 
-	/**
-	 * แสดงผล
-	 *
-	 * @param Request $request
-	 */
-	public function index(Request $request)
-	{
-		createClass('Index\Index\View')->render();
-	}
+  /**
+   * แสดงผล
+   *
+   * @param Request $request
+   */
+  public function index(Request $request)
+  {
+    createClass('Index\Index\View')->render();
+  }
 }

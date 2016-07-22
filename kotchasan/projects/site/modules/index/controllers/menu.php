@@ -17,17 +17,17 @@ namespace Index\Menu;
  */
 class Controller extends \Kotchasan\Controller
 {
-	/*
-	 * Initial Controller.
-	 *
-	 * @param array $modules
-	 *
-	 * @return string
-	 */
+  /*
+   * Initial Controller.
+   *
+   * @param array $modules
+   *
+   * @return string
+   */
 
-	public function render($module)
-	{
-		// สร้างเมนู
-		return createClass('Index\Menu\View')->render($module);
-	}
+  public function render($module)
+  {
+    // สร้างเมนู
+    return createClass('Index\Menu\View')->render($module);
+  }
 }

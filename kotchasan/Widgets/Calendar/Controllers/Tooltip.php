@@ -8,6 +8,8 @@
 
 namespace Widgets\Calendar\Controllers;
 
+use \Kotchasan\Http\Request;
+
 /**
  * แสดง tooltip ของปฎิทิน (Ajax called)
  *
@@ -18,16 +20,16 @@ namespace Widgets\Calendar\Controllers;
 class Tooltip extends \Kotchasan\Controller
 {
 
-	/**
-	 * แสดงปฎิทิน
-	 */
-	public function get($query_string)
-	{
-		// settings
-		$settings = include ROOT_PATH.'Widgets/Calendar/settings.php';
-		// calendar tooltip
-		if (!empty($settings['controller']) && class_exists($settings['controller'], 'tooltip')) {
-			echo createClass($settings['controller'])->tooltip($query_string, $settings);
-		}
-	}
+  /**
+   * แสดงปฎิทิน
+   */
+  public function get(Request $request)
+  {
+    // settings
+    $settings = include ROOT_PATH.'Widgets/Calendar/settings.php';
+    // calendar tooltip
+    if (!empty($settings['controller']) && class_exists($settings['controller'], 'tooltip')) {
+      echo createClass($settings['controller'])->tooltip($request, $settings);
+    }
+  }
 }

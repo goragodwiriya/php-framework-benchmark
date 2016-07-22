@@ -1,4 +1,4 @@
 <?php
 return array(
-	'controller' => 'Document\\Calendar\\Controller'
+  'controller' => 'Document\\Calendar\\Controller'
 );

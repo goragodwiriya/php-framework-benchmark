@@ -20,34 +20,34 @@ use \Kotchasan\Http\Request;
 class Controller extends \Kotchasan\Controller
 {
 
-	/**
-	 * แก้ไขกระทู้และความคิดเห็น
-	 *
-	 * @param Request $request
-	 * @param object $module ข้อมูลโมดูลจาก database
-	 * @return object
-	 */
-	public function init(Request $request, $module)
-	{
-		// รายการที่แก้ไข
-		$qid = $request->request('qid')->toInt();
-		$rid = $request->request('rid')->toInt();
-		// ตรวจสอบโมดูลและอ่านข้อมูลโมดูล
-		if ($qid > 0) {
-			$index = \Board\Module\Model::getQuestionById($qid, $module);
-		} elseif ($rid > 0) {
-			$index = \Board\Module\Model::getCommentById($rid, $module);
-		}
-		if (empty($index)) {
-			// 404
-			$list = createClass('Index\PageNotFound\View')->render();
-		} elseif ($qid > 0) {
-			// ฟอร์มแก้ไขกระทู้
-			$list = createClass('Board\Writeedit\View')->index($request, $index);
-		} elseif ($rid > 0) {
-			// ฟอร์มแก้ไขความคิดเห็น
-			$list = createClass('Board\Replyedit\View')->index($request, $index);
-		}
-		return $list;
-	}
+  /**
+   * แก้ไขกระทู้และความคิดเห็น
+   *
+   * @param Request $request
+   * @param object $module ข้อมูลโมดูลจาก database
+   * @return object
+   */
+  public function init(Request $request, $module)
+  {
+    // รายการที่แก้ไข
+    $qid = $request->get('qid')->toInt();
+    $rid = $request->get('rid')->toInt();
+    // ตรวจสอบโมดูลและอ่านข้อมูลโมดูล
+    if ($qid > 0) {
+      $index = \Board\Module\Model::getQuestionById($qid, $module);
+    } elseif ($rid > 0) {
+      $index = \Board\Module\Model::getCommentById($rid, $module);
+    }
+    if (empty($index)) {
+      // 404
+      $page = createClass('Index\PageNotFound\Controller')->init($request, 'board');
+    } elseif ($qid > 0) {
+      // ฟอร์มแก้ไขกระทู้
+      $page = createClass('Board\Writeedit\View')->index($request, $index);
+    } elseif ($rid > 0) {
+      // ฟอร์มแก้ไขความคิดเห็น
+      $page = createClass('Board\Replyedit\View')->index($request, $index);
+    }
+    return $page;
+  }
 }

@@ -22,32 +22,35 @@ use \Kotchasan\Template;
 class Model extends \Kotchasan\KBase
 {
 
-	/**
-	 * ฟังก์ชั่นตรวจสอบการ Login
-	 */
-	public function chklogin()
-	{
-		if (self::$request->isReferer() && self::$request->inintSession()) {
-			// กำหนด skin ให้กับ template
-			Template::init(self::$cfg->skin);
-			// ตรวจสอบการ login
-			Login::create();
-			// ตรวจสอบสมาชิก
-			$login = Login::isMember();
-			// คืนค่า Json
-			if ($login) {
-				$ret = array(
-					'alert' => str_replace('%s', empty($login['displayname']) ? $login['email'] : $login['displayname'], Language::get('Welcome %s, login complete')),
-					'content' => rawurlencode(\Index\Login\Controller::inint($login)),
-					'action' => self::$request->post('login_action', self::$cfg->login_action)->toString()
-				);
-			} else {
-				$ret = array(
-					'alert' => Login::$login_message,
-					'input' => Login::$login_input
-				);
-			}
-			echo json_encode($ret);
-		}
-	}
+  /**
+   * ฟังก์ชั่นตรวจสอบการ Login
+   */
+  public function chklogin()
+  {
+    if (self::$request->initSession() && self::$request->isSafe()) {
+      // กำหนด skin ให้กับ template
+      Template::init(self::$cfg->skin);
+      // ตรวจสอบการ login
+      Login::create();
+      // ตรวจสอบสมาชิก
+      $login = Login::isMember();
+      if ($login) {
+        $name = trim($login['fname'].' '.$login['lname']);
+        $ret = array(
+          'alert' => str_replace('%s', (empty($name) ? $login['email'] : $name), Language::get('Welcome %s, login complete')),
+          'content' => rawurlencode(\Index\Login\Controller::init($login)),
+          'action' => self::$request->post('login_action', self::$cfg->login_action)->toString()
+        );
+        // clear
+        self::$request->removeToken();
+      } else {
+        $ret = array(
+          'alert' => Login::$login_message,
+          'input' => Login::$login_input
+        );
+      }
+      // คืนค่า JSON
+      echo json_encode($ret);
+    }
+  }
 }

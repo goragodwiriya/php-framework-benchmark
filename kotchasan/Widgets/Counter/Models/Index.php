@@ -18,31 +18,31 @@ namespace Widgets\Counter\Models;
 class Index extends \Kotchasan\Model
 {
 
-	/**
-	 * อ่านข้อมูล Counter และ Useronline
-	 *
-	 * @return object
-	 */
-	public static function get()
-	{
-		$model = new static;
-		$query = $model->db()->createQuery()
-			->selectCount()
-			->from('useronline');
-		$ret = $model->db()->createQuery()
-			->from('counter')
-			->order('id DESC')
-			->cacheOn()
-			->first('*', array($query, 'useronline'));
-		if (!$ret) {
-			return (object)array(
-					'counter' => 0,
-					'visited' => 0,
-					'pages_view' => 0,
-					'useronline' => 0
-			);
-		} else {
-			return $ret;
-		}
-	}
+  /**
+   * อ่านข้อมูล Counter และ Useronline
+   *
+   * @return object
+   */
+  public static function get()
+  {
+    $model = new static;
+    $query = $model->db()->createQuery()
+      ->selectCount()
+      ->from('useronline');
+    $ret = $model->db()->createQuery()
+      ->from('counter')
+      ->order('id DESC')
+      ->cacheOn()
+      ->first('*', array($query, 'useronline'));
+    if (!$ret) {
+      return (object)array(
+          'counter' => 0,
+          'visited' => 0,
+          'pages_view' => 0,
+          'useronline' => 0
+      );
+    } else {
+      return $ret;
+    }
+  }
 }

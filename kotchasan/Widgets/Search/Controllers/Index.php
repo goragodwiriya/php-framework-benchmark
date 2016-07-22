@@ -18,14 +18,14 @@ namespace Widgets\Search\Controllers;
 class Index extends \Kotchasan\Controller
 {
 
-	/**
-	 * แสดงผล Widget
-	 *
-	 * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
-	 * @return string
-	 */
-	public function get($query_string)
-	{
-		return \Widgets\Search\Views\Index::render($query_string);
-	}
+  /**
+   * แสดงผล Widget
+   *
+   * @param array $query_string ข้อมูลที่ส่งมาจากการเรียก Widget
+   * @return string
+   */
+  public function get($query_string)
+  {
+    return \Widgets\Search\Views\Index::render($query_string);
+  }
 }

@@ -22,101 +22,101 @@ use \Kotchasan\Http\Uri;
  */
 class AbstractRequest extends AbstractMessage implements RequestInterface
 {
-	/**
-	 * @var Uri
-	 */
-	protected $uri;
-	/**
-	 * @var string
-	 */
-	protected $method = 'GET';
-	/**
-	 * @var string
-	 */
-	protected $requestTarget;
+  /**
+   * @var Uri
+   */
+  protected $uri;
+  /**
+   * @var string
+   */
+  protected $method = 'GET';
+  /**
+   * @var string
+   */
+  protected $requestTarget;
 
-	/**
-	 * อ่านค่า request target.
-	 *
-	 * @return string
-	 */
-	public function getRequestTarget()
-	{
-		if ($this->requestTarget === null) {
-			$this->requestTarget = $this->uri;
-		}
-		return $this->requestTarget;
-	}
+  /**
+   * อ่านค่า request target.
+   *
+   * @return string
+   */
+  public function getRequestTarget()
+  {
+    if ($this->requestTarget === null) {
+      $this->requestTarget = $this->uri;
+    }
+    return $this->requestTarget;
+  }
 
-	/**
-	 * กำหนดค่า request target.
-	 *
-	 * @param mixed $requestTarget
-	 * @return self
-	 */
-	public function withRequestTarget($requestTarget)
-	{
-		$clone = clone $this;
-		$clone->requestTarget = $requestTarget;
-		return $clone;
-	}
+  /**
+   * กำหนดค่า request target.
+   *
+   * @param mixed $requestTarget
+   * @return \static
+   */
+  public function withRequestTarget($requestTarget)
+  {
+    $clone = clone $this;
+    $clone->requestTarget = $requestTarget;
+    return $clone;
+  }
 
-	/**
-	 * อ่านค่า HTTP method
-	 *
-	 * @return string Returns the request method.
-	 */
-	public function getMethod()
-	{
-		return $this->method;
-	}
+  /**
+   * อ่านค่า HTTP method
+   *
+   * @return string Returns the request method.
+   */
+  public function getMethod()
+  {
+    return $this->method;
+  }
 
-	/**
-	 * กำหนดค่า HTTP method
-	 *
-	 * @param string $method
-	 * @return self
-	 */
-	public function withMethod($method)
-	{
-		$clone = clone $this;
-		$clone->method = $method;
-		return $clone;
-	}
+  /**
+   * กำหนดค่า HTTP method
+   *
+   * @param string $method
+   * @return \static
+   */
+  public function withMethod($method)
+  {
+    $clone = clone $this;
+    $clone->method = $method;
+    return $clone;
+  }
 
-	/**
-	 * อ่าน Uri
-	 *
-	 * @return Uri
-	 */
-	public function getUri()
-	{
-		if ($this->uri === null) {
-			$this->uri = Uri::createFromGlobals();
-		}
-		return $this->uri;
-	}
+  /**
+   * อ่าน Uri
+   *
+   * @return Uri
+   */
+  public function getUri()
+  {
+    if ($this->uri === null) {
+      $this->uri = Uri::createFromGlobals();
+    }
+    return $this->uri;
+  }
 
-	/**
-	 * กำหนดค่า Uri
-	 *
-	 * @param Uri $uri
-	 * @param bool $preserveHost
-	 * @return self
-	 */
-	public function withUri(UriInterface $uri, $preserveHost = false)
-	{
-		$clone = clone $this;
-		$clone->uri = $uri;
-		if (!$preserveHost) {
-			if ($uri->getHost() !== '') {
-				$clone->headers['Host'] = $uri->getHost();
-			}
-		} else {
-			if ($this->uri->getHost() !== '' && (!$this->hasHeader('Host') || $this->getHeader('Host') === null)) {
-				$clone->headers['Host'] = $uri->getHost();
-			}
-		}
-		return $clone;
-	}
+  /**
+   * กำหนดค่า Uri
+   *
+   * @param Uri $uri
+   * @param boolean $preserveHost
+   * @return \static
+   */
+  public function withUri(UriInterface $uri, $preserveHost = false)
+  {
+    $clone = clone $this;
+    $clone->uri = $uri;
+    if (!$preserveHost) {
+      if ($uri->getHost() !== '') {
+        $clone->headers['Host'] = $uri->getHost();
+      }
+    } else {
+      if ($this->uri->getHost() !== '' && (!$this->hasHeader('Host') || $this->getHeader('Host') === null)) {
+        $clone->headers['Host'] = $uri->getHost();
+      }
+    }
+    return $clone;
+  }
 }
