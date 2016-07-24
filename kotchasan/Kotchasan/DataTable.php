@@ -618,7 +618,7 @@ class DataTable extends \Kotchasan\KBase
             if (isset($this->onCreateButton)) {
               $attributes = call_user_func($this->onCreateButton, $btn, $attributes, $items);
             }
-            if ($attributes !== false) {
+            if ($attributes && $attributes !== false) {
               $buttons[] = $this->button($btn, $attributes);
             }
           }

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cms="$base/kotchasan/index.php?module=benchmark&skin=benchmark"
+cms="$base/kcms/index.php?module=benchmark&skin=benchmark"
