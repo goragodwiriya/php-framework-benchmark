@@ -9,7 +9,6 @@
 namespace Index\Skin;
 
 use \Kotchasan\Html;
-use \Kotchasan\Language;
 
 /**
  * ตั้งค่า template
@@ -39,7 +38,7 @@ class View extends \Kotchasan\View
         'ajax' => true
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('Website display settings')
+      'title' => '{LNG_Website display settings}'
     ));
     // logo
     if (isset($config->logo) && is_file(ROOT_PATH.DATA_FOLDER.'image/'.$config->logo)) {
@@ -51,8 +50,8 @@ class View extends \Kotchasan\View
       'id' => 'logo',
       'labelClass' => 'g-input icon-upload',
       'itemClass' => 'item',
-      'label' => Language::get('Logo'),
-      'comment' => Language::get('Images or flash files on the website header (header) accepted jpg gif png files and swf'),
+      'label' => '{LNG_Logo}',
+      'comment' => '{LNG_Images or flash files on the website header (header) accepted jpg gif png files and swf}',
       'dataPreview' => 'logoImage',
       'previewSrc' => $img
     ));
@@ -60,7 +59,7 @@ class View extends \Kotchasan\View
     $fieldset->add('checkbox', array(
       'id' => 'delete_logo',
       'itemClass' => 'subitem',
-      'label' => Language::get('remove this photo'),
+      'label' => '{LNG_remove this photo}',
       'value' => 1
     ));
     // bg_image
@@ -69,8 +68,8 @@ class View extends \Kotchasan\View
       'id' => 'bg_image',
       'labelClass' => 'g-input icon-upload',
       'itemClass' => 'item',
-      'label' => Language::get('Background image'),
-      'comment' => Language::get('Background picture of the site (body)'),
+      'label' => '{LNG_Background image}',
+      'comment' => '{LNG_Background picture of the site (body)}',
       'dataPreview' => 'bgImage',
       'previewSrc' => $img
     ));
@@ -78,7 +77,7 @@ class View extends \Kotchasan\View
     $fieldset->add('checkbox', array(
       'id' => 'delete_bg_image',
       'itemClass' => 'subitem',
-      'label' => Language::get('remove this photo'),
+      'label' => '{LNG_remove this photo}',
       'value' => 1
     ));
     // bg_color
@@ -86,8 +85,8 @@ class View extends \Kotchasan\View
       'id' => 'bg_color',
       'labelClass' => 'g-input icon-color',
       'itemClass' => 'item',
-      'label' => Language::get('Background color'),
-      'comment' => Language::get('Background color of the site (body), eg #FFFFFF'),
+      'label' => '{LNG_Background color}',
+      'comment' => '{LNG_Background color of the site (body), eg #FFFFFF}',
       'value' => isset($config->bg_color) ? $config->bg_color : ''
     ));
     $fieldset = $form->add('fieldset', array(
@@ -96,7 +95,7 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large',
-      'value' => Language::get('Save')
+      'value' => '{LNG_Save}'
     ));
     return $form->render();
   }

@@ -25,6 +25,13 @@ a[id^='lang_']:hover, a[id^='lang_']:focus, .font_size:hover, .font_size:focus {
   background-color: rgba(0,0,0,0.2);
   color: inherit;
 }
+/* header */
+#logo h1 {
+  padding: 10px 10px 0;
+}
+#logo .description {
+  padding: 0 30px 10px;
+}
 /* search form */
 .search-form > p {
   display: table;
@@ -76,6 +83,8 @@ a[id^='lang_']:hover, a[id^='lang_']:focus, .font_size:hover, .font_size:focus {
 }
 .counter-detail > .col {
   text-align: left;
+  background-color: #F9F9F9;
+  background-color: rgba(0,0,0,0.02);
 }
 /* Login Form */
 .login p {
@@ -110,6 +119,9 @@ img.thumbnail,
 img#usericon {
   max-width: 50px;
   max-height: 50px;
+}
+img.uicon {
+  margin-left: 10px;
 }
 /* comment */
 .post-detail {
@@ -169,12 +181,20 @@ header.list h2 > * {
 }
 header.list .newtopic {
   text-align: right;
+  color: inherit;
+}
+#comment-list .r,
+#document-view .q,
+#board-view .q {
+  margin-bottom: 10px;
 }
 /* webbaord */
 #board-list .col1 {
   width: 42px;
   vertical-align: top;
-  padding-top: 1em;
+}
+#board-list .col1 img {
+  margin-top: 0.5em;
 }
 #board-list .col2 {
   max-width: 15em;
@@ -187,6 +207,14 @@ header.list .newtopic {
 #board-list .col4 {
   max-width: 6em;
   text-align: center;
+}
+#board-list td {
+  border-width: 2px;
+  border-bottom-style: dotted;
+}
+/* document-list */
+.document-list.listview .description {
+  display: none;
 }
 /* gbanner */
 .gbanner {

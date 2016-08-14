@@ -244,7 +244,13 @@ var indexActionCallback = function (xhr) {
   if (ds) {
     for (prop in ds) {
       val = ds[prop];
-      if (prop == 'delete_id') {
+      if (prop == 'location') {
+        if (val == 'reload') {
+          window.location.reload();
+        } else {
+          window.location.href = val;
+        }
+      } else if (prop == 'delete_id') {
         $G(val).remove();
       } else if (prop == 'alert') {
         alert(val);

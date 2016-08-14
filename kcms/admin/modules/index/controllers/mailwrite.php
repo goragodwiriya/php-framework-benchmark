@@ -40,23 +40,20 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-settings">'.Language::get('Site settings').'</span></li>');
-      $ul->appendChild('<li><a href="{BACKURL?module=mailtemplate&id=0}">'.Language::get('Email template').'</a></li>');
+      $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
+      $ul->appendChild('<li><a href="{BACKURL?module=mailtemplate&id=0}">{LNG_Email template}</a></li>');
       $ul->appendChild('<li><span>'.$title.'</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-write">'.$title.' '.$index->name.'</h1>'
       ));
-      if (!$index) {
-        $section->appendChild('<aside class=error>'.Language::get('Can not be performed this request. Because they do not find the information you need or you are not allowed').'</aside>');
-      } else {
+      if ($index) {
         // แสดงฟอร์ม
         $section->appendChild(createClass('Index\Mailwrite\View')->render($index));
+        return $section->render();
       }
-      return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -64,6 +61,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Create or Edit').' '.Language::get('Email Template');
+    return '{LNG_Create or Edit} {LNG_Email Template}';
   }
 }

@@ -9,7 +9,6 @@
 namespace Index\Languages;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 
 /**
@@ -36,8 +35,8 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-settings">'.Language::get('Site settings').'</span></li>');
-      $ul->appendChild('<li><span>'.Language::get('Language').'</span></li>');
+      $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
+      $ul->appendChild('<li><span>{LNG_Language}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-language">'.$this->title().'</h1>'
       ));
@@ -55,6 +54,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Language settings');
+    return '{LNG_Language settings}';
   }
 }

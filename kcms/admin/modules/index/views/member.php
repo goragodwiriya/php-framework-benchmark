@@ -45,7 +45,7 @@ class View extends \Kotchasan\View
       'sort' => self::$request->cookie('member_sort', 'id desc')->toString(),
       'onRow' => array($this, 'onRow'),
       /* คอลัมน์ที่ไม่ต้องแสดงผล */
-      'hideColumns' => array('visited', 'status', 'admin_access', 'activatecode'),
+      'hideColumns' => array('visited', 'status', 'admin_access', 'activatecode', 'website', 'fb'),
       /* คอลัมน์ที่สามารถค้นหาได้ */
       'searchColumns' => array('fname', 'lname', 'displayname', 'email'),
       /* ตั้งค่าการกระทำของของตัวเลือกต่างๆ ด้านล่างตาราง ซึ่งจะใช้ร่วมกับการขีดถูกเลือกแถว */
@@ -96,7 +96,8 @@ class View extends \Kotchasan\View
         'visited',
         'status',
         'admin_access',
-        'activatecode'
+        'activatecode',
+        'fb'
       ),
       /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
       'headers' => array(
@@ -176,13 +177,14 @@ class View extends \Kotchasan\View
    */
   public function onRow($item)
   {
-    $item['email'] = '<a href="index.php?module=sendmail&to='.$item['email'].'" class="status'.$item['status'].(empty($item['ban']) ? '' : ' ban').'">'.$item['email'].'</a>';
+    $item['email'] = '<a href="index.php?module=sendmail&to='.$item['email'].'" class="status'.$item['status'].'">'.$item['email'].'</a>';
     $item['create_date'] = Date::format($item['create_date'], 'd M Y');
     $item['lastvisited'] = Date::format($item['lastvisited'], 'd M Y H:i').' ('.number_format($item['visited']).')';
     $item['sex'] = '<span class=icon-sex'.(isset($this->sexes[$item['sex']]) ? '-'.$item['sex'] : '').'></span>';
     $item['ban'] = $item['ban'] == 1 ? '<span class="icon-ban ban" title="{LNG_Members were suspended}"></span>' : '<span class="icon-ban"></span>';
     $item['phone1'] = empty($item['phone1']) ? '' : '<a href="tel:'.$item['phone1'].'">'.$item['phone1'].'</a>';
-    $item['website'] = empty($item['website']) ? '' : '<a href="http://'.$item['website'].'" target="_blank">'.$item['website'].'</a>';
+    $class = $item['fb'] == 1 ? ' class=facebook' : '';
+    $item['displayname'] = empty($item['website']) ? '<span'.$class.'>'.$item['displayname'].'</span>' : '<a href="http://'.$item['website'].'" target="_blank"'.$class.'>'.$item['displayname'].'</a>';
     return $item;
   }
 }

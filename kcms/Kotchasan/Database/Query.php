@@ -216,19 +216,19 @@ abstract class Query extends \Kotchasan\KBase
       } elseif (strpos($fields, '(') !== false && preg_match('/^(.*?)(\s{0,}(as)?\s{0,}`?([a-z0-9_]+)`?)?$/i', $fields, $match)) {
         // (...) alias
         $ret = $match[1].(isset($match[4]) ? " AS `$match[4]`" : '');
-      } elseif (preg_match('/^([0-9]+)([\s]+as)?[\s]+([a-z0-9_]+)$/i', $fields, $match)) {
+      } elseif (preg_match('/^([0-9]+)([\s]+as)?[\s]+`?([^`]+)`?$/i', $fields, $match)) {
         // 0 as alias
         $ret = $match[1].' AS `'.$match[3].'`';
-      } elseif (preg_match('/^([\'"])(.*)\\1([\s]+as)?[\s]+([a-z0-9_]+)$/i', $fields, $match)) {
+      } elseif (preg_match('/^([\'"])(.*)\\1([\s]+as)?[\s]+`?([^`]+)`?$/i', $fields, $match)) {
         // 'string' as alias
         $ret = "'$match[2]' AS `$match[4]`";
-      } elseif (preg_match('/^([A-Z0-9]{1,2})\.([\*a-z0-9_]+)(([\s]+as)?[\s]+([a-z0-9_]+))?$/i', $fields, $match)) {
+      } elseif (preg_match('/^([A-Z0-9]{1,2})\.`?([\*a-z0-9_]+)`?(([\s]+as)?[\s]+`?([^`]+)`?)?$/i', $fields, $match)) {
         // U.id alias
         $ret = $match[1].'.'.($match[2] == '*' ? '*' : '`'.$match[2].'`').(isset($match[5]) ? ' AS `'.$match[5].'`' : '');
-      } elseif (preg_match('/^([a-z0-9_]+)\.([\*a-z0-9_]+)(([\s]+as)?[\s]+([a-z0-9_]+))?$/i', $fields, $match)) {
+      } elseif (preg_match('/^`?([a-z0-9_]+)`?\.`?([\*a-z0-9_]+)`?(([\s]+as)?[\s]+`?([^`]+)`?)?$/i', $fields, $match)) {
         // table.field alias
         $ret = '`'.$match[1].'`.'.($match[2] == '*' ? '*' : '`'.$match[2].'`').(isset($match[5]) ? ' AS `'.$match[5].'`' : '');
-      } elseif (preg_match('/^([a-z0-9_]+)([\s]+as)?[\s]+([a-z0-9_]+)$/i', $fields, $match)) {
+      } elseif (preg_match('/^`?([a-z0-9_]+)`?([\s]+as)?[\s]+`?([^`]+)`?$/i', $fields, $match)) {
         // table.field
         $ret = '`'.$match[1].'` AS `'.$match[3].'`';
       } elseif (preg_match('/([a-z0-9_]+)/i', $fields, $match)) {
@@ -325,11 +325,15 @@ abstract class Query extends \Kotchasan\KBase
   protected function fieldName($name)
   {
     if (is_array($name)) {
-      $rets = array();
-      foreach ($name AS $item) {
-        $rets[] = $this->fieldName($item);
+      if ($name[0] instanceof QueryBuilder) {
+        $ret = '('.$name[0]->text().') AS `'.$name[1].'`';
+      } else {
+        $rets = array();
+        foreach ($name AS $item) {
+          $rets[] = $this->fieldName($item);
+        }
+        $ret = implode(', ', $rets);
       }
-      $ret = implode(', ', $rets);
     } elseif (is_numeric($name)) {
       $ret = $name;
     } else {
@@ -572,6 +576,8 @@ abstract class Query extends \Kotchasan\KBase
         foreach ($value as $i => $item) {
           if (empty($item)) {
             $qs[] = is_string($item) ? "'$item'" : $item;
+          } elseif (is_string($item) && preg_match('/([a-zA-Z0-9]{1,2})\.`?([a-zA-Z0-9_\-]+)`?/', $item, $match)) {
+            $qs[] = "$match[1].`$match[2]`";
           } else {
             $qs[] = $q.$i;
             $vs[$q.$i] = $item;

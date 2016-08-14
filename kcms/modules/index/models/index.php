@@ -12,14 +12,20 @@ use \Kotchasan\Date;
 use \Kotchasan\Language;
 
 /**
- * คลาสสำหรับโหลดรายการเมนูจากฐานข้อมูลของ GCMS
+ * ตาราง index
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
  * @since 1.0
  */
-class Model extends \Kotchasan\Model
+class Model extends \Kotchasan\Orm\Field
 {
+  /**
+   * ชื่อตาราง
+   *
+   * @var string
+   */
+  protected $table = 'index I';
 
   /**
    * อ่านข้อมูลโมดูลจาก $module_id
@@ -30,7 +36,7 @@ class Model extends \Kotchasan\Model
   public static function getIndex($module_id)
   {
     if (is_int($module_id) && $module_id > 0) {
-      $model = new static;
+      $model = new \Kotchasan\Model;
       $select = array('I.id', 'M.module', 'M.owner', 'D.topic', 'D.description', 'D.keywords', 'D.detail', 'I.visited');
       $where = array(
         array('I.index', 1),
@@ -65,7 +71,7 @@ class Model extends \Kotchasan\Model
   public static function getIndexById($id)
   {
     if (is_int($id) && $id > 0) {
-      $model = new static;
+      $model = new \Kotchasan\Model;
       $select = array('I.id', 'M.module', 'M.owner', 'D.topic', 'D.description', 'D.keywords', 'D.detail', 'I.visited');
       $where = array(
         array('I.id', $id),
@@ -101,7 +107,7 @@ class Model extends \Kotchasan\Model
   public static function getModule($module, $owner)
   {
     if (is_string($module) && is_string($owner)) {
-      $model = new static;
+      $model = new \Kotchasan\Model;
       $select = array('I.id', 'I.module_id', 'M.module', 'M.owner', 'D.topic', 'D.description', 'D.keywords', 'D.detail', 'I.visited');
       $where = array(
         array('I.index', 1),

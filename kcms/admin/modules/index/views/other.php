@@ -9,7 +9,6 @@
 namespace Index\Other;
 
 use \Kotchasan\Html;
-use \Kotchasan\Language;
 
 /**
  * ตั้งค่าอื่นๆ
@@ -39,7 +38,7 @@ class View extends \Kotchasan\View
         'ajax' => true
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('General')
+      'title' => '{LNG_General}'
     ));
     // member_reservir
     if (empty($config->member_reserv)) {
@@ -61,8 +60,8 @@ class View extends \Kotchasan\View
       'id' => 'member_reserv',
       'labelClass' => 'g-input icon-file',
       'itemClass' => 'item',
-      'label' => Language::get('Member reserve'),
-      'comment' => Language::get('Do not use these names as a member (one per line)'),
+      'label' => '{LNG_Member reserve}',
+      'comment' => '{LNG_Do not use these names as a member (one per line)}',
       'rows' => 6,
       'value' => implode("\n", $config->member_reserv)
     ));
@@ -124,8 +123,8 @@ class View extends \Kotchasan\View
       'id' => 'wordrude',
       'labelClass' => 'g-input icon-file',
       'itemClass' => 'item',
-      'label' => Language::get('Bad words'),
-      'comment' => Language::get('List of bad words (one per line)'),
+      'label' => '{LNG_Bad words}',
+      'comment' => '{LNG_List of bad words (one per line)}',
       'rows' => 6,
       'value' => implode("\n", $config->wordrude)
     ));
@@ -134,8 +133,8 @@ class View extends \Kotchasan\View
       'id' => 'wordrude_replace',
       'labelClass' => 'g-input icon-edit',
       'itemClass' => 'item',
-      'label' => Language::get('Replace'),
-      'comment' => Language::get('Bad words will be replaced with this message'),
+      'label' => '{LNG_Replace}',
+      'comment' => '{LNG_Bad words will be replaced with this message}',
       'value' => isset($config->wordrude_replace) ? $config->wordrude_replace : 'xxx'
     ));
     // counter_digit
@@ -143,8 +142,8 @@ class View extends \Kotchasan\View
       'id' => 'counter_digit',
       'labelClass' => 'g-input icon-edit',
       'itemClass' => 'item',
-      'label' => Language::get('Digits of the counter'),
-      'comment' => Language::get('Principal amount of the counter for preview'),
+      'label' => '{LNG_Digits of the counter}',
+      'comment' => '{LNG_Principal amount of the counter for preview}',
       'value' => isset($config->counter_digit) ? $config->counter_digit : self::$cfg->counter_digit
     ));
     $fieldset = $form->add('fieldset', array(
@@ -153,7 +152,7 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large',
-      'value' => Language::get('Save')
+      'value' => '{LNG_Save}'
     ));
     return $form->render();
   }

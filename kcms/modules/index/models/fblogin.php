@@ -65,10 +65,10 @@ class Model extends \Kotchasan\Model
         ->first('id', 'email', 'visited', 'fb', 'website');
       if ($search === false) {
         // ยังไม่เคยลงทะเบียน, ลงทะเบียนใหม่
-        $facebook_data['id'] = 1 + $db->lastId($this->getTableName('user'));
+        $facebook_data['id'] = $db->getNextId($this->getTableName('user'));
         $facebook_data['fb'] = 1;
         $facebook_data['subscrib'] = 1;
-        $facebook_data['visited'] = 1;
+        $facebook_data['visited'] = 0;
         $facebook_data['ip'] = $request->getClientIp();
         $facebook_data['password'] = md5($login_password.$facebook_data['email']);
         $facebook_data['lastvisited'] = time();
@@ -86,7 +86,7 @@ class Model extends \Kotchasan\Model
       } else {
         // ไม่สามารถ login ได้ เนื่องจากมี email อยู่ก่อนแล้ว
         $facebook_data = false;
-        $ret['alert'] = str_replace(':name', Language::get('Users'), Language::get('This :name is already registered'));
+        $ret['alert'] = str_replace(':name', Language::get('User'), Language::get('This :name is already registered'));
         $ret['isMember'] = 0;
       }
       if (is_array($facebook_data)) {
@@ -102,6 +102,8 @@ class Model extends \Kotchasan\Model
         // login
         $facebook_data['password'] = $login_password;
         $_SESSION['login'] = $facebook_data;
+        // clear
+        $request->removeToken();
         // reload
         $ret['isMember'] = 1;
         $u = $request->post('u')->toString();
@@ -111,8 +113,6 @@ class Model extends \Kotchasan\Model
           $ret['location'] = 'reload';
         }
       }
-      // clear
-      $request->removeToken();
       // คืนค่าเป็น json
       echo json_encode($ret);
     }

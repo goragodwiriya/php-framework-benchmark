@@ -31,7 +31,7 @@ class Model extends \Kotchasan\Model
     $ret = array();
     // referer, session, member
     if ($request->initSession() && $request->isReferer() && $login = Login::isMember()) {
-      if ($login['email'] == 'demo') {
+      if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');
       } else {
         // รับค่าจากการ POST

@@ -9,7 +9,6 @@
 namespace Index\Register;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 
 /**
@@ -36,18 +35,17 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><a class="icon-user" href="index.php?module=member">'.Language::get('Users').'</a></li>');
-      $ul->appendChild('<li><span>'.Language::get('Register').'</span></li>');
+      $ul->appendChild('<li><a class="icon-user" href="index.php?module=member">{LNG_Users}</a></li>');
+      $ul->appendChild('<li><span>{LNG_Register}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-register">'.$this->title().'</h1>'
       ));
       // แสดงฟอร์ม
       $section->appendChild(createClass('Index\Register\View')->render());
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -55,6 +53,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Create new account');
+    return '{LNG_Create new account}';
   }
 }

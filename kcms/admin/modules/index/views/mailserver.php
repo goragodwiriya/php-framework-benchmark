@@ -39,15 +39,15 @@ class View extends \Kotchasan\View
         'ajax' => true
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('General')
+      'title' => '{LNG_General}'
     ));
     // noreply_email
     $fieldset->add('text', array(
       'id' => 'noreply_email',
       'labelClass' => 'g-input icon-email',
       'itemClass' => 'item',
-      'label' => Language::get('noreply email'),
-      'comment' => Language::get('Email addresses for sender and do not reply such as no-reply@domain.tld'),
+      'label' => '{LNG_noreply email}',
+      'comment' => '{LNG_Email addresses for sender and do not reply such as no-reply@domain.tld}',
       'maxlength' => 255,
       'value' => isset($config->noreply_email) ? $config->noreply_email : self::$cfg->noreply_email
     ));
@@ -56,8 +56,8 @@ class View extends \Kotchasan\View
       'id' => 'email_charset',
       'labelClass' => 'g-input icon-language',
       'itemClass' => 'item',
-      'label' => Language::get('Email encoding'),
-      'comment' => Language::get('Specify the language code of the email, as utf-8'),
+      'label' => '{LNG_Email encoding}',
+      'comment' => '{LNG_Specify the language code of the email, as utf-8}',
       'value' => isset($config->email_charset) ? $config->email_charset : self::$cfg->email_charset
     ));
     // email_use_phpMailer
@@ -65,22 +65,22 @@ class View extends \Kotchasan\View
       'id' => 'email_use_phpMailer',
       'labelClass' => 'g-input icon-clock',
       'itemClass' => 'item',
-      'label' => Language::get('Mail program'),
-      'comment' => Language::get('Set the application for send an email'),
+      'label' => '{LNG_Mail program}',
+      'comment' => '{LNG_Set the application for send an email}',
       'options' => Language::get('MAIL_PROGRAMS'),
       'value' => isset($config->email_use_phpMailer) ? $config->email_use_phpMailer : self::$cfg->email_use_phpMailer
     ));
     // ตั้งค่า mail server
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('Mail Server Settings')
+      'title' => '{LNG_Mail Server Settings}'
     ));
     // email_Host
     $fieldset->add('text', array(
       'id' => 'email_Host',
       'labelClass' => 'g-input icon-world',
       'itemClass' => 'item',
-      'label' => Language::get('Mail server'),
-      'comment' => Language::get('The name of the mail server as localhost or smtp.gmail.com (To change the settings of your email is the default. To remove this box entirely.)'),
+      'label' => '{LNG_Mail server}',
+      'comment' => '{LNG_The name of the mail server as localhost or smtp.gmail.com (To change the settings of your email is the default. To remove this box entirely.)}',
       'value' => isset($config->email_Host) ? $config->email_Host : self::$cfg->email_Host
     ));
     // email_Port
@@ -88,8 +88,8 @@ class View extends \Kotchasan\View
       'id' => 'email_Port',
       'labelClass' => 'g-input icon-config',
       'itemClass' => 'item',
-      'label' => Language::get('Port'),
-      'comment' => Language::get('Mail server port number (default is 25, for GMail used 465, 587 for DirectAdmin).'),
+      'label' => '{LNG_Port}',
+      'comment' => '{LNG_Mail server port number (default is 25, for GMail used 465, 587 for DirectAdmin).}',
       'value' => isset($config->email_Port) ? $config->email_Port : self::$cfg->email_Port
     ));
     // email_SMTPAuth
@@ -97,8 +97,8 @@ class View extends \Kotchasan\View
       'id' => 'email_SMTPAuth',
       'labelClass' => 'g-input icon-config',
       'itemClass' => 'item',
-      'label' => Language::get('Authentication require'),
-      'comment' => Language::get('How to define user authentication for mail servers. If you enable it, you must configure below correctly.'),
+      'label' => '{LNG_Authentication require}',
+      'comment' => '{LNG_How to define user authentication for mail servers. If you enable it, you must configure below correctly.}',
       'options' => Language::get('BOOLEANS'),
       'value' => isset($config->email_SMTPAuth) ? $config->email_SMTPAuth : self::$cfg->email_SMTPAuth
     ));
@@ -107,8 +107,8 @@ class View extends \Kotchasan\View
       'id' => 'email_SMTPSecure',
       'labelClass' => 'g-input icon-config',
       'itemClass' => 'item',
-      'label' => Language::get('SSL support'),
-      'comment' => Language::get('Enable SSL encryption for sending email'),
+      'label' => '{LNG_SSL support}',
+      'comment' => '{LNG_Enable SSL encryption for sending email}',
       'options' => Language::get('SMTPSECURIES'),
       'value' => isset($config->email_SMTPSecure) ? $config->email_SMTPSecure : self::$cfg->email_SMTPSecure
     ));
@@ -117,8 +117,8 @@ class View extends \Kotchasan\View
       'id' => 'email_Username',
       'labelClass' => 'g-input icon-user',
       'itemClass' => 'item',
-      'label' => Language::get('Username'),
-      'comment' => Language::get('Username for the mail server. (To change, enter a new value.)'),
+      'label' => '{LNG_Username}',
+      'comment' => '{LNG_Username for the mail server. (To change, enter a new value.)}',
       'value' => isset($config->email_Username) ? $config->email_Username : self::$cfg->email_Username
     ));
     // email_Password
@@ -126,8 +126,8 @@ class View extends \Kotchasan\View
       'id' => 'email_Password',
       'labelClass' => 'g-input icon-password',
       'itemClass' => 'item',
-      'label' => Language::get('Password'),
-      'comment' => Language::get('Password of the mail server. (To change the fill.)')
+      'label' => '{LNG_Password}',
+      'comment' => '{LNG_Password of the mail server. (To change the fill.)}'
     ));
     $fieldset = $form->add('fieldset', array(
       'class' => 'submit'
@@ -135,7 +135,7 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large',
-      'value' => Language::get('Save')
+      'value' => '{LNG_Save}'
     ));
     $form->script('initMailserver();');
     return $form->render();

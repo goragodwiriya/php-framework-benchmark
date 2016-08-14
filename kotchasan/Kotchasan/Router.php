@@ -65,11 +65,9 @@ class Router extends \Kotchasan\KBase
       // สร้างคลาส
       $obj = new $className;
       // เรียกเมธอด
-      if (method_exists($obj, $method)) {
-        $obj->$method(self::$request->withQueryParams($modules));
-      }
+      $obj->$method(self::$request->withQueryParams($modules));
     } else {
-      throw new \InvalidArgumentException('Method '.$method.' not found in '.$className.'.');
+      throw new \InvalidArgumentException('Method '.$method.' not found in '.$className);
     }
     return $this;
   }

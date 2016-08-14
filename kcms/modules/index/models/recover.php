@@ -11,7 +11,7 @@ namespace Index\Recover;
 use \Kotchasan\Http\Request;
 use \Kotchasan\Text;
 use \Kotchasan\Language;
-use \Kotchasan\Email;
+use \Gcms\Email;
 
 /**
  * ขอรหัสผ่านใหม่

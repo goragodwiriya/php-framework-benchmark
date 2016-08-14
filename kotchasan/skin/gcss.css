@@ -333,12 +333,6 @@ mark {
 .term5 {
   background-color: #C768BE;
 }
-.new,
-.update,
-.hot,
-.recommend {
-  position: relative;
-}
 .new:after,
 .update:after,
 .hot:after,
@@ -347,16 +341,12 @@ mark {
   font-size: 10px;
   font-weight: normal;
   font-style: normal;
-  line-height: 1;
-  padding: 1px 2px;
-  font-family: Arial;
+  line-height: inherit;
+  padding: 0 2px;
+  margin: 0 0 0 5px;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  margin-top: -6px;
 }
 .new:after {
   content: 'new';
@@ -366,7 +356,7 @@ mark {
 .update:after {
   content: 'update';
   background-color: #FFFF00;
-  color: #555;
+  color: #000;
 }
 .hot:after {
   content: 'hot!';
@@ -377,18 +367,6 @@ mark {
   content: 'cool';
   background-color: #259B24;
   color: #FFF;
-}
-.new {
-  padding-right: 2em !important;
-}
-.update {
-  padding-right: 3.1em !important;
-}
-.hot {
-  padding-right: 1.4em;
-}
-.recommend {
-  padding-right: 1.6em;
 }
 /* layout */
 .gcss-wrapper {
@@ -968,6 +946,9 @@ textarea.cke_editable {
   color: #333;
   border-color: rgba(0, 0, 0, 0.2);
 }
+.facebook .light:hover {
+  color: #000;
+}
 .color-gray {
   color: #9E9E9E;
 }
@@ -1248,7 +1229,8 @@ form p, form .item {
 .fixlabel label,
 .fixlabel .label,
 .fixlabel fieldset fieldset > legend,
-.listview > [class*="col"] {
+.listview > [class*="col"],
+.listview > .row > [class*="col"] {
   white-space: nowrap;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
@@ -1686,6 +1668,7 @@ html[dir="rtl"] .topmenu > ul ul ul {
   top: 1px;
   padding: 0 !important;
   list-style-type: none;
+  border-color: inherit;
 }
 .btntab > ul {
   margin-left: 1px;
@@ -2487,7 +2470,6 @@ table.fullwidth,
 .gbox > .row > .col1,
 .document-list .col,
 .document-list .col1 {
-  float: none;
   margin: 0 0 1% 0;
   clear: both;
 }
@@ -2811,7 +2793,7 @@ tr.bg2, .tr.bg2 {
   background-color: #F9F9F9;
   background-color: rgba(0,0,0,0.01);
 }
-tr.highlight, tr.select {
+tr:hover, tr.highlight, tr.select {
   background-color: rgba(0,0,0,0.02);
 }
 .border.horiz-table > thead > tr > td,
@@ -2982,13 +2964,14 @@ a.skip_content {
 .document-list [class*="col"] {
   border-width: 2px;
   border-bottom-style: dotted;
+  padding-bottom: 5px;
 }
 .document-list h6,
 .document-list .icon {
   display: inline;
 }
 .listview [class*="col"] {
-  padding: 0;
+  padding: 0.5% 1%;
   margin: 0;
 }
 .listview [class*="col"] * {

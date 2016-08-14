@@ -44,14 +44,4 @@ class Grid extends \Kotchasan\Template
   {
     return $this->cols;
   }
-
-  /**
-   * ฟังก์ชั่นตรวจสอบว่ามีการ add ข้อมูลมาหรือเปล่า
-   *
-   * @return boolean คืนค่า true ถ้ามีการเรียกใช้คำสั่ง add มาก่อนหน้า, หรือ false ถ้าไม่ใช่
-   */
-  public function hasItem()
-  {
-    return empty($this->items) ? false : true;
-  }
 }

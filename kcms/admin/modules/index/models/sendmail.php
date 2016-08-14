@@ -104,7 +104,7 @@ class Model extends \Kotchasan\Model
         );
         $save['detail'] = trim(preg_replace(array_keys($patt), array_values($patt), $save['detail']));
         if (!$input) {
-          $err = Email::custom($save['reciever'], $save['from'], $save['subject'], $save['detail']);
+          $err = Email::send($save['reciever'], $save['from'], $save['subject'], $save['detail']);
           if (empty($err)) {
             // ส่งอีเมล์สำเร็จ
             $ret['alert'] = Language::get('Your message was sent successfully');

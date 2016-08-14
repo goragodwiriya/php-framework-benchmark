@@ -12,7 +12,7 @@ use \Kotchasan\Language;
 use \Kotchasan\Http\Request;
 use \Kotchasan\Validator;
 use \Kotchasan\Text;
-use \Kotchasan\Email;
+use \Gcms\Email;
 use \Kotchasan\Antispam;
 
 /**
@@ -177,7 +177,7 @@ class Model extends \Kotchasan\Model
             Email::send(empty(self::$cfg->user_activate) ? 2 : 1, 'member', $replace, $save['email']);
             if (empty(self::$cfg->user_activate)) {
               // login
-              $save['password'] = $save['password'];
+              $save['password'] = $password;
               $_SESSION['login'] = $save;
               // แสดงข้อความตอบรับการสมัครสมาชิก
               $ret['alert'] = str_replace(':email', $save['email'], Language::get('Registration information sent to :email complete. We will take you to edit your profile'));

@@ -9,7 +9,6 @@
 namespace Index\Memberstatus;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 
 /**
@@ -36,18 +35,17 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-user">'.Language::get('Users').'</span></li>');
-      $ul->appendChild('<li><span>'.Language::get('Member status').'</span></li>');
+      $ul->appendChild('<li><span class="icon-user">{LNG_Users}</span></li>');
+      $ul->appendChild('<li><span>{LNG_Member status}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-users">'.$this->title().'</h1>'
       ));
       // แสดงฟอร์ม
       $section->appendChild(createClass('Index\Memberstatus\View')->render());
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -55,6 +53,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('The members status of the site');
+    return '{LNG_The members status of the site}';
   }
 }

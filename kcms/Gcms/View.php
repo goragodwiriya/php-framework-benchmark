@@ -54,10 +54,13 @@ class View extends \Kotchasan\View
    */
   public function addBreadcrumb($url, $menu, $tooltip = '', $class = '')
   {
-    $patt = array('/{CLASS}/', '/{URL}/', '/{TOOLTIP}/', '/{MENU}/');
-    $tooltip = $tooltip == '' ? $menu : $tooltip;
     $menu = htmlspecialchars_decode($menu);
-    $this->breadcrumbs[] = preg_replace($patt, array($class, $url, $tooltip, $menu), $this->breadcrumb_template);
+    $tooltip = $tooltip == '' ? $menu : $tooltip;
+    if ($url) {
+      $this->breadcrumbs[] = '<li><a class="'.$class.'" href="'.$url.'" title="'.$tooltip.'"><span>'.$menu.'</span></a></li>';
+    } else {
+      $this->breadcrumbs[] = '<li><span class="'.$class.'" title="'.$tooltip.'">'.$menu.'</span></li>';
+    }
   }
 
   /**

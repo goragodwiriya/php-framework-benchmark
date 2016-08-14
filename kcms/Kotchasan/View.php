@@ -8,7 +8,6 @@
 
 namespace Kotchasan;
 
-use \Kotchasan\Language;
 use \Kotchasan\Template;
 
 /**
@@ -122,7 +121,7 @@ class View extends \Kotchasan\KBase
     $this->contents['/{WEBDESCRIPTION}/'] = self::$cfg->web_description;
     $this->contents['/{WEBURL}/'] = WEB_URL;
     $this->contents['/{SKIN}/'] = Template::$src;
-    $this->contents['/{LANGUAGE}/'] = Language::name();
+    $this->contents['/{LANGUAGE}/'] = \Kotchasan\Language::name();
     $this->contents['/^[\s\t]+/m'] = '';
     foreach ($this->after_contents as $key => $value) {
       $this->contents[$key] = $value;

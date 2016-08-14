@@ -9,7 +9,6 @@
 namespace Index\Mailtemplate;
 
 use \Kotchasan\DataTable;
-use \Kotchasan\Language;
 
 /**
  * module=mailtemplate
@@ -36,14 +35,14 @@ class View extends \Kotchasan\View
       'onCreateButton' => array($this, 'onCreateButton'),
       'headers' => array(
         'name' => array(
-          'text' => Language::get('Name')
+          'text' => '{LNG_Name}'
         ),
         'language' => array(
-          'text' => Language::get('Language'),
+          'text' => '{LNG_Language}',
           'class' => 'center'
         ),
         'module' => array(
-          'text' => Language::get('Module'),
+          'text' => '{LNG_Module}',
           'class' => 'center'
         )
       ),
@@ -61,12 +60,12 @@ class View extends \Kotchasan\View
         'edit' => array(
           'class' => 'icon-edit button green',
           'href' => self::$request->getUri()->withParams(array('module' => 'mailwrite', 'id' => ':id'), true),
-          'text' => Language::get('Edit')
+          'text' => '{LNG_Edit}'
         ),
         'delete' => array(
           'class' => 'icon-delete button red',
           'id' => ':id',
-          'text' => Language::get('Delete')
+          'text' => '{LNG_Delete}'
         )
       )
     ));

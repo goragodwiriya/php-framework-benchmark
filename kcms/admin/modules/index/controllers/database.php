@@ -9,7 +9,6 @@
 namespace Index\Database;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 
 /**
@@ -31,15 +30,13 @@ class Controller extends \Kotchasan\Controller
     if (Login::isAdmin()) {
       // แสดงผล
       $section = Html::create('section');
-      // database
-      $db = \Index\Database\Model::create(self::$request);
       // breadcrumbs
       $breadcrumbs = $section->add('div', array(
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-tools">'.Language::get('Tools').'</span></li>');
-      $ul->appendChild('<li><span>'.Language::get('Database').'</span></li>');
+      $ul->appendChild('<li><span class="icon-tools">{LNG_Tools}</span></li>');
+      $ul->appendChild('<li><span>{LNG_Database}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-database">'.$this->title().'</h1>'
       ));
@@ -48,13 +45,12 @@ class Controller extends \Kotchasan\Controller
       ));
       // แสดงฟอร์ม
       $view = new \Index\Database\View;
-      $div->appendChild($view->export($db));
-      $div->appendChild($view->import($db));
+      $div->appendChild($view->export());
+      $div->appendChild($view->import());
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -62,6 +58,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Backup and restore database');
+    return '{LNG_Backup and restore database}';
   }
 }

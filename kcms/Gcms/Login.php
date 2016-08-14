@@ -12,7 +12,7 @@ use \Kotchasan\Model;
 use \Kotchasan\Language;
 use \Kotchasan\Http\Request;
 use \Kotchasan\Text;
-use \Kotchasan\Email;
+use \Gcms\Email;
 
 /**
  * คลาสสำหรับตรวจสอบการ Login สำหรับ GCMS

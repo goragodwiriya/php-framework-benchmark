@@ -65,6 +65,7 @@ class File
     while (false !== ($text = readdir($f))) {
       if ($text !== '.' && $text !== '..') {
         if (is_dir($dir.$text)) {
+          self::makeDirectory($todir.$text.'/');
           self::copyDirectory($dir.$text.'/', $todir.$text.'/');
         } elseif (is_dir($todir)) {
           copy($dir.$text, $todir.$text);
@@ -97,7 +98,7 @@ class File
   /**
    * ลบไดเรคทอรี่และไฟล์ หรือ ไดเร็คทอรี่ในนั้นทั้งหมด
    *
-   * @param string $dir ไดเรคทอรี่ที่ต้องการลบ
+   * @param string $dir ไดเรคทอรี่ที่ต้องการลบ มี / ต่อท้ายด้วย
    */
   public static function removeDirectory($dir)
   {

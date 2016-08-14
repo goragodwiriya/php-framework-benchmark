@@ -45,11 +45,11 @@ class View extends \Kotchasan\View
       'searchColumns' => array_merge(array('key'), $installed_language),
       'headers' => array(
         'id' => array(
-          'text' => Language::get('ID'),
+          'text' => '{LNG_ID}',
           'sort' => 'id'
         ),
         'key' => array(
-          'text' => Language::get('Key'),
+          'text' => '{LNG_Key}',
           'sort' => 'key'
         )
       ),
@@ -60,28 +60,28 @@ class View extends \Kotchasan\View
         array(
           'id' => 'action',
           'class' => 'ok',
-          'text' => Language::get('With selected'),
+          'text' => '{LNG_With selected}',
           'options' => array(
-            'delete' => Language::get('Delete')
+            'delete' => '{LNG_Delete}'
           )
         ),
         array(
           'class' => 'button add icon-plus',
           'href' => $uri->createBackUri(array('module' => 'languageedit', 'id' => null, 'type' => $type)),
-          'text' => Language::get('Add New')
+          'text' => '{LNG_Add New}'
         )
       ),
       'buttons' => array(
         array(
           'class' => 'icon-edit button green',
           'href' => $uri->createBackUri(array('module' => 'languageedit', 'id' => ':id', 'type' => $type)),
-          'text' => Language::get('Edit')
+          'text' => '{LNG_Edit}'
         )
       ),
       'filters' => array(
         'type' => array(
           'name' => 'type',
-          'text' => Language::get('Type'),
+          'text' => '{LNG_Type}',
           'options' => array('php' => 'php', 'js' => 'js'),
           'value' => $type
         )

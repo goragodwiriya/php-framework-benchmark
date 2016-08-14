@@ -9,7 +9,6 @@
 namespace Index\Member;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 
 /**
@@ -36,7 +35,7 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-user">'.Language::get('Users').'</span></li>');
+      $ul->appendChild('<li><span class="icon-user">{LNG_Users}</span></li>');
       $ul->appendChild('<li><span>'.$this->title().'</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-users">'.$this->title().'</h1>'
@@ -44,10 +43,9 @@ class Controller extends \Kotchasan\Controller
       // แสดงตาราง
       $section->appendChild(createClass('Index\Member\View')->render());
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -55,6 +53,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Member List');
+    return '{LNG_Member List}';
   }
 }

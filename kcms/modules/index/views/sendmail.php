@@ -57,7 +57,8 @@ class View extends \Kotchasan\View
         $index = (object)array(
             'topic' => Language::replace('Send a message to the :name', array(':name' => $to_msg)),
             'keywords' => self::$cfg->web_title,
-            'description' => self::$cfg->web_description
+            'description' => self::$cfg->web_description,
+            'module' => 'sendmail'
         );
         $template = Template::create('member', 'member', 'sendmail');
         $template->add(array(

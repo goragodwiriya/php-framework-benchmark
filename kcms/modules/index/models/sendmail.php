@@ -61,7 +61,7 @@ class Model extends \Kotchasan\Model
           $ret['input'] = 'mail_detail';
         } else {
           // ส่งอีเมล์
-          $err = Email::custom($reciever, $login['email'].(empty($login['displayname']) ? '' : '<'.$login['displayname'].'>'), $subject, $detail);
+          $err = Email::send($reciever, $login['email'].(empty($login['displayname']) ? '' : '<'.$login['displayname'].'>'), $subject, $detail);
           if (empty($err)) {
             // เคลียร์ Antispam
             $antispam->delete();

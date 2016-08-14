@@ -9,7 +9,6 @@
 namespace Index\Login;
 
 use \Kotchasan\Html;
-use \Kotchasan\Language;
 use \Kotchasan\Login;
 use \Kotchasan\Template;
 
@@ -37,7 +36,7 @@ class View extends \Kotchasan\View
     // h1
     $form->add('h1', array(
       'class' => 'icon-customer',
-      'innerHTML' => Language::get('Administrator Area')
+      'innerHTML' => '{LNG_Administrator Area}'
     ));
     // message
     if (!empty(Login::$login_message)) {
@@ -59,7 +58,7 @@ class View extends \Kotchasan\View
     $fieldset->add('text', array(
       'id' => 'login_username',
       'labelClass' => 'g-input icon-email',
-      'placeholder' => Language::get('Email'),
+      'placeholder' => '{LNG_Email}',
       'value' => isset(Login::$text_username) ? Login::$text_username : '',
       'autofocus',
       'required',
@@ -70,7 +69,7 @@ class View extends \Kotchasan\View
     $fieldset->add('password', array(
       'id' => 'login_password',
       'labelClass' => 'g-input icon-password',
-      'placeholder' => Language::get('Password'),
+      'placeholder' => '{LNG_Password}',
       'value' => isset(Login::$text_password) ? Login::$text_password : ''
     ));
     // input-groups (div สำหรับจัดกลุ่ม input)
@@ -79,21 +78,21 @@ class View extends \Kotchasan\View
     $group->add('a', array(
       'href' => self::$request->getUri()->withParams(array('action' => 'forgot'), true),
       'class' => 'td',
-      'title' => Language::get('Request new password'),
-      'innerHTML' => ''.Language::get('Forgot').' ?'
+      'title' => '{LNG_Request new password}',
+      'innerHTML' => '{LNG_Forgot} ?'
     ));
     // checkbox
     $group->add('checkbox', array(
       'id' => 'login_remember',
       'checked' => self::$request->cookie('login_remember')->toInt(),
       'value' => 1,
-      'label' => Language::get('Remember me'),
+      'label' => '{LNG_Remember me}',
       'labelClass' => 'td right'
     ));
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large wide',
-      'value' => Language::get('Sign In')
+      'value' => '{LNG_Sign In}'
     ));
     // template
     $template = Template::create('', '', 'login');

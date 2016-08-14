@@ -55,8 +55,10 @@ class Image
       default:
         return false;
     }
-    $wm = $info[0] / $thumbwidth;
-    $hm = $info[1] / $thumbheight;
+    $o_wd = @imagesx($o_im);
+    $o_ht = @imagesy($o_im);
+    $wm = $o_wd / $thumbwidth;
+    $hm = $o_ht / $thumbheight;
     $h_height = $thumbheight / 2;
     $w_height = $thumbwidth / 2;
     $t_im = ImageCreateTrueColor($thumbwidth, $thumbheight);
@@ -64,30 +66,30 @@ class Image
     $int_height = 0;
     $adjusted_width = $thumbwidth;
     $adjusted_height = $thumbheight;
-    if ($info[0] > $info[1]) {
-      $adjusted_width = ceil($info[0] / $hm);
+    if ($o_wd > $o_ht) {
+      $adjusted_width = ceil($o_wd / $hm);
       $half_width = $adjusted_width / 2;
       $int_width = $half_width - $w_height;
       if ($adjusted_width < $thumbwidth) {
-        $adjusted_height = ceil($info[1] / $wm);
+        $adjusted_height = ceil($o_ht / $wm);
         $half_height = $adjusted_height / 2;
         $int_height = $half_height - $h_height;
         $adjusted_width = $thumbwidth;
         $int_width = 0;
       }
-    } elseif (($info[0] < $info[1]) || ($info[0] == $info[1])) {
-      $adjusted_height = ceil($info[1] / $wm);
+    } elseif (($o_wd < $o_ht) || ($o_wd == $o_ht)) {
+      $adjusted_height = ceil($o_ht / $wm);
       $half_height = $adjusted_height / 2;
       $int_height = $half_height - $h_height;
       if ($adjusted_height < $thumbheight) {
-        $adjusted_width = ceil($info[0] / $hm);
+        $adjusted_width = ceil($o_wd / $hm);
         $half_width = $adjusted_width / 2;
         $int_width = $half_width - $w_height;
         $adjusted_height = $thumbheight;
         $int_height = 0;
       }
     }
-    ImageCopyResampled($t_im, $o_im, -$int_width, -$int_height, 0, 0, $adjusted_width, $adjusted_height, $info[0], $info[1]);
+    ImageCopyResampled($t_im, $o_im, -$int_width, -$int_height, 0, 0, $adjusted_width, $adjusted_height, $o_wd, $o_ht);
     if ($watermark != '') {
       $t_im = self::watermarkText($t_im, $watermark);
     }
@@ -115,13 +117,6 @@ class Image
   {
     $info = @getImageSize($source);
     if ($info[0] > $width || $info[1] > $width) {
-      if ($info[0] <= $info[1]) {
-        $h = $width;
-        $w = round($h * $info[0] / $info[1]);
-      } else {
-        $w = $width;
-        $h = round($w * $info[1] / $info[0]);
-      }
       switch ($info['mime']) {
         case 'image/gif':
           $o_im = imageCreateFromGIF($source);
@@ -138,6 +133,13 @@ class Image
       }
       $o_wd = @imagesx($o_im);
       $o_ht = @imagesy($o_im);
+      if ($o_wd <= $o_ht) {
+        $h = $width;
+        $w = round($h * $o_wd / $o_ht);
+      } else {
+        $w = $width;
+        $h = round($w * $o_ht / $o_wd);
+      }
       $t_im = @ImageCreateTrueColor($w, $h);
       @ImageCopyResampled($t_im, $o_im, 0, 0, 0, 0, $w + 1, $h + 1, $o_wd, $o_ht);
       if ($watermark != '') {

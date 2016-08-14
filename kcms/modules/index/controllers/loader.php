@@ -99,6 +99,9 @@ class Controller extends \Kotchasan\Controller
       foreach ($page as $key => $value) {
         $ret[$key] = $value;
       }
+      if (empty($ret['menu'])) {
+        $ret['menu'] = $ret['module'];
+      }
       $ret['detail'] = Gcms::$view->renderHTML($page->detail);
       echo json_encode($ret);
     }

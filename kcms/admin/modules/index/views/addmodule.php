@@ -9,7 +9,6 @@
 namespace Index\Addmodule;
 
 use \Kotchasan\Html;
-use \Kotchasan\Language;
 
 /**
  * เพิ่มโมดูลแบบที่สามารถใช้ซ้ำได้
@@ -37,13 +36,13 @@ class View extends \Kotchasan\View
         'method' => 'get'
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('Create a new module from the module installed, according to usage')
+      'title' => '{LNG_Create a new module from the module installed, according to usage}'
     ));
     $fieldset->add('select', array(
       'id' => 'owner',
       'labelClass' => 'g-input icon-modules',
       'itemClass' => 'item',
-      'label' => Language::get('installed module'),
+      'label' => '{LNG_installed module}',
       'options' => $modules
     ));
     $fieldset = $form->add('fieldset', array(
@@ -52,7 +51,7 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large',
-      'value' => Language::get('Create')
+      'value' => '{LNG_Create}'
     ));
     // module
     $fieldset->add('hidden', array(

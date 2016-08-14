@@ -116,8 +116,6 @@ class Login extends \Kotchasan\KBase implements LoginInterface
           self::$login_input = 'login_password';
         }
       } elseif (!$login->from_submit || ($login->from_submit && self::$request->isSafe())) {
-        // clear
-        self::$request->removeToken();
         // ตรวจสอบการ login กับฐานข้อมูล
         $login_result = $login->checkLogin(self::$text_username, self::$text_password);
         if (is_string($login_result)) {

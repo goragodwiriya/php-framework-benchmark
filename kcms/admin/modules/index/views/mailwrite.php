@@ -39,15 +39,15 @@ class View extends \Kotchasan\View
         'ajax' => true
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('Details of').' '.Language::get('Email')
+      'title' => '{LNG_Details of} {LNG_Email}'
     ));
     // from_email
     $fieldset->add('text', array(
       'id' => 'from_email',
       'labelClass' => 'g-input icon-email',
       'itemClass' => 'item',
-      'label' => Language::get('Sender'),
-      'comment' => Language::get('E-mail address for replies. If you do not want a response, please leave blank.'),
+      'label' => '{LNG_Sender}',
+      'comment' => '{LNG_E-mail address for replies. If you do not want a response, please leave blank.}',
       'maxlength' => 255,
       'value' => $index->from_email
     ));
@@ -56,8 +56,8 @@ class View extends \Kotchasan\View
       'id' => 'copy_to',
       'labelClass' => 'g-input icon-cc',
       'itemClass' => 'item',
-      'label' => Language::get('Copy to'),
-      'comment' => Language::get('More email addresses to send a copy of the email. Separate each item with comma (,)'),
+      'label' => '{LNG_Copy to}',
+      'comment' => '{LNG_More email addresses to send a copy of the email. Separate each item with comma (,)}',
       'value' => $index->copy_to
     ));
     // subject
@@ -65,8 +65,8 @@ class View extends \Kotchasan\View
       'id' => 'subject',
       'labelClass' => 'g-input icon-edit',
       'itemClass' => 'item',
-      'label' => Language::get('Subject'),
-      'title' => Language::get('Please fill in').' '.Language::get('Subject'),
+      'label' => '{LNG_Subject}',
+      'title' => '{LNG_Please fill in} {LNG_Subject}',
       'maxlength' => 64,
       'value' => $index->subject
     ));
@@ -75,8 +75,8 @@ class View extends \Kotchasan\View
       'id' => 'language',
       'labelClass' => 'g-input icon-language',
       'itemClass' => 'item',
-      'label' => Language::get('Language'),
-      'comment' => Language::get('The system will e-mail the selected language. If you do not use the default language.'),
+      'label' => '{LNG_Language}',
+      'comment' => '{LNG_The system will e-mail the selected language. If you do not use the default language.}',
       'options' => Language::installedLanguage(),
       'value' => $index->language
     ));
@@ -88,7 +88,7 @@ class View extends \Kotchasan\View
       'language' => Language::name(),
       'toolbar' => 'Document',
       'upload' => true,
-      'label' => Language::get('Detail'),
+      'label' => '{LNG_Detail}',
       'value' => $index->detail
     ));
     $fieldset = $form->add('fieldset', array(
@@ -97,7 +97,7 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large',
-      'value' => Language::get('Save')
+      'value' => '{LNG_Save}'
     ));
     // id
     $fieldset->add('hidden', array(

@@ -40,12 +40,12 @@ class View extends \Kotchasan\View
     ));
     // fieldset
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get($controller->id > -1 ? 'Edit' : 'Create').' '.htmlspecialchars($controller->language['key'])
+      'title' => '{LNG_'.($controller->id > -1 ? 'Edit' : 'Create').'} '.htmlspecialchars($controller->language['key'])
     ));
     $fieldset->add('select', array(
       'id' => 'write_type',
       'labelClass' => 'g-input icon-config',
-      'label' => Language::get('Type'),
+      'label' => '{LNG_Type}',
       'itemClass' => 'item',
       'options' => array('php' => 'php', 'js' => 'js'),
       'value' => $controller->type
@@ -54,7 +54,7 @@ class View extends \Kotchasan\View
     $fieldset->add('text', array(
       'id' => 'write_topic',
       'labelClass' => 'g-input icon-edit',
-      'label' => Language::get('Key'),
+      'label' => '{LNG_Key}',
       'itemClass' => 'item',
       'autofocus',
       'value' => $controller->language['key']
@@ -69,7 +69,7 @@ class View extends \Kotchasan\View
       'pmButton' => true,
       'headers' => array(
         'key' => array(
-          'text' => Language::get('Key')
+          'text' => '{LNG_Key}'
         )
       )
     ));
@@ -79,7 +79,7 @@ class View extends \Kotchasan\View
     ));
     $div->add('div', array(
       'class' => 'comment',
-      'innerHTML' => Language::get('No need to enter text in English (en) or fill in the two matches')
+      'innerHTML' => '{LNG_No need to enter text in English (en) or fill in the two matches}'
     ));
     // fieldset
     $fieldset = $form->add('fieldset', array(
@@ -88,7 +88,7 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button save large',
-      'value' => Language::get('Save')
+      'value' => '{LNG_Save}'
     ));
     // id
     $fieldset->add('hidden', array(

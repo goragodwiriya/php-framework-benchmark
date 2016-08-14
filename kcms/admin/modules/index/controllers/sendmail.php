@@ -9,7 +9,6 @@
 namespace Index\Sendmail;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 
 /**
@@ -35,18 +34,17 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-email">'.Language::get('Mailbox').'</span></li>');
-      $ul->appendChild('<li><span>'.Language::get('Email send').'</span></li>');
+      $ul->appendChild('<li><span class="icon-email">{LNG_Mailbox}</span></li>');
+      $ul->appendChild('<li><span>{LNG_Email send}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-email-sent">'.$this->title().'</h1>'
       ));
       // แสดงฟอร์ม
       $section->appendChild(createClass('Index\Sendmail\View')->render($login));
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -54,6 +52,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Send email by Admin');
+    return '{LNG_Send email by Admin}';
   }
 }

@@ -8,7 +8,6 @@
 
 namespace Index\Register;
 
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 
 /**
@@ -37,15 +36,15 @@ class View extends \Kotchasan\View
         'ajax' => true
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('Register')
+      'title' => '{LNG_Register}'
     ));
     // email
     $fieldset->add('email', array(
       'id' => 'register_email',
       'itemClass' => 'item',
       'labelClass' => 'g-input icon-email',
-      'label' => Language::get('Email'),
-      'comment' => Language::get('The system will send the registration information to this e-mail. Please use real email address'),
+      'label' => '{LNG_Email}',
+      'comment' => '{LNG_The system will send the registration information to this e-mail. Please use real email address}',
       'maxlength' => 255,
       'validator' => array('keyup,change', 'checkEmail', 'index.php/index/model/checker/email')
     ));
@@ -55,8 +54,8 @@ class View extends \Kotchasan\View
       'id' => 'register_password',
       'itemClass' => 'width50',
       'labelClass' => 'g-input icon-password',
-      'label' => Language::get('Password'),
-      'comment' => Language::get('Passwords must be at least four characters'),
+      'label' => '{LNG_Password}',
+      'comment' => '{LNG_Passwords must be at least four characters}',
       'maxlength' => 20,
       'validator' => array('keyup,change', 'checkPassword')
     ));
@@ -65,15 +64,15 @@ class View extends \Kotchasan\View
       'id' => 'register_repassword',
       'itemClass' => 'width50',
       'labelClass' => 'g-input icon-password',
-      'label' => Language::get('Repassword'),
-      'comment' => Language::get('Enter your password again'),
+      'label' => '{LNG_Repassword}',
+      'comment' => '{LNG_Enter your password again}',
       'maxlength' => 20,
       'validator' => array('keyup,change', 'checkPassword')
     ));
     $fieldset->add('select', array(
       'id' => 'register_status',
       'itemClass' => 'item',
-      'label' => Language::get('Member status'),
+      'label' => '{LNG_Member status}',
       'labelClass' => 'g-input icon-star0',
       'options' => self::$cfg->member_status
     ));
@@ -83,7 +82,7 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button save large',
-      'value' => Language::get('Register')
+      'value' => '{LNG_Register}'
     ));
     $fieldset->add('hidden', array(
       'id' => 'register_id',

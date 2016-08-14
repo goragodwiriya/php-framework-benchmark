@@ -227,39 +227,12 @@ class Config
    */
   public static function save($config, $file)
   {
-    $list = array();
-    foreach ($config as $key => $value) {
-      if (is_array($value)) {
-        $save = array();
-        foreach ($value as $k => $v) {
-          $data = '';
-          if (preg_match('/^[0-9]+$/', $k)) {
-            $data = $k.' => ';
-          } else {
-            $data = '\''.$k.'\' => ';
-          }
-          if (is_string($v)) {
-            $data .= '\''.$v.'\'';
-          } else {
-            $data .= $v;
-          }
-          $save[] = $data;
-        }
-        $list[] = '\''.$key."' => array(\n    ".implode(",\n    ", $save)."\n  )";
-      } elseif (is_string($value)) {
-        $list[] = '\''.$key.'\' => \''.($value).'\'';
-      } elseif (is_bool($value)) {
-        $list[] = '\''.$key.'\' => '.($value ? 'true' : 'false');
-      } else {
-        $list[] = '\''.$key.'\' => '.$value;
-      }
-    }
     $f = @fopen($file, 'wb');
     if ($f !== false) {
       if (!preg_match('/^.*\/([^\/]+)\.php?/', $file, $match)) {
         $match[1] = 'config';
       }
-      fwrite($f, "<"."?php\n/* $match[1].php */\nreturn array(\n  ".implode(",\n  ", $list)."\n);");
+      fwrite($f, "<"."?php\n/* $match[1].php */\nreturn ".var_export((array)$config, true).";");
       fclose($f);
       return true;
     } else {

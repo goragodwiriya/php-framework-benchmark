@@ -9,7 +9,6 @@
 namespace Index\Meta;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 use \Kotchasan\Config;
 
@@ -37,8 +36,8 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-settings">'.Language::get('Site settings').'</span></li>');
-      $ul->appendChild('<li><span>'.Language::get('SEO &amp; Social').'</span></li>');
+      $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
+      $ul->appendChild('<li><span>{LNG_SEO &amp; Social}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-share">'.$this->title().'</h1>'
       ));
@@ -47,10 +46,9 @@ class Controller extends \Kotchasan\Controller
       // แสดงฟอร์ม
       $section->appendChild(createClass('Index\Meta\View')->render($config));
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -58,6 +56,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Other preferences about SEO and Social Network');
+    return '{LNG_Other preferences about SEO and Social Network}';
   }
 }

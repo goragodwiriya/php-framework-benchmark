@@ -59,7 +59,7 @@ class Model extends \Kotchasan\Model
     $ret = array();
     // referer, session, member
     if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
-      if ($login['email'] == 'demo') {
+      if ($login['email'] == 'demo' || !empty($login['fb'])) {
         $ret['alert'] = Language::get('Unable to complete the transaction');
       } else {
         $input = false;

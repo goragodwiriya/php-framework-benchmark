@@ -1723,7 +1723,7 @@ window.$K = (function () {
   GScroll.prototype = Object.extend(new GFx(), {
     initialize: function (container, scroller) {
       this.options = {
-        speed: 30,
+        speed: 20,
         duration: 1,
         pauseit: 1,
         scrollto: 'top'

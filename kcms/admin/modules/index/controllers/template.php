@@ -38,25 +38,26 @@ class Controller extends \Kotchasan\Controller
       // action
       $action = self::$request->get('action')->toString();
       if (!empty($action)) {
-        if ($login['email'] == 'demo') {
-          $message = '<aside class=error>'.Language::get('Unable to complete the transaction').'</aside>';
+        if ($login['email'] == 'demo' || !empty($login['fb'])) {
+          $message = '<aside class=error>{LNG_Unable to complete the transaction}</aside>';
         } else {
           $theme = preg_replace('/[\/\\\\]/ui', '', self::$request->get('theme')->text());
           if (is_dir($dir."/$theme")) {
             if ($action == 'use') {
               // skin ที่กำหนด
               $config->skin = $theme;
+              unset($_SESSION['skin']);
               // บันทึก config.php
               if (Config::save($config, ROOT_PATH.'settings/config.php')) {
                 self::$request->setSession('my_skin', $config->skin);
-                $message = '<aside class=message>'.Language::get('Select a new template successfully').'</aside>';
+                $message = '<aside class=message>{LNG_Select a new template successfully}</aside>';
               } else {
                 $message = '<aside class=error>'.sprintf(Language::get('File %s cannot be created or is read-only.'), 'settings/config.php').'</aside>';
               }
             } elseif ($action == 'delete') {
               // ลบ skin
               File::removeDirectory($dir.'/'.$theme.'/');
-              $message = '<aside class=message>'.Language::get('Successfully remove template files').'</aside>';
+              $message = '<aside class=message>{LNG_Successfully remove template files}</aside>';
             }
           }
         }
@@ -68,8 +69,8 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-settings">'.Language::get('Site settings').'</span></li>');
-      $ul->appendChild('<li><span>'.Language::get('Template').'</span></li>');
+      $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
+      $ul->appendChild('<li><span>{LNG_Template}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-template">'.$this->title().'</h1>'
       ));
@@ -90,10 +91,9 @@ class Controller extends \Kotchasan\Controller
       // แสดงฟอร์ม
       $section->appendChild(createClass('Index\Template\View')->render($dir, $config, $themes));
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -101,6 +101,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Select a template of the site');
+    return '{LNG_Select a template of the site}';
   }
 }

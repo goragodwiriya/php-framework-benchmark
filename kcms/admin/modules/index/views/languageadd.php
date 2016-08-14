@@ -10,6 +10,7 @@ namespace Index\Languageadd;
 
 use \Kotchasan\Html;
 use \Kotchasan\Language;
+use \Gcms\Gcms;
 
 /**
  * ฟอร์มเพิ่ม/แก้ไข ภาษาหลัก
@@ -39,15 +40,15 @@ class View extends \Kotchasan\View
         'ajax' => true
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('Details of').' '.Language::get('Language')
+      'title' => '{LNG_Details of} {LNG_Language}'
     ));
     // language_name
     $fieldset->add('text', array(
       'id' => 'language_name',
       'labelClass' => 'g-input icon-language',
       'itemClass' => 'item',
-      'label' => Language::get('Language'),
-      'comment' => Language::get('Language name English lowercase two letters'),
+      'label' => '{LNG_Language}',
+      'comment' => '{LNG_Language name English lowercase two letters}',
       'maxlength' => 2,
       'value' => $id
     ));
@@ -57,8 +58,8 @@ class View extends \Kotchasan\View
         'id' => 'lang_copy',
         'labelClass' => 'g-input icon-copy',
         'itemClass' => 'item',
-        'label' => Language::get('Copy'),
-        'comment' => Language::get('Copy language from the installation'),
+        'label' => '{LNG_Copy}',
+        'comment' => '{LNG_Copy language from the installation}',
         'options' => Language::installedLanguage()
       ));
     }
@@ -68,8 +69,8 @@ class View extends \Kotchasan\View
       'id' => 'lang_icon',
       'labelClass' => 'g-input icon-upload',
       'itemClass' => 'item',
-      'label' => Language::get('Icon'),
-      'comment' => str_replace('%s', 'gif', Language::get('Image upload types %s only, should be prepared to have the same size')),
+      'label' => '{LNG_Icon}',
+      'comment' => '{LNG_Image upload types :type only, should be prepared to have the same size}',
       'dataPreview' => 'icoImage',
       'previewSrc' => $img
     ));
@@ -79,13 +80,16 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large',
-      'value' => Language::get('Save')
+      'value' => '{LNG_Save}'
     ));
     // language
     $fieldset->add('hidden', array(
       'id' => 'language',
       'value' => $id
     ));
+    Gcms::$view->setContents(array(
+      '/:type/' => 'gif'
+      ), false);
     return $form->render();
   }
 }

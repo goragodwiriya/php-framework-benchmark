@@ -48,28 +48,28 @@ class View extends \Kotchasan\View
       /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
       'headers' => array(
         'topic' => array(
-          'text' => Language::get('Topic')
+          'text' => '{LNG_Topic}'
         ),
         'published' => array(
-          'text' => Language::get('Status'),
+          'text' => '{LNG_Status}',
           'class' => 'center'
         ),
         'language' => array(
-          'text' => Language::get('Language'),
+          'text' => '{LNG_Language}',
           'class' => 'center'
         ),
         'module' => array(
-          'text' => Language::get('module name')
+          'text' => '{LNG_module name}'
         ),
         'owner' => array(
           'text' => '&nbsp;'
         ),
         'last_update' => array(
-          'text' => Language::get('Last updated'),
+          'text' => '{LNG_Last updated}',
           'class' => 'center'
         ),
         'visited' => array(
-          'text' => Language::get('Preview'),
+          'text' => '{LNG_Preview}',
           'class' => 'center'
         )
       ),
@@ -93,19 +93,19 @@ class View extends \Kotchasan\View
         'edit' => array(
           'class' => 'icon-edit button green',
           'href' => $uri->createBackUri(array('module' => 'pagewrite', 'id' => ':id')),
-          'text' => Language::get('Edit')
+          'text' => '{LNG_Edit}'
         ),
         'delete' => array(
           'class' => 'icon-delete button red',
           'id' => ':id',
-          'text' => Language::get('Delete')
+          'text' => '{LNG_Delete}'
         )
       ),
       /* ปุ่มเพิ่ม */
       'addNew' => array(
         'class' => 'button green icon-plus',
         'href' => $uri->createBackUri(array('module' => 'addmodule', 'id' => '0')),
-        'text' => Language::get('Add New').' '.Language::get('Module')
+        'text' => '{LNG_Add New} {LNG_Module}'
       )
     ));
     return $table->render();

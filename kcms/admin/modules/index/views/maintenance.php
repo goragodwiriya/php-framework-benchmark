@@ -40,19 +40,19 @@ class View extends \Kotchasan\View
         'ajax' => true
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('The page will appear on your site is in maintenance mode')
+      'title' => '{LNG_The page will appear on your site is in maintenance mode}'
     ));
     // maintenance_mode
     $fieldset->add('select', array(
       'id' => 'maintenance_mode',
       'labelClass' => 'g-input icon-config',
       'itemClass' => 'item',
-      'label' => Language::get('Settings'),
+      'label' => '{LNG_Settings}',
       'options' => Language::get('BOOLEANS'),
       'value' => isset(self::$cfg->maintenance_mode) ? self::$cfg->maintenance_mode : 0
     ));
     $div = $fieldset->add('groups-table', array(
-      'label' => Language::get('Language')
+      'label' => '{LNG_Language}'
     ));
     // language
     $div->add('select', array(
@@ -66,7 +66,7 @@ class View extends \Kotchasan\View
       'id' => 'btn_go',
       'itemClass' => 'width',
       'class' => 'button go',
-      'value' => Language::get('Go')
+      'value' => '{LNG_Go}'
     ));
     // detail
     $fieldset->add('ckeditor', array(
@@ -75,7 +75,7 @@ class View extends \Kotchasan\View
       'height' => 300,
       'language' => Language::name(),
       'toolbar' => 'Document',
-      'label' => Language::get('Detail'),
+      'label' => '{LNG_Detail}',
       'value' => $template,
       'upload' => true
     ));
@@ -85,7 +85,7 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large',
-      'value' => Language::get('Save')
+      'value' => '{LNG_Save}'
     ));
     $form->script('doChangeLanguage("btn_go", "index.php?module=maintenance");');
     return $form->render();

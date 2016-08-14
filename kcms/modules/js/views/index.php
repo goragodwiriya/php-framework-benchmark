@@ -35,6 +35,7 @@ class View extends \Kotchasan\KBase
     $js[] = file_get_contents(ROOT_PATH.'js/table.js');
     $js[] = file_get_contents(ROOT_PATH.'js/common.js');
     $js[] = file_get_contents(ROOT_PATH.'js/tooltip.js');
+    $js[] = file_get_contents(ROOT_PATH.'js/media.js');
     $js[] = file_get_contents(ROOT_PATH.'js/gcms.js');
     $lng = Language::name();
     $data_folder = Language::languageFolder();
@@ -103,7 +104,7 @@ class View extends \Kotchasan\KBase
         'Expires' => gmdate('D, d M Y H:i:s', time() + $expire).' GMT',
         'Last-Modified' => gmdate('D, d M Y H:i:s', time() - $expire).' GMT'
       ))
-      ->setContent(preg_replace($patt, $replace, implode("\n", $js)))
+      ->withContent(preg_replace($patt, $replace, implode("\n", $js)))
       ->send();
   }
 }

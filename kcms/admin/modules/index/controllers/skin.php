@@ -9,7 +9,6 @@
 namespace Index\Skin;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 use \Kotchasan\Config;
 
@@ -37,8 +36,8 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-settings">'.Language::get('Site settings').'</span></li>');
-      $ul->appendChild('<li><span>'.Language::get('Template settings').'</span></li>');
+      $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
+      $ul->appendChild('<li><span>{LNG_Template settings}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-index">'.$this->title().'</h1>'
       ));
@@ -47,10 +46,9 @@ class Controller extends \Kotchasan\Controller
       // แสดงฟอร์ม
       $section->appendChild(createClass('Index\Skin\View')->render($config));
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -58,6 +56,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Customize the layout of the site');
+    return '{LNG_Customize the layout of the site}';
   }
 }

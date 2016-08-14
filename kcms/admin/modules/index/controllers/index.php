@@ -58,7 +58,7 @@ class Controller extends \Kotchasan\Controller
     $languages = array();
     $uri = $request->getUri();
     foreach (array_merge(self::$cfg->languages, Language::installedLanguage()) AS $i => $item) {
-      $languages[$item] = '<a id=lang_'.$item.' href="'.$uri->withParams(array('lang' => $item), true).'" title="'.Language::get('Language').' '.strtoupper($item).'" style="background-image:url('.WEB_URL.'language/'.$item.'.gif)" tabindex=1>&nbsp;</a>';
+      $languages[$item] = '<a id=lang_'.$item.' href="'.$uri->withParams(array('lang' => $item), true).'" title="{LNG_Language} '.strtoupper($item).'" style="background-image:url('.WEB_URL.'language/'.$item.'.gif)" tabindex=1>&nbsp;</a>';
     }
     // เนื้อหา
     Gcms::$view->setContents(array(
@@ -88,6 +88,6 @@ class Controller extends \Kotchasan\Controller
     }
     // ส่งออก เป็น HTML
     $response = new Response;
-    $response->setContent(Gcms::$view->renderHTML())->send();
+    $response->withContent(Gcms::$view->renderHTML())->send();
   }
 }

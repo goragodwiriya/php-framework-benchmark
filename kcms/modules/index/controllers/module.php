@@ -46,7 +46,6 @@ class Controller extends \Kotchasan\Controller
       // โมดูล index
       $modules['page'] = 'Index';
     }
-
     // ตรวจสอบโมดูลที่เลือกกับโมดูลที่ติดตั้งแล้ว
     $module = null;
     if (!empty($module_list)) {

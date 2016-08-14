@@ -214,7 +214,6 @@
       var cellHeight = Math.floor((b - t) / rows);
       r = (cellWidth * (cols - 1)) + l;
       b = (cellHeight * rows) + t;
-      var clientWidth = r - l;
       var clientHeight = b - t;
       var o = options.lineWidth + 2;
       forEach(this.datas.rows, function (rows, row) {

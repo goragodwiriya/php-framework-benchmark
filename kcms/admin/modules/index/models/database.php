@@ -10,6 +10,7 @@ namespace Index\Database;
 
 use \Kotchasan\Login;
 use \Kotchasan\Language;
+use \Kotchasan\Http\Response;
 
 /**
  * ตรวจสอบข้อมูลสมาชิกด้วย Ajax
@@ -22,38 +23,18 @@ class Model extends \Kotchasan\Model
 {
 
   /**
-   * get all table
-   *
-   * @return array
-   */
-  public function showTables()
-  {
-    if (defined('MAIN_INIT')) {
-      return $this->db()->customQuery('SHOW TABLE STATUS', true);
-    } else {
-      // เรียก method โดยตรง
-      new \Kotchasan\Http\NotFound('Do not call method directly');
-    }
-  }
-
-  /**
    * export database to file
    */
   public function export()
   {
-    // UTF-8
-    header("content-type: text/html; charset=UTF-8");
     // referer, session, member
     if (self::$request->initSession() && self::$request->isReferer() && $login = Login::isAdmin()) {
-      if ($login['email'] == 'demo') {
-        // ไม่สามารถดาวน์โหลดได้
-        header("HTTP/1.0 404 Not Found");
-      } else {
+      if ($login['email'] != 'demo' && empty($login['fb'])) {
         $sqls = array();
         $rows = array();
         $database = array();
         $datas = array();
-        foreach ($_POST AS $table => $values) {
+        foreach (self::$request->getParsedBody() AS $table => $values) {
           foreach ($values AS $k => $v) {
             if (isset($datas[$table][$v])) {
               $datas[$table][$v] ++;
@@ -70,13 +51,10 @@ class Model extends \Kotchasan\Model
         $fname = $model->getSetting('dbname').'.sql';
         // memory limit
         ini_set('memory_limit', '1024M');
-        // ส่งออกเป็นไฟล์
-        header("Content-Type: application/force-download");
-        header("Content-Disposition: attachment; filename=$fname");
         // prefix
         $prefix = $model->getSetting('prefix');
         // ตารางทั้งหมด
-        $tables = $model->showTables();
+        $tables = $model->db()->customQuery('SHOW TABLE STATUS', true);
         // ตารางทั้งหมด
         foreach ($tables as $table) {
           if (preg_match('/^'.$prefix.'(.*?)$/', $table['Name']) && isset($datas[$table['Name']])) {
@@ -94,8 +72,9 @@ class Model extends \Kotchasan\Model
               $rows[] = 'PRIMARY KEY ('.implode(',', $primarykey).')';
             }
             if (isset($datas[$table['Name']]['sturcture'])) {
-              $sqls[] = 'DROP TABLE IF EXISTS `'.preg_replace('/^'.$prefix.'/', '{prefix}', $table['Name']).'`;';
-              $q = 'CREATE TABLE `'.preg_replace('/^'.$prefix.'/', '{prefix}', $table['Name']).'` ('.implode(',', $rows).') ENGINE='.$table['Engine'];
+              $table_name = $prefix == '' ? $table['Name'] : preg_replace('/^'.$prefix.'/', '{prefix}', $table['Name']);
+              $sqls[] = 'DROP TABLE IF EXISTS `'.$table_name.'`;';
+              $q = 'CREATE TABLE `'.$table_name.'` ('.implode(',', $rows).') ENGINE='.$table['Engine'];
               $q .= ' DEFAULT CHARSET='.preg_replace('/([a-zA-Z0-9]+)_.*?/Uu', '\\1', $table['Collation']).' COLLATE='.$table['Collation'];
               $q .= ($table['Create_options'] != '' ? ' '.strtoupper($table['Create_options']) : '').';';
               $sqls[] = $q;
@@ -110,7 +89,8 @@ class Model extends \Kotchasan\Model
                 if (($key = array_search('id', $database[$table['Name']]['Field'])) !== false) {
                   unset($database[$table['Name']]['Field'][$key]);
                 }
-                $data = "INSERT INTO `".preg_replace('/^'.$prefix.'/', '{prefix}', $table['Name'])."` (`".implode('`, `', $database[$table['Name']]['Field'])."`) VALUES ('%s');";
+                $table_name = $prefix == '' ? $table['Name'] : preg_replace('/^'.$prefix.'/', '{prefix}', $table['Name']);
+                $data = "INSERT INTO `$table_name` (`".implode('`, `', $database[$table['Name']]['Field'])."`) VALUES ('%s');";
                 $records = $model->db()->customQuery('SELECT * FROM '.$table['Name'], true);
                 foreach ($records AS $record) {
                   foreach ($record AS $field => $value) {
@@ -126,7 +106,8 @@ class Model extends \Kotchasan\Model
                 }
               }
             } elseif (isset($datas[$table['Name']]['datas'])) {
-              $data = "INSERT INTO `".preg_replace('/^'.$prefix.'/', '{prefix}', $table['Name'])."` (`".implode('`, `', $database[$table['Name']]['Field'])."`) VALUES ('%s');";
+              $table_name = $prefix == '' ? $table['Name'] : preg_replace('/^'.$prefix.'/', '{prefix}', $table['Name']);
+              $data = "INSERT INTO `$table_name` (`".implode('`, `', $database[$table['Name']]['Field'])."`) VALUES ('%s');";
               $records = $model->db()->customQuery('SELECT * FROM '.$table['Name'], true);
               foreach ($records AS $record) {
                 foreach ($record AS $field => $value) {
@@ -137,13 +118,18 @@ class Model extends \Kotchasan\Model
             }
           }
         }
-        // คืนต่าข้อมูล
-        echo preg_replace(array('/[\\\\]+/', '/\\\"/'), array('\\', '"'), implode("\r\n", $sqls));
+        // send file
+        $response = new Response();
+        $response->withHeaders(array(
+          'Content-Type' => 'application/force-download',
+          'Content-Disposition' => 'attachment; filename='.$fname
+        ))->withContent(preg_replace(array('/[\\\\]+/', '/\\\"/'), array('\\', '"'), implode("\r\n", $sqls)))->send();
+        exit;
       }
-    } else {
-      // ไม่สามารถดาวน์โหลดได้
-      header("HTTP/1.0 404 Not Found");
     }
+    // ไม่สามารถดาวน์โหลดได้
+    $response = new Response(404);
+    $response->withContent('File Not Found!')->send();
   }
 
   /**

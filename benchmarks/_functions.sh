@@ -5,8 +5,8 @@ benchmark ()
     ab_log="output/$3/$fw.ab.log"
     output="output/$3/$fw.output"
 
-    echo "ab -k -n 20 -c 5 -t 3 $url"
-    ab -k -n 20 -c 5 -t 3 "$url" > "$ab_log"
+    echo "ab -k -c 10 -t 3 $url"
+    ab -k -c 10 -t 3 "$url" > "$ab_log"
     curl "$url" > "$output"
 
     rps=`grep "Requests per second:" "$ab_log" | cut -f 7 -d " "`

@@ -38,7 +38,10 @@ class Controller extends \Kotchasan\Controller
     // ตรวจสอบการ login
     Login::create();
     // กำหนด skin ให้กับ template
-    Template::init($request->get('skin', self::$cfg->skin)->toString());
+    self::$cfg->skin = $request->get('skin', self::$request->session('skin', self::$cfg->skin)->toString())->toString();
+    self::$cfg->skin = is_file(ROOT_PATH.'skin/'.self::$cfg->skin.'/style.css') ? self::$cfg->skin : 'bighead';
+    $_SESSION['skin'] = self::$cfg->skin;
+    Template::init(self::$cfg->skin);
     // ตรวจสอบหน้าที่จะแสดง
     if (!empty(self::$cfg->maintenance_mode) && !Login::isAdmin()) {
       Gcms::$view = new \Index\Maintenance\View;
@@ -164,7 +167,7 @@ class Controller extends \Kotchasan\Controller
         ));
       }
       // เมนูหลัก
-      Gcms::$view->setContents(Gcms::$menu->render($page->menu));
+      Gcms::$view->setContents(Gcms::$menu->render(isset($page->menu) ? $page->menu : $page->module));
       // เนื้อหา
       Gcms::$view->setContents(array(
         // content
@@ -179,6 +182,6 @@ class Controller extends \Kotchasan\Controller
     }
     // ส่งออก เป็น HTML
     $response = new Response;
-    $response->setContent(Gcms::$view->renderHTML())->send();
+    $response->withContent(Gcms::$view->renderHTML())->send();
   }
 }

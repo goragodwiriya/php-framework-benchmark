@@ -9,7 +9,6 @@
 namespace Index\Debug;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 
 /**
@@ -36,7 +35,7 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-tools">'.Language::get('Tools').'</span></li>');
+      $ul->appendChild('<li><span class="icon-tools">{LNG_Tools}</span></li>');
       $ul->appendChild('<li><span>'.$this->title().'</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-world">'.$this->title().'</h1>'
@@ -48,13 +47,12 @@ class Controller extends \Kotchasan\Controller
         'class' => 'item'
       ));
       $div->appendChild('<div id="debug_layer"></div>');
-      $div->appendChild('<div class="submit right"><a id="debug_clear" class="button large red">'.Language::get('Clear').'</a></div>');
+      $div->appendChild('<div class="submit right"><a id="debug_clear" class="button large red">{LNG_Clear}</a></div>');
       $section->script('showDebug();');
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -62,6 +60,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Debug tool');
+    return '{LNG_Debug tool}';
   }
 }

@@ -9,7 +9,6 @@
 namespace Index\Addmodule;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 use \Gcms\Gcms;
 
@@ -60,10 +59,9 @@ class Controller extends \Kotchasan\Controller
       // แสดงฟอร์ม
       $section->appendChild(createClass('Index\Addmodule\View')->render($modules));
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -71,6 +69,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Add New').' '.Language::get('Module');
+    return '{LNG_Add New} {LNG_Module}';
   }
 }

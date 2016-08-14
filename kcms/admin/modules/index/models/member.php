@@ -10,7 +10,7 @@ namespace Index\Member;
 
 use \Kotchasan\Login;
 use \Kotchasan\Text;
-use \Kotchasan\Email;
+use \Gcms\Email;
 use \Kotchasan\Http\Request;
 use \Kotchasan\Language;
 
@@ -36,7 +36,7 @@ class Model extends \Kotchasan\Orm\Field
   public function action(Request $request)
   {
     if ($request->initSession() && $request->isReferer() && $login = Login::isAdmin()) {
-      if ($login['email'] == 'demo') {
+      if ($login['email'] == 'demo' || !empty($login['fb'])) {
         echo Language::get('Unable to complete the transaction');
       } else {
         // รับค่าจากการ POST

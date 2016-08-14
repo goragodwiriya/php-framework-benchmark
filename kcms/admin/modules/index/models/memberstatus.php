@@ -64,7 +64,7 @@ class Model extends \Kotchasan\KBase
           $i = sizeof($config->member_status) - 1;
           // ข้อมูลใหม่
           $row = '<dd id="config_status_'.$i.'">';
-          $row .= '<span class="icon-delete" id="config_status_delete_'.$i.'" title="'.Language::get('Delete').'"></span>';
+          $row .= '<span class="icon-delete" id="config_status_delete_'.$i.'" title="{LNG_Delete}"></span>';
           $row .= '<span id="config_status_color_'.$i.'" title="'.$config->color_status[$i].'"></span>';
           $row .= '<span id="config_status_name_'.$i.'" title="'.$config->member_status[$i].'">'.htmlspecialchars($config->member_status[$i]).'</span>';
           $row .= '</dd>';

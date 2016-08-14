@@ -37,7 +37,7 @@ class View extends \Kotchasan\KBase
       if ($text != "." && $text != "..") {
         if (is_dir($dir.$text)) {
           if (is_file($dir.$text.'/admin.css')) {
-            $data2 .= preg_replace('/url\(img\//isu', 'url('.WEB_URL.'/modules/'.$text.'/img/', file_get_contents($dir.$text.'/admin.css'));
+            $data2 .= preg_replace('/url\(img\//isu', 'url('.WEB_URL.'modules/'.$text.'/img/', file_get_contents($dir.$text.'/admin.css'));
           }
         }
       }
@@ -50,7 +50,7 @@ class View extends \Kotchasan\KBase
       if ($text != "." && $text != "..") {
         if (is_dir($dir.$text)) {
           if (is_file($dir.$text.'/admin.css')) {
-            $data2 .= preg_replace('/url\(img\//isu', 'url('.WEB_URL.'/Widgets/'.$text.'/img/', file_get_contents($dir.$text.'/admin.css'));
+            $data2 .= preg_replace('/url\(img\//isu', 'url('.WEB_URL.'Widgets/'.$text.'/img/', file_get_contents($dir.$text.'/admin.css'));
           }
         }
       }
@@ -71,7 +71,7 @@ class View extends \Kotchasan\KBase
         'Expires' => gmdate('D, d M Y H:i:s', time() + $expire).' GMT',
         'Last-Modified' => gmdate('D, d M Y H:i:s', time() - $expire).' GMT'
       ))
-      ->setContent(preg_replace(array('/[\r\n\t]/s', '/[\s]{2,}/s', '/;}/'), array('', ' ', '}'), $data))
+      ->withContent(preg_replace(array('/[\r\n\t]/s', '/[\s]{2,}/s', '/;}/'), array('', ' ', '}'), $data))
       ->send();
   }
 }

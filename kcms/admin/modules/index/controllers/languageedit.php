@@ -84,9 +84,9 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-tools">'.Language::get('Tools').'</span></li>');
-      $ul->appendChild('<li><a href="{BACKURL?module=language}">'.Language::get('Language').'</a></li>');
-      $ul->appendChild('<li><span>'.Language::get($this->id > -1 ? 'Edit' : 'Create').'</span></li>');
+      $ul->appendChild('<li><span class="icon-tools">{LNG_Tools}</span></li>');
+      $ul->appendChild('<li><a href="{BACKURL?module=language}">{LNG_Language}</a></li>');
+      $ul->appendChild('<li><span>{LNG_'.($this->id > -1 ? 'Edit' : 'Create').'}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-language">'.$this->title().'</h1>'
       ));
@@ -104,6 +104,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Add and manage the display language of the site');
+    return '{LNG_Add and manage the display language of the site}';
   }
 }

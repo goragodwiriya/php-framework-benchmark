@@ -53,7 +53,7 @@ class View extends \Kotchasan\View
       /* ส่วนหัวของตาราง และการเรียงลำดับ (thead) */
       'headers' => array(
         'menu_text' => array(
-          'text' => Language::get('Menu')
+          'text' => '{LNG_Menu}'
         ),
         'move_left' => array(
           'text' => ''
@@ -62,25 +62,25 @@ class View extends \Kotchasan\View
           'text' => ''
         ),
         'alias' => array(
-          'text' => Language::get('Alias')
+          'text' => '{LNG_Alias}'
         ),
         'published' => array(
-          'text' => Language::get('Status'),
+          'text' => '{LNG_Status}',
           'class' => 'center'
         ),
         'language' => array(
-          'text' => Language::get('Language'),
+          'text' => '{LNG_Language}',
           'class' => 'center'
         ),
         'menu_tooltip' => array(
-          'text' => Language::get('Tooltip')
+          'text' => '{LNG_Tooltip}'
         ),
         'accesskey' => array(
-          'text' => Language::get('Accesskey'),
+          'text' => '{LNG_Accesskey}',
           'class' => 'center'
         ),
         'module' => array(
-          'text' => Language::get('Link').'/'.Language::get('Module')
+          'text' => '{LNG_Link}/{LNG_Module}'
         )
       ),
       /* รูปแบบการแสดงผลของคอลัมน์ (tbody) */
@@ -100,25 +100,25 @@ class View extends \Kotchasan\View
         'edit' => array(
           'class' => 'icon-edit button green',
           'href' => $uri->createBackUri(array('module' => 'menuwrite', 'id' => ':id')),
-          'text' => Language::get('Edit')
+          'text' => '{LNG_Edit}'
         ),
         'delete' => array(
           'class' => 'icon-delete button red',
           'id' => ':id',
-          'text' => Language::get('Delete')
+          'text' => '{LNG_Delete}'
         )
       ),
       /* ปุ่มเพิ่ม */
       'addNew' => array(
         'class' => 'button green icon-plus',
         'href' => $uri->createBackUri(array('module' => 'menuwrite', 'id' => '0')),
-        'text' => Language::get('Add New').' '.Language::get('Menu')
+        'text' => '{LNG_Add New} {LNG_Menu}'
       ),
       /* ฟิลเตอร์ของตาราง */
       'filters' => array(
         'parent' => array(
           'name' => 'parent',
-          'text' => Language::get('Choose'),
+          'text' => '{LNG_Choose}',
           'options' => $installed_menus,
           'value' => $parent
         )
@@ -135,14 +135,14 @@ class View extends \Kotchasan\View
    */
   public function onRow($item)
   {
-    $url = empty($item['menu_url']) ? WEB_URL.'/index.php?module='.$item['module'] : $item['menu_url'];
+    $url = empty($item['menu_url']) ? WEB_URL.'index.php?module='.$item['module'] : $item['menu_url'];
     $text = '';
     for ($i = 0; $i < $item['level']; $i++) {
       $text .= '&nbsp;&nbsp;&nbsp;';
     }
     $item['menu_text'] = (empty($text) ? '' : $text.'↳&nbsp;').$item['menu_text'];
-    $item['move_left'] = '<a id=move_left_'.$item['move_left'].' title="'.Language::get('Move submenu to the top').'" class='.($item['level'] == 0 ? 'hidden' : 'icon-move_left').'></a>';
-    $item['move_right'] = '<a id=move_right_'.$item['move_right'].' title="'.Language::get('Move menu to submenu of the top').'" class='.($item['level'] > $this->toplvl ? 'hidden' : 'icon-move_right').'></a>';
+    $item['move_left'] = '<a id=move_left_'.$item['move_left'].' title="{LNG_Move submenu to the top}" class='.($item['level'] == 0 ? 'hidden' : 'icon-move_left').'></a>';
+    $item['move_right'] = '<a id=move_right_'.$item['move_right'].' title="{LNG_Move menu to submenu of the top}" class='.($item['level'] > $this->toplvl ? 'hidden' : 'icon-move_right').'></a>';
     $menu_publisheds = Language::get('MENU_PUBLISHEDS');
     $item['published'] = $menu_publisheds[$item['published']];
     $item['language'] = empty($item['language']) ? '' : '<img src="'.WEB_URL.'language/'.$item['language'].'.gif" alt="'.$item['language'].'">';

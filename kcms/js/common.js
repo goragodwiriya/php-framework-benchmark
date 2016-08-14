@@ -365,9 +365,44 @@ var doCustomConfirm = function (value) {
   return confirm(value);
 };
 $G(window).Ready(function () {
+  var fontSize = floatval(Cookie.get('fontSize')),
+    patt = /font_size(.*?)\s(small|normal|large)/;
+  var _doChangeFontSize = function () {
+    fontSize = floatval(document.body.getStyle('fontSize'));
+    var hs = patt.exec(this.className);
+    if (hs[2] == 'small') {
+      fontSize = Math.max(6, fontSize - 2);
+    } else if (hs[2] == 'large') {
+      fontSize = Math.min(24, fontSize + 2);
+    } else {
+      fontSize = document.body.get('data-fontSize');
+    }
+    document.body.setStyle('fontSize', fontSize + 'px');
+    Cookie.set('fontSize', fontSize);
+    return false;
+  };
+  document.body.set('data-fontSize', floatval(document.body.getStyle('fontSize')));
+  forEach(document.body.getElementsByTagName('a'), function () {
+    if (patt.test(this.className)) {
+      callClick(this, _doChangeFontSize);
+    }
+  });
+  if (fontSize > 5) {
+    document.body.setStyle('fontSize', fontSize + 'px');
+  }
   if (navigator.userAgent.indexOf("MSIE") > -1) {
     document.body.addClass("ie");
   }
+  var _doMenuClick = function () {
+    if ($E('wait')) {
+      $E('wait').className = 'show';
+    }
+  };
+  forEach($E(document.body).getElementsByTagName('nav'), function () {
+    if ($G(this).hasClass('topmenu sidemenu slidemenu gddmenu')) {
+      new GDDMenu(this, _doMenuClick);
+    }
+  });
   var _scrolltop = 0;
   var toTop = $E('toTop') ? $G('toTop').getTop() : 100;
   document.addEvent('scroll', function () {

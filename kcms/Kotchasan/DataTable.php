@@ -109,7 +109,7 @@ class DataTable extends \Kotchasan\KBase
    *
    * @var array
    */
-  private $actions = array();
+  public $actions = array();
   /**
    * ชื่อฟังก์ชั่น Javascript เรียกหลังจากทำการส่งค่าจาก action ไปประมวลผลแล้ว
    * เช่น doFormSubmit
@@ -234,9 +234,6 @@ class DataTable extends \Kotchasan\KBase
     foreach ($param as $key => $value) {
       $this->$key = $value;
     }
-    if (!empty($this->actions) && $this->checkCol == -1) {
-      $this->checkCol = 1;
-    }
     // รายการต่อหน้า มาจากการเลือกภายในตารง
     $count = self::$request->request('count')->toInt();
     if ($count > 0) {
@@ -252,13 +249,17 @@ class DataTable extends \Kotchasan\KBase
       if ($first === false) {
         if (!empty($this->fields)) {
           foreach ($this->fields as $field) {
-            if (preg_match('/(.*?[`\s]+)?([a-z0-9_]+)`?$/i', $field, $match)) {
+            if (is_array($field)) {
+              $this->columns[$field[1]] = array('text' => $field[1]);
+            } elseif (preg_match('/(.*?[`\s]+)?([a-z0-9_]+)`?$/i', $field, $match)) {
               $this->columns[$match[2]] = array('text' => $match[2]);
             }
           }
         }
       } else {
-        $this->columns = $this->rs->getFields();
+        foreach ($this->rs->getFields() as $k => $v) {
+          $this->columns[$k] = array('text' => $v['name']);
+        }
       }
     } elseif (isset($this->datas)) {
       // อ่านคอลัมน์จากข้อมูลเราการแรก
@@ -307,6 +308,9 @@ class DataTable extends \Kotchasan\KBase
    */
   public function render()
   {
+    if (!empty($this->actions) && $this->checkCol == -1) {
+      $this->checkCol = 1;
+    }
     $url_query = array();
     $hidden_fields = array();
     foreach (self::$request->getQueryParams() as $key => $value) {
@@ -427,10 +431,20 @@ class DataTable extends \Kotchasan\KBase
       $sorts = array();
       foreach (explode(',', $this->sort) as $sort) {
         if (preg_match('/^([a-z0-9_\-]+)([\s]+(desc|asc))?$/i', trim($sort), $match)) {
-          $sort = isset($this->headers[$match[1]]['sort']) ? $this->headers[$match[1]]['sort'] : $match[1];
-          $sortType = isset($match[3]) && strtolower($match[3]) == 'desc' ? 'desc' : 'asc';
-          $this->sorts[$sort] = $sortType;
-          $sorts[] = $sort.' '.$sortType;
+          if (isset($this->headers[$match[1]]['sort'])) {
+            $sort = $this->headers[$match[1]]['sort'];
+          } elseif (isset($this->columns[$match[1]])) {
+            $sort = $match[1];
+          } elseif (isset($this->rs) && $this->rs->fieldExists($match[1])) {
+            $sort = $match[1];
+          } else {
+            $sort = null;
+          }
+          if ($sort) {
+            $sortType = isset($match[3]) && strtolower($match[3]) == 'desc' ? 'desc' : 'asc';
+            $this->sorts[$sort] = $sortType;
+            $sorts[] = $sort.' '.$sortType;
+          }
         }
       }
       $this->sort = implode(',', $sorts);
@@ -618,7 +632,7 @@ class DataTable extends \Kotchasan\KBase
             if (isset($this->onCreateButton)) {
               $attributes = call_user_func($this->onCreateButton, $btn, $attributes, $items);
             }
-            if ($attributes !== false) {
+            if ($attributes && $attributes !== false) {
               $buttons[] = $this->button($btn, $attributes);
             }
           }

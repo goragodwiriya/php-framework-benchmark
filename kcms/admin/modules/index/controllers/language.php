@@ -9,7 +9,6 @@
 namespace Index\Language;
 
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 
 /**
@@ -36,18 +35,17 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-tools">'.Language::get('Tools').'</span></li>');
-      $ul->appendChild('<li><span>'.Language::get('Language').'</span></li>');
+      $ul->appendChild('<li><span class="icon-tools">{LNG_Tools}</span></li>');
+      $ul->appendChild('<li><span>{LNG_Language}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-language">'.$this->title().'</h1>'
       ));
       // แสดงตาราง
       $section->appendChild(createClass('Index\Language\View')->render());
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -55,6 +53,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Add and manage the display language of the site');
+    return '{LNG_Add and manage the display language of the site}';
   }
 }

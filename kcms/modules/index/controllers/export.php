@@ -8,11 +8,8 @@
 
 namespace Index\Export;
 
-use \Gcms\Gcms;
-use \Gcms\Login;
 use \Kotchasan\Template;
 use \Kotchasan\Http\Request;
-use \Kotchasan\View;
 
 /**
  * Controller สำหรับการ Export หรือ Print

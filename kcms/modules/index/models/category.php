@@ -31,20 +31,41 @@ class Model extends \Kotchasan\Model
   public static function all($module_id)
   {
     $result = array();
-    if (is_int($module_id) && $module_id > 0) {
-      $model = new static;
-      $query = $model->db()->createQuery()
-        ->select()
-        ->from('category')
-        ->where(array(array('module_id', $module_id), array('published', '1')))
-        ->cacheOn()
-        ->order('category_id');
-      foreach ($query->toArray()->execute() as $item) {
-        $item['topic'] = Gcms::ser2Str($item, 'topic');
-        $item['detail'] = Gcms::ser2Str($item, 'detail');
-        $item['icon'] = Gcms::ser2Str($item, 'icon');
-        $result[] = (object)ArrayTool::unserialize($item['config'], $item);
-      }
+    $model = new static;
+    $query = $model->db()->createQuery()
+      ->select()
+      ->from('category')
+      ->where(array(array('module_id', (int)$module_id), array('published', '1')))
+      ->cacheOn()
+      ->order('category_id');
+    foreach ($query->toArray()->execute() as $item) {
+      $item['topic'] = Gcms::ser2Str($item, 'topic');
+      $item['detail'] = Gcms::ser2Str($item, 'detail');
+      $item['icon'] = Gcms::ser2Str($item, 'icon');
+      $result[] = (object)ArrayTool::unserialize($item['config'], $item);
+    }
+    return $result;
+  }
+
+  /**
+   * อ่านข้อมูลหมวดหมู่ที่สามารถเผยแพร่ได้
+   * สำหรับใส่ select หรือ menu
+   * 
+   * @param int $module_id
+   * @return array
+   */
+  public static function categories($module_id)
+  {
+    $result = array();
+    $model = new static;
+    $query = $model->db()->createQuery()
+      ->select('category_id', 'topic')
+      ->from('category')
+      ->where(array(array('module_id', (int)$module_id), array('published', '1')))
+      ->cacheOn()
+      ->order('category_id');
+    foreach ($query->toArray()->execute() as $item) {
+      $result[$item['category_id']] = Gcms::ser2Str($item, 'topic');
     }
     return $result;
   }

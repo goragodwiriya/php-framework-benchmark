@@ -39,11 +39,11 @@ class Controller extends \Kotchasan\Controller
         'class' => 'breadcrumbs'
       ));
       $ul = $breadcrumbs->add('ul');
-      $ul->appendChild('<li><span class="icon-settings">'.Language::get('Site settings').'</span></li>');
-      $ul->appendChild('<li><a href="{BACKURL?module=languages&id=0}">'.Language::get('Language').'</a></li>');
+      $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
+      $ul->appendChild('<li><a href="{BACKURL?module=languages&id=0}">{LNG_Language}</a></li>');
       $ul->appendChild('<li><span>'.$title.'</span></li>');
       $section->add('header', array(
-        'innerHTML' => '<h1 class="icon-language">'.$title.' '.Language::get('Language').' '.$id.'</h1>'
+        'innerHTML' => '<h1 class="icon-language">'.$title.' {LNG_Language} '.$id.'</h1>'
       ));
       // แสดงฟอร์ม
       $section->appendChild(createClass('Index\Languageadd\View')->render($id));
@@ -59,6 +59,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Create or Edit').' '.Language::get('Language');
+    return '{LNG_Create or Edit} {LNG_Language}';
   }
 }

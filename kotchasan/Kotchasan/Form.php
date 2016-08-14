@@ -69,6 +69,7 @@ class Form extends \Kotchasan\KBase
         case 'accept':
         case 'options':
         case 'optgroup':
+        case 'multiple':
         case 'validator':
         case 'antispamid':
         case 'text':
@@ -117,11 +118,19 @@ class Form extends \Kotchasan\KBase
     }
     if ($this->tag == 'select') {
       unset($prop['type']);
-      $value = isset($value) ? $value : null;
+      if (isset($multiple)) {
+        $value = isset($value) ? $value : array();
+      } else {
+        $value = isset($value) ? $value : null;
+      }
       if (isset($options)) {
         $datas = array();
         foreach ($options as $k => $v) {
-          $sel = $value == $k ? ' selected' : '';
+          if (is_array($value)) {
+            $sel = in_array($k, $value) ? ' selected' : '';
+          } else {
+            $sel = $value == $k ? ' selected' : '';
+          }
           $datas[] = '<option value="'.$k.'"'.$sel.'>'.$v.'</option>';
         }
         $value = implode('', $datas);
@@ -130,7 +139,11 @@ class Form extends \Kotchasan\KBase
         foreach ($optgroup as $group_label => $options) {
           $datas[] = '<optgroup label="'.$group_label.'">';
           foreach ($options as $k => $v) {
-            $sel = $value == $k ? ' selected' : '';
+            if (is_array($value)) {
+              $sel = in_array($k, $value) ? ' selected' : '';
+            } else {
+              $sel = $value == $k ? ' selected' : '';
+            }
             $datas[] = '<option value="'.$k.'"'.$sel.'>'.$v.'</option>';
           }
           $datas[] = '</optgroup>';
@@ -152,6 +165,9 @@ class Form extends \Kotchasan\KBase
     }
     if (isset($accept) && is_array($accept)) {
       $prop['accept'] = 'accept="'.Mime::getEccept($accept).'"';
+    }
+    if (isset($multiple)) {
+      $prop['multiple'] = 'multiple';
     }
     $prop = implode(' ', $prop);
     if ($this->tag == 'input') {
@@ -327,6 +343,26 @@ class Form extends \Kotchasan\KBase
       unset($attributes['name']);
     }
     if (isset($attributes['id']) && $attributes['id'] == 'submit') {
+      unset($attributes['id']);
+    }
+    $obj->attributes = $attributes;
+    return $obj;
+  }
+
+  public static function reset($attributes = array())
+  {
+    $obj = new static;
+    if (isset($attributes['tag']) && $attributes['tag'] == 'input') {
+      $obj->tag = 'input';
+    } else {
+      $obj->tag = 'button';
+    }
+    unset($attributes['tag']);
+    $attributes['type'] = 'reset';
+    if (isset($attributes['name']) && $attributes['name'] == 'reset') {
+      unset($attributes['name']);
+    }
+    if (isset($attributes['id']) && $attributes['id'] == 'reset') {
       unset($attributes['id']);
     }
     $obj->attributes = $attributes;

@@ -54,7 +54,7 @@ class View extends \Kotchasan\View
         'class' => 'current clear'
       ));
       $article->add('h2', array(
-        'innerHTML' => Language::get('Templates in use')
+        'innerHTML' => '{LNG_Templates in use}'
       ));
       $article = $article->add('article', array(
         'class' => 'item bg-0'
@@ -67,7 +67,7 @@ class View extends \Kotchasan\View
       }
       $article->add('span', array(
         'class' => 'preview',
-        'title' => Language::get('Templates in use'),
+        'title' => '{LNG_Templates in use}',
         'style' => 'background-image:url('.WEB_URL.'skin/'.$config->skin.'/screenshot.jpg)'
       ));
       $article->add('h3', array(
@@ -87,7 +87,7 @@ class View extends \Kotchasan\View
       'class' => 'list clear'
     ));
     $article->add('h2', array(
-      'innerHTML' => Language::get('Other templates')
+      'innerHTML' => '{LNG_Other templates}'
     ));
     // รายการแรกที่แสดง
     $l = sizeof(self::$cfg->colors);
@@ -111,7 +111,7 @@ class View extends \Kotchasan\View
       }
       $article2->add('span', array(
         'class' => 'preview',
-        'title' => Language::get('Thumbnail'),
+        'title' => '{LNG_Thumbnail}',
         'style' => 'background-image:url('.WEB_URL.'skin/'.$text.'/screenshot.jpg)'
       ));
       $article2->add('h3', array(
@@ -127,12 +127,12 @@ class View extends \Kotchasan\View
       ));
       $p = $article2->add('p');
       $p->add('a', array(
-        'innerHTML' => Language::get('Use this template'),
+        'innerHTML' => '{LNG_Use this template}',
         'href' => 'index.php?module=template&amp;page='.$page.'&amp;action=use&amp;theme='.$text
       ));
       $p->appendChild('&nbsp;|&nbsp;');
       $p->add('a', array(
-        'innerHTML' => Language::get('Delete'),
+        'innerHTML' => '{LNG_Delete}',
         'href' => 'index.php?module=template&amp;page='.$page.'&amp;action=delete&amp;theme='.$text
       ));
     }

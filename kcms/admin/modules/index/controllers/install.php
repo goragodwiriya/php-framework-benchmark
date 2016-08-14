@@ -10,7 +10,6 @@ namespace Index\Install;
 
 use \Kotchasan\Http\Request;
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 use \Kotchasan\Html;
 
 /**
@@ -43,26 +42,25 @@ class Controller extends \Kotchasan\Controller
       ));
       $ul = $breadcrumbs->add('ul');
       if ($module !== '') {
-        $ul->appendChild('<li><span class="icon-modules">'.Language::get('Module').'</span></li>');
+        $ul->appendChild('<li><span class="icon-modules">{LNG_Module}</span></li>');
         $type = 'module';
       } elseif ($widget !== '') {
-        $ul->appendChild('<li><span class="icon-widgets">'.Language::get('Widgets').'</span></li>');
+        $ul->appendChild('<li><span class="icon-widgets">{LNG_Widgets}</span></li>');
         $type = 'widget';
       } else {
         // 404.html
         return \Index\Error\Controller::page404();
       }
-      $ul->appendChild('<li><span>'.Language::get('Install').'</span></li>');
+      $ul->appendChild('<li><span>{LNG_Install}</span></li>');
       $section->add('header', array(
         'innerHTML' => '<h1 class="icon-inbox">'.$this->title().'</h1>'
       ));
       // แสดงฟอร์ม
       $section->appendChild(createClass('Index\Install\View')->render($type, $this->module));
       return $section->render();
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -70,6 +68,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return ucfirst($this->module).' - '.Language::get('First Install');
+    return ucfirst($this->module).' - {LNG_First Install}';
   }
 }

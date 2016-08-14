@@ -38,7 +38,7 @@ class View extends \Kotchasan\View
         'ajax' => true
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('Details of').' '.Language::get('Email')
+      'title' => '{LNG_Details of} {LNG_Email}'
     ));
     // reciever
     $reciever = self::$request->get('to')->topic();
@@ -46,14 +46,14 @@ class View extends \Kotchasan\View
       'id' => 'reciever',
       'itemClass' => 'item',
       'labelClass' => 'g-input icon-email-sent',
-      'label' => Language::get('Reciever'),
-      'comment' => Language::get('Recipient&#39;s Email Address Many can be found Each separated by, (comma).'),
+      'label' => '{LNG_Reciever}',
+      'comment' => '{LNG_Recipient&#39;s Email Address Many can be found Each separated by, (comma).}',
       'autofocus',
       'value' => $reciever
     ));
     // email_from
     $datas = array($login['email'] => $login['email']);
-    if (Login::isAdmin()) {
+    if (Login::isAdmin() && empty($login['fb'])) {
       $datas[self::$cfg->noreply_email] = self::$cfg->noreply_email;
       foreach (\Index\Sendmail\Model::findAdmin(self::$request) as $item) {
         $datas[$item] = $item;
@@ -63,7 +63,7 @@ class View extends \Kotchasan\View
       'id' => 'from',
       'itemClass' => 'item',
       'labelClass' => 'g-input icon-email',
-      'label' => Language::get('Sender'),
+      'label' => '{LNG_Sender}',
       'options' => $datas
     ));
     // subject
@@ -71,8 +71,8 @@ class View extends \Kotchasan\View
       'id' => 'subject',
       'itemClass' => 'item',
       'labelClass' => 'g-input icon-edit',
-      'label' => Language::get('Subject'),
-      'comment' => ''.Language::get('Please fill in').' '.Language::get('Subject')
+      'label' => '{LNG_Subject}',
+      'comment' => ''.'{LNG_Please fill in} {LNG_Subject}'
     ));
     // detail
     $fieldset->add('ckeditor', array(
@@ -81,7 +81,7 @@ class View extends \Kotchasan\View
       'height' => 300,
       'language' => Language::name(),
       'toolbar' => 'Email',
-      'label' => Language::get('Detail'),
+      'label' => '{LNG_Detail}',
       'value' => Template::load('', '', 'mailtemplate')
     ));
     $fieldset = $form->add('fieldset', array(
@@ -90,7 +90,7 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large',
-      'value' => Language::get('Send message')
+      'value' => '{LNG_Send message}'
     ));
     return $form->render();
   }

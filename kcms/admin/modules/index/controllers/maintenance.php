@@ -46,22 +46,18 @@ class Controller extends \Kotchasan\Controller
           'class' => 'breadcrumbs'
         ));
         $ul = $breadcrumbs->add('ul');
-        $ul->appendChild('<li><span class="icon-settings">'.Language::get('Site settings').'</span></li>');
-        $ul->appendChild('<li><span>'.Language::get('Maintenance Mode').'</span></li>');
+        $ul->appendChild('<li><span class="icon-settings">{LNG_Site settings}</span></li>');
+        $ul->appendChild('<li><span>{LNG_Maintenance Mode}</span></li>');
         $section->add('header', array(
           'innerHTML' => '<h1 class="icon-write">'.$this->title().'</h1>'
         ));
         // แสดงฟอร์ม
         $section->appendChild(createClass('Index\Maintenance\View')->render($language, $template));
         return $section->render();
-      } else {
-        // 404.html
-        return \Index\Error\Controller::page404();
       }
-    } else {
-      // 404.html
-      return \Index\Error\Controller::page404();
     }
+    // 404.html
+    return \Index\Error\Controller::page404();
   }
 
   /**
@@ -69,6 +65,6 @@ class Controller extends \Kotchasan\Controller
    */
   public function title()
   {
-    return Language::get('Enable/Disable Maintenance Mode');
+    return '{LNG_Enable/Disable Maintenance Mode}';
   }
 }

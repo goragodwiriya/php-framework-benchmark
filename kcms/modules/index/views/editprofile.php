@@ -40,7 +40,7 @@ class View extends \Kotchasan\View
       $index = (object)array('description' => self::$cfg->web_description);
       // รายการ tabs
       $tabs = array();
-      if ($login['fb'] == 1) {
+      if (!empty($login['fb'])) {
         unset(Gcms::$member_tabs['password']);
       }
       foreach (Gcms::$member_tabs AS $key => $values) {

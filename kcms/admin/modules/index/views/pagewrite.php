@@ -41,33 +41,33 @@ class View extends \Kotchasan\View
         'upload' => true
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('Details of').' '.Language::get($index->owner === 'index' ? 'Page' : 'Module')
+      'title' => '{LNG_Details of} '.Language::get($index->owner === 'index' ? 'Page' : 'Module')
     ));
     $groups = $fieldset->add('groups-table', array(
-      'label' => Language::get('Language'),
+      'label' => '{LNG_Language}',
       'id' => 'language',
-      'comment' => Language::get('Select the language of this item (Select the first Is present in every language)'),
+      'comment' => '{LNG_Select the language of this item (Select the first Is present in every language)}',
     ));
     // language
     $groups->add('select', array(
       'id' => 'language',
       'labelClass' => 'g-input icon-language',
       'itemClass' => 'width',
-      'options' => ArrayTool::replace(array('' => Language::get('all languages')), Language::installedLanguage()),
+      'options' => ArrayTool::replace(array('' => '{LNG_all languages}'), Language::installedLanguage()),
       'value' => $index->language
     ));
     $groups->add('a', array(
       'id' => 'btn_copy',
       'class' => 'button icon-copy copy',
-      'title' => Language::get('Copy this item to the selected language')
+      'title' => '{LNG_Copy this item to the selected language}'
     ));
     // module
     $fieldset->add('text', array(
       'id' => 'module',
       'labelClass' => 'g-input icon-modules',
       'itemClass' => 'item',
-      'label' => Language::get('Module'),
-      'comment' => Language::get('Name of this module. English lowercase and number only, short. (Can not use a reserve or a duplicate)'),
+      'label' => '{LNG_Module}',
+      'comment' => '{LNG_Name of this module. English lowercase and number only, short. (Can not use a reserve or a duplicate)}',
       'maxlength' => 64,
       'value' => $index->module
     ));
@@ -76,8 +76,8 @@ class View extends \Kotchasan\View
       'id' => 'topic',
       'labelClass' => 'g-input icon-edit',
       'itemClass' => 'item',
-      'label' => Language::get('Topic'),
-      'comment' => Language::get('Text displayed on the Title Bar of the browser (3 - 255 characters)'),
+      'label' => '{LNG_Topic}',
+      'comment' => '{LNG_Text displayed on the Title Bar of the browser (3 - 255 characters)}',
       'maxlength' => 255,
       'value' => $index->topic
     ));
@@ -86,8 +86,8 @@ class View extends \Kotchasan\View
       'id' => 'keywords',
       'labelClass' => 'g-input icon-tags',
       'itemClass' => 'item',
-      'label' => Language::get('Keywords'),
-      'comment' => Language::get('Text keywords for SEO or Search Engine to search'),
+      'label' => '{LNG_Keywords}',
+      'comment' => '{LNG_Text keywords for SEO or Search Engine to search}',
       'value' => $index->keywords
     ));
     // description
@@ -95,8 +95,8 @@ class View extends \Kotchasan\View
       'id' => 'description',
       'labelClass' => 'g-input icon-file',
       'itemClass' => 'item',
-      'label' => Language::get('Description'),
-      'comment' => Language::get('Text short summary of your story. Which can be used to show in your theme. (If not the program will fill in the contents of the first paragraph)'),
+      'label' => '{LNG_Description}',
+      'comment' => '{LNG_Text short summary of your story. Which can be used to show in your theme. (If not the program will fill in the contents of the first paragraph)}',
       'value' => $index->description
     ));
     // detail
@@ -107,7 +107,7 @@ class View extends \Kotchasan\View
       'language' => Language::name(),
       'toolbar' => 'Document',
       'upload' => true,
-      'label' => Language::get('Detail'),
+      'label' => '{LNG_Detail}',
       'value' => $index->detail
     ));
     // published_date
@@ -115,8 +115,8 @@ class View extends \Kotchasan\View
       'id' => 'published_date',
       'labelClass' => 'g-input icon-calendar',
       'itemClass' => 'item',
-      'label' => Language::get('Published date'),
-      'comment' => Language::get('The date of publication of this information. The publisher will start automatically when you log on due date'),
+      'label' => '{LNG_Published date}',
+      'comment' => '{LNG_The date of publication of this information. The publisher will start automatically when you log on due date}',
       'value' => $index->published_date
     ));
     // published
@@ -124,8 +124,8 @@ class View extends \Kotchasan\View
       'id' => 'published',
       'labelClass' => 'g-input icon-published1',
       'itemClass' => 'item',
-      'label' => Language::get('Published'),
-      'comment' => Language::get('Publish this item'),
+      'label' => '{LNG_Published}',
+      'comment' => '{LNG_Publish this item}',
       'options' => Language::get('PUBLISHEDS'),
       'value' => $index->published
     ));
@@ -135,14 +135,14 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large',
-      'value' => Language::get('Save')
+      'value' => '{LNG_Save}'
     ));
     // preview button
     if ($index->owner == 'index') {
       $fieldset->add('button', array(
         'id' => 'btn_preview',
         'class' => 'button preview large',
-        'value' => Language::get('Preview')
+        'value' => '{LNG_Preview}'
       ));
     }
     // owner

@@ -93,6 +93,13 @@ class Model extends \Kotchasan\Model
           $result[$key][$key.'_'.$menu] = $details[0];
         }
       }
+      // inint module
+      foreach ($result as $owner => $values) {
+        $class = ucfirst($owner).'\Admin\Init\Model';
+        if (method_exists($class, 'initMenuwrite')) {
+          $result[$owner] = $class::initMenuwrite($values);
+        }
+      }
     }
     return $result;
   }
@@ -194,15 +201,12 @@ class Model extends \Kotchasan\Model
         $toplvl = self::$request->post('menu_order')->toInt();
         $action = self::$request->post('action')->toInt();
         if ($action == 1 && preg_match('/^([a-z]+)_(([a-z]+)(_([a-z0-9]+))?|([0-9]+))$/', self::$request->post('index_id')->toString(), $match)) {
+          // module Initial
+          $class = ucfirst($match[1]).'\Admin\Init\Model';
+          if (method_exists($class, 'parseMenuwrite')) {
+            $class::parseMenuwrite($match);
+          }
           if (empty($match[6])) {
-            if (is_file(ROOT_PATH.'modules/'.$match[1].'/models/admin/init.php')) {
-              include ROOT_PATH.'modules/'.$match[1].'/models/admin/init.php';
-              $class = ucfirst($match[1]).'\Admin\Init\Model';
-              if (method_exists($class, 'init')) {
-                // module Initial
-                $class::init($items);
-              }
-            }
             if (isset(Gcms::$module_menus[$match[1]])) {
               $action = 2;
               $save['menu_url'] = Gcms::$module_menus[$match[1]][$match[2]][1];

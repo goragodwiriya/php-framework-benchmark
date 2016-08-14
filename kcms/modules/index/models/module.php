@@ -115,4 +115,61 @@ class Model extends \Kotchasan\Model
     }
     return empty($module) ? false : (object)$module;
   }
+
+  /**
+   * อ่านรายละเอียดของโมดูล
+   * topic, details, keywords, description
+   *
+   * @param Object $index
+   * @return Object
+   */
+  public static function getDetails($index)
+  {
+    // Model
+    $model = new static;
+    $search = $model->db()->createQuery()
+      ->from('index_detail D')
+      ->join('index I', 'INNER', array(array('I.index', 1), array('I.id', 'D.id'), array('I.module_id', 'D.module_id'), array('I.language', 'D.language')))
+      ->where(array(array('I.module_id', (int)$index->module_id), array('D.language', array(\Kotchasan\Language::name(), ''))))
+      ->cacheOn()
+      ->toArray()
+      ->first('D.topic', 'D.detail', 'D.keywords', 'D.description');
+    if ($search) {
+      foreach ($search as $key => $value) {
+        $index->$key = $value;
+      }
+    }
+    return $index;
+  }
+
+  /**
+   * อ่านข้อมูลโมดูลจาก $module และ $owner
+   *
+   * @param string $owner
+   * @param string $module
+   * @param int $module_id
+   * @return object|false คืนค่าข้อมูลโมดูล (Object) ไม่พบคืนค่า false
+   */
+  public static function get($owner, $module, $module_id = 0)
+  {
+    // Model
+    $model = new static;
+    if (empty($module_id)) {
+      $where = array(array('module', $module), array('owner', $owner));
+    } else {
+      $where = array(array('id', (int)$module_id), array('owner', $owner));
+    }
+    $module = $model->db()->createQuery()
+      ->from('modules')
+      ->where($where)
+      ->toArray()
+      ->cacheOn()
+      ->first('id module_id', 'module', 'config');
+    if ($module) {
+      $module = ArrayTool::unserialize($module['config'], $module);
+      unset($module['config']);
+      return (object)$module;
+    }
+    return false;
+  }
 }

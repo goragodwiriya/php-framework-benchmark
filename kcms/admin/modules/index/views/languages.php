@@ -30,7 +30,7 @@ class View extends \Kotchasan\View
   {
     $section = Html::create('div', array(
         'class' => 'subtitle',
-        'innerHTML' => Language::get('Add, edit, and reorder the language of the site. The first item is the default language of the site.')
+        'innerHTML' => '{LNG_Add, edit, and reorder the language of the site. The first item is the default language of the site.}'
     ));
     $list = $section->add('ol', array(
       'class' => 'editinplace_list',
@@ -50,12 +50,12 @@ class View extends \Kotchasan\View
         $row->add('span', array(
           'id' => 'delete_'.$item,
           'class' => 'icon-delete',
-          'title' => Language::get('Delete')
+          'title' => '{LNG_Delete}'
         ));
         $row->add('a', array(
           'class' => 'icon-edit',
           'href' => '?module=languageadd&amp;id='.$item,
-          'title' => Language::get('Edit')
+          'title' => '{LNG_Edit}'
         ));
         $chk = in_array($item, self::$cfg->languages) ? 'check' : 'uncheck';
         $row->add('span', array(
@@ -79,7 +79,7 @@ class View extends \Kotchasan\View
     ));
     $a->add('span', array(
       'class' => 'icon-plus',
-      'innerHTML' => Language::get('Add New').' '.Language::get('Language')
+      'innerHTML' => '{LNG_Add New} {LNG_Language}'
     ));
     $section->script('initLanguages("languages");');
     return $section->render();

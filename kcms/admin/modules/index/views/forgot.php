@@ -9,7 +9,6 @@
 namespace Index\Forgot;
 
 use \Kotchasan\Html;
-use \Kotchasan\Language;
 use \Kotchasan\Login;
 use \Kotchasan\Template;
 
@@ -36,7 +35,7 @@ class View extends \Kotchasan\View
     // h1
     $form->add('h1', array(
       'class' => 'icon-password',
-      'innerHTML' => Language::get('Request new password')
+      'innerHTML' => '{LNG_Request new password}'
     ));
     // message
     if (!empty(Login::$login_message)) {
@@ -51,13 +50,13 @@ class View extends \Kotchasan\View
     $fieldset->add('email', array(
       'id' => 'login_username',
       'labelClass' => 'g-input icon-email',
-      'placeholder' => Language::get('Email'),
+      'placeholder' => '{LNG_Email}',
       'value' => isset(Login::$text_username) ? Login::$text_username : '',
       'autofocus',
       'required',
       'accesskey' => 'e',
       'maxlength' => 255,
-      'comment' => Language::get('New password will be sent to the email address registered. If you do not remember or do not receive emails. Please contact your system administrator (Please check in the Junk Box)')
+      'comment' => '{LNG_New password will be sent to the email address registered. If you do not remember or do not receive emails. Please contact your system administrator (Please check in the Junk Box)}'
     ));
     // input-groups (div สำหรับจัดกลุ่ม input)
     $group = $fieldset->add('groups');
@@ -65,13 +64,13 @@ class View extends \Kotchasan\View
     $group->add('a', array(
       'href' => self::$request->getUri()->withParams(array('action' => 'login'), true),
       'class' => 'td',
-      'title' => Language::get('Administrator Area'),
-      'innerHTML' => ''.Language::get('Sign In').' ?'
+      'title' => '{LNG_Administrator Area}',
+      'innerHTML' => '{LNG_Sign In} ?'
     ));
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large wide',
-      'value' => Language::get('Get new password')
+      'value' => '{LNG_Get new password}'
     ));
     $fieldset->add('hidden', array(
       'id' => 'action',

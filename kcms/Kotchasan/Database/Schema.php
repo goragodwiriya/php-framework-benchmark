@@ -25,7 +25,7 @@ class Schema
    *
    * @var array
    */
-  private $tables;
+  private $tables = array();
   /**
    * Database object
    *

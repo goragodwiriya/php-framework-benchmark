@@ -267,10 +267,10 @@ abstract class Driver extends Query
    * @param string $table_name ชื่อตาราง
    * @return int คืนค่า id ล่าสุดของตาราง
    */
-  public function lastId($table_name)
+  public function getNextId($table_name)
   {
     $result = $this->doCustomQuery("SHOW TABLE STATUS LIKE '$table_name'");
-    return $result && sizeof($result) == 1 ? (int)$result[0]['Auto_increment'] : 0;
+    return $result && sizeof($result) == 1 ? (int)$result[0]['Auto_increment'] : 1;
   }
 
   /**
@@ -422,4 +422,12 @@ abstract class Driver extends Query
    * @return boolean สำเร็จ คืนค่า true, ผิดพลาด คืนค่า false
    */
   abstract public function update($table_name, $condition, $save);
+
+  /**
+   * เลือกฐานข้อมูล.
+   *
+   * @param string $database
+   * @return boolean false หากไม่สำเร็จ
+   */
+  abstract public function selectDB($database);
 }

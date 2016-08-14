@@ -43,8 +43,6 @@ class View extends \Kotchasan\View
     ));
     // detail
     $index->detail = $template->render();
-    // menu
-    $index->menu = $index->module;
     // breadcrumb ของหน้า
     Gcms::$view->addBreadcrumb($index->canonical, $index->topic, $index->description);
     return $index;

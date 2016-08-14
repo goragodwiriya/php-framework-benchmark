@@ -40,33 +40,33 @@ class View extends \Kotchasan\View
         'ajax' => true
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('Menu details')
+      'title' => '{LNG_Menu details}'
     ));
     $groups = $fieldset->add('groups-table', array(
-      'label' => Language::get('Language'),
+      'label' => '{LNG_Language}',
       'id' => 'language',
-      'comment' => Language::get('Select the language of this item (Select the first Is present in every language)'),
+      'comment' => '{LNG_Select the language of this item (Select the first Is present in every language)}',
     ));
     // language
     $groups->add('select', array(
       'id' => 'language',
       'labelClass' => 'g-input icon-language',
       'itemClass' => 'width',
-      'options' => ArrayTool::replace(array('' => Language::get('all languages')), Language::installedLanguage()),
+      'options' => ArrayTool::replace(array('' => '{LNG_all languages}'), Language::installedLanguage()),
       'value' => empty($menu->id) ? '' : $menu->language
     ));
     $groups->add('a', array(
       'id' => 'copy_menu',
       'class' => 'button icon-copy copy',
-      'title' => Language::get('Copy this item to the selected language')
+      'title' => '{LNG_Copy this item to the selected language}'
     ));
     // menu_text
     $fieldset->add('text', array(
       'id' => 'menu_text',
       'labelClass' => 'g-input icon-menus',
       'itemClass' => 'item',
-      'label' => Language::get('Text'),
-      'comment' => Language::get('Text displayed on the menu'),
+      'label' => '{LNG_Text}',
+      'comment' => '{LNG_Text displayed on the menu}',
       'maxlength' => 100,
       'value' => $menu->menu_text
     ));
@@ -75,8 +75,8 @@ class View extends \Kotchasan\View
       'id' => 'menu_tooltip',
       'labelClass' => 'g-input icon-edit',
       'itemClass' => 'item',
-      'label' => Language::get('Tooltip'),
-      'comment' => Language::get('Message when mouse over the menu'),
+      'label' => '{LNG_Tooltip}',
+      'comment' => '{LNG_Message when mouse over the menu}',
       'maxlength' => 100,
       'value' => $menu->menu_tooltip
     ));
@@ -85,20 +85,20 @@ class View extends \Kotchasan\View
       'id' => 'accesskey',
       'labelClass' => 'g-input icon-keyboard',
       'itemClass' => 'item',
-      'label' => Language::get('Accesskey'),
-      'comment' => Language::get('Enter lowercase English letters or numbers to be used as a shortcut to this menu. (Sub-menus do not support the shortcut menu. Do not duplicate keys of the system shortcut)'),
+      'label' => '{LNG_Accesskey}',
+      'comment' => '{LNG_Enter lowercase English letters or numbers to be used as a shortcut to this menu. (Sub-menus do not support the shortcut menu. Do not duplicate keys of the system shortcut)}',
       'value' => $menu->accesskey
     ));
     $fieldset = $form->add('fieldset', array(
-      'title' => Language::get('Installation and position of the menu')
+      'title' => '{LNG_Installation and position of the menu}'
     ));
     // alias
     $fieldset->add('text', array(
       'id' => 'alias',
       'labelClass' => 'g-input icon-edit',
       'itemClass' => 'item',
-      'label' => Language::get('Alias'),
-      'comment' => Language::get('The name of the menu (the default is the name of the module is installed)'),
+      'label' => '{LNG_Alias}',
+      'comment' => '{LNG_The name of the menu (the default is the name of the module is installed)}',
       'value' => $menu->alias
     ));
     // parent
@@ -106,8 +106,8 @@ class View extends \Kotchasan\View
       'id' => 'parent',
       'labelClass' => 'g-input icon-config',
       'itemClass' => 'item',
-      'label' => Language::get('Menu position'),
-      'comment' => Language::get('Select the menu position. The menu will be displayed on the website at the selected position. (Based on templates you are using)'),
+      'label' => '{LNG_Menu position}',
+      'comment' => '{LNG_Select the menu position. The menu will be displayed on the website at the selected position. (Based on templates you are using)}',
       'options' => Language::find('MENU_PARENTS', array('MAINMENU' => 'Main menu')),
       'value' => $menu->parent
     ));
@@ -125,8 +125,8 @@ class View extends \Kotchasan\View
       'id' => 'type',
       'labelClass' => 'g-input icon-config',
       'itemClass' => 'item',
-      'label' => Language::get('Menu type'),
-      'comment' => Language::get('Select the type of menu'),
+      'label' => '{LNG_Menu type}',
+      'comment' => '{LNG_Select the type of menu}',
       'options' => Language::get('MENU_TYPES'),
       'value' => $m
     ));
@@ -135,23 +135,23 @@ class View extends \Kotchasan\View
       'id' => 'menu_order',
       'labelClass' => 'g-input icon-config',
       'itemClass' => 'item',
-      'label' => Language::get('Menu order'),
+      'label' => '{LNG_Menu order}',
       'size' => 8,
-      'comment' => Language::get('The sequence of the desired menu. The menu will be displayed next from the selected item')
+      'comment' => '{LNG_The sequence of the desired menu. The menu will be displayed next from the selected item}'
     ));
     // published
     $fieldset->add('select', array(
       'id' => 'published',
       'labelClass' => 'g-input icon-published1',
       'itemClass' => 'item',
-      'label' => Language::get('Status'),
-      'comment' => Language::get('Publish this item'),
+      'label' => '{LNG_Status}',
+      'comment' => '{LNG_Publish this item}',
       'options' => Language::get('MENU_PUBLISHEDS'),
       'value' => $menu->published
     ));
     $fieldset = $form->add('fieldset', array(
       'id' => 'menu_action',
-      'title' => Language::get('Action when click on menu')
+      'title' => '{LNG_Action when click on menu}'
     ));
     // action
     if ($menu->menu_url != '') {
@@ -165,8 +165,8 @@ class View extends \Kotchasan\View
       'id' => 'action',
       'labelClass' => 'g-input icon-config',
       'itemClass' => 'item',
-      'label' => Language::get('When choosing the menu'),
-      'comment' => Language::get('Choose how to proceed. When you click on the menu'),
+      'label' => '{LNG_When choosing the menu}',
+      'comment' => '{LNG_Choose how to proceed. When you click on the menu}',
       'options' => Language::get('MENU_ACTIONS'),
       'value' => $m
     ));
@@ -175,8 +175,8 @@ class View extends \Kotchasan\View
       'id' => 'index_id',
       'labelClass' => 'g-input icon-modules',
       'itemClass' => 'item action 1',
-      'label' => Language::get('installed module'),
-      'comment' => Language::get('Choose the page you want to open when you click a menu item from a list of web pages or modules already installed'),
+      'label' => '{LNG_installed module}',
+      'comment' => '{LNG_Choose the page you want to open when you click a menu item from a list of web pages or modules already installed}',
       'optgroup' => \Index\Menuwrite\Model::getModules(),
       'value' => $menu->owner.'_'.$menu->index_id
     ));
@@ -185,8 +185,8 @@ class View extends \Kotchasan\View
       'id' => 'menu_url',
       'labelClass' => 'g-input icon-world',
       'itemClass' => 'item action 2',
-      'label' => Language::get('URL'),
-      'comment' => Language::get('Links for this item, which will open this page when click on it'),
+      'label' => '{LNG_URL}',
+      'comment' => '{LNG_Links for this item, which will open this page when click on it}',
       'value' => str_replace(array('{', '}'), array('&#x007B;', '&#x007D;'), $menu->menu_url)
     ));
     // menu_target
@@ -194,8 +194,8 @@ class View extends \Kotchasan\View
       'id' => 'menu_target',
       'labelClass' => 'g-input icon-forward',
       'itemClass' => 'item action 1 2',
-      'label' => Language::get('The opening page of links'),
-      'comment' => Language::get('Determine how to turn the page when a link is clicked'),
+      'label' => '{LNG_The opening page of links}',
+      'comment' => '{LNG_Determine how to turn the page when a link is clicked}',
       'options' => Language::get('MENU_TARGET'),
       'value' => $menu->menu_target
     ));
@@ -205,7 +205,7 @@ class View extends \Kotchasan\View
     // submit
     $fieldset->add('submit', array(
       'class' => 'button ok large',
-      'value' => Language::get('Save')
+      'value' => '{LNG_Save}'
     ));
     // id
     $fieldset->add('hidden', array(

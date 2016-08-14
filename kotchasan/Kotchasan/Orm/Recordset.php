@@ -72,6 +72,12 @@ class Recordset extends Query implements \Iterator
    * @var array
    */
   private $values;
+  /**
+   * รายชื่อฟิลด์
+   *
+   * @var array
+   */
+  private $fields = array();
 
   /**
    * create new Recordset
@@ -345,6 +351,20 @@ class Recordset extends Query implements \Iterator
       $this->first();
     }
     return $this->db()->getFields();
+  }
+
+  /**
+   * ฟังก์ชั่นตรวจสอบว่ามีฟิลด์ หรือไม่.
+   *
+   * @param string $field ชื่อฟิลด์
+   * @return boolean คืนค่า true หากมีฟิลด์นี้อยู่ ไม่พบคืนค่า false
+   */
+  public function fieldExists($field)
+  {
+    if (empty($this->fields)) {
+      $this->fields = Schema::create($this->db())->fields($this->table_name);
+    }
+    return in_array($field, $this->fields);
   }
 
   /**

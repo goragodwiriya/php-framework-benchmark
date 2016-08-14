@@ -308,7 +308,7 @@ function setQueryURL(key, value) {
     }
   }
 }
-function fbLogin(token) {
+function fbLogin() {
   FB.login(function (response) {
     if (response.authResponse) {
       var accessToken = response.authResponse.accessToken;
@@ -319,7 +319,7 @@ function fbLogin(token) {
           for (var prop in response) {
             q.push(prop + '=' + response[prop]);
           }
-          send(WEB_URL + 'xhr.php/index/model/fblogin/chklogin', 'u=' + encodeURIComponent(getCurrentURL()) + '&data=' + encodeURIComponent(q.join('&')) + '&token=' + token, function (xhr) {
+          send(WEB_URL + 'xhr.php/index/model/fblogin/chklogin', 'u=' + encodeURIComponent(getCurrentURL()) + '&data=' + encodeURIComponent(q.join('&')) + '&token=' + encodeURIComponent($E('token').value), function (xhr) {
             var ds = xhr.responseText.toJSON();
             if (ds) {
               if (ds.alert) {

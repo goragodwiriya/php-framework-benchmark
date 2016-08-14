@@ -26,7 +26,7 @@ class Model extends \Kotchasan\Model
   public static function get()
   {
     // url ของตัว update
-    $url = 'http://gcms.in.th/getupdate.php?v='.self::$request->post('v')->filter('0-9a-z\-\.');
+    $url = 'http://gcms.in.th/gcmsupdate.php?v='.self::$request->post('v')->filter('0-9a-z\-\.');
     if ($feedRef = @fopen($url, 'rb')) {
       $contents = '';
       while (!feof($feedRef)) {
@@ -45,6 +45,7 @@ class Model extends \Kotchasan\Model
       curl_close($ch);
     }
     $response = new Response;
-    $response->withHeader('Content-type', 'text/html; charset=utf-8')->setContent($contents)->send();
+    $response->withHeader('Content-type', 'text/html; charset=utf-8')
+      ->withContent($contents)->send();
   }
 }

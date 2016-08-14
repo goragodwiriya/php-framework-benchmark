@@ -10,7 +10,6 @@ namespace Index\Menu;
 
 use \Gcms\Gcms;
 use \Kotchasan\Login;
-use \Kotchasan\Language;
 
 /**
  * รายการเมนูทั้งหมด.
@@ -36,54 +35,54 @@ class Controller extends \Kotchasan\Controller
   public static function getMenus()
   {
     // menu section
-    self::$menus['sections']['home'] = array('h', '<a href="index.php?module=dashboard" accesskey=h title="'.Language::get('Home').'"><span>'.Language::get('Home').'</span></a>');
-    self::$menus['sections']['settings'] = array('1', ''.Language::get('Site settings').'');
-    self::$menus['sections']['index'] = array('2', ''.Language::get('Menus').' &amp; '.Language::get('Web pages').'');
-    self::$menus['sections']['modules'] = array('3', ''.Language::get('Modules').'');
-    self::$menus['sections']['widgets'] = array('4', ''.Language::get('Widgets').'');
-    self::$menus['sections']['users'] = array('5', ''.Language::get('Users').'');
-    self::$menus['sections']['email'] = array('6', ''.Language::get('Mailbox').'');
-    self::$menus['sections']['tools'] = array('7', ''.Language::get('Tools').'');
+    self::$menus['sections']['home'] = array('h', '<a href="index.php?module=dashboard" accesskey=h title="{LNG_Home}"><span>{LNG_Home}</span></a>');
+    self::$menus['sections']['settings'] = array('1', '{LNG_Site settings}');
+    self::$menus['sections']['index'] = array('2', '{LNG_Menus} &amp; {LNG_Web pages}');
+    self::$menus['sections']['modules'] = array('3', '{LNG_Modules}');
+    self::$menus['sections']['widgets'] = array('4', '{LNG_Widgets}');
+    self::$menus['sections']['users'] = array('5', '{LNG_Users}');
+    self::$menus['sections']['email'] = array('6', '{LNG_Mailbox}');
+    self::$menus['sections']['tools'] = array('7', '{LNG_Tools}');
     // settings
-    self::$menus['settings']['system'] = '<a href="index.php?module=system"><span>'.Language::get('General').'</span></a>';
-    self::$menus['settings']['mailserver'] = '<a href="index.php?module=mailserver"><span>'.Language::get('Email settings').'</span></a>';
-    self::$menus['settings']['mailtemplate'] = '<a href="index.php?module=mailtemplate"><span>'.Language::get('Email template').'</span></a>';
-    self::$menus['settings']['template'] = '<a href="index.php?module=template"><span>'.Language::get('Template').'</span></a>';
-    self::$menus['settings']['skin'] = '<a href="index.php?module=skin"><span>'.Language::get('Template settings').'</span></a>';
-    self::$menus['settings']['maintenance'] = '<a href="index.php?module=maintenance"><span>'.Language::get('Maintenance Mode').'</span></a>';
-    self::$menus['settings']['intro'] = '<a href="index.php?module=intro"><span>'.Language::get('Intro Page').'</span></a>';
-    self::$menus['settings']['languages'] = '<a href="index.php?module=languages"><span>'.Language::get('Language').'</span></a>';
-    self::$menus['settings']['other'] = '<a href="index.php?module=other"><span>'.Language::get('Other').'</span></a>';
-    self::$menus['settings']['meta'] = '<a href="index.php?module=meta"><span>'.Language::get('SEO &amp; Social').'</span></a>';
+    self::$menus['settings']['system'] = '<a href="index.php?module=system"><span>{LNG_General}</span></a>';
+    self::$menus['settings']['mailserver'] = '<a href="index.php?module=mailserver"><span>{LNG_Email settings}</span></a>';
+    self::$menus['settings']['mailtemplate'] = '<a href="index.php?module=mailtemplate"><span>{LNG_Email template}</span></a>';
+    self::$menus['settings']['template'] = '<a href="index.php?module=template"><span>{LNG_Template}</span></a>';
+    self::$menus['settings']['skin'] = '<a href="index.php?module=skin"><span>{LNG_Template settings}</span></a>';
+    self::$menus['settings']['maintenance'] = '<a href="index.php?module=maintenance"><span>{LNG_Maintenance Mode}</span></a>';
+    self::$menus['settings']['intro'] = '<a href="index.php?module=intro"><span>{LNG_Intro Page}</span></a>';
+    self::$menus['settings']['languages'] = '<a href="index.php?module=languages"><span>{LNG_Language}</span></a>';
+    self::$menus['settings']['other'] = '<a href="index.php?module=other"><span>{LNG_Other}</span></a>';
+    self::$menus['settings']['meta'] = '<a href="index.php?module=meta"><span>{LNG_SEO &amp; Social}</span></a>';
     // email
-    self::$menus['email']['sendmail'] = '<a href="index.php?module=sendmail"><span>'.Language::get('Email send').'</span></a>';
+    self::$menus['email']['sendmail'] = '<a href="index.php?module=sendmail"><span>{LNG_Email send}</span></a>';
     // เมนู
-    self::$menus['index']['pages'] = '<a href="index.php?module=pages"><span>'.Language::get('Web pages').'</span></a>';
-    self::$menus['index']['insmod'] = '<a href="index.php?module=mods"><span>'.Language::get('installed module').'</span></a>';
-    self::$menus['index']['menu'] = '<a href="index.php?module=menus"><span>'.Language::get('Menus').'</span></a>';
+    self::$menus['index']['pages'] = '<a href="index.php?module=pages"><span>{LNG_Web pages}</span></a>';
+    self::$menus['index']['insmod'] = '<a href="index.php?module=mods"><span>{LNG_installed module}</span></a>';
+    self::$menus['index']['menu'] = '<a href="index.php?module=menus"><span>{LNG_Menus}</span></a>';
     // เมนูสมาชิก
-    self::$menus['users']['memberstatus'] = '<a href="index.php?module=memberstatus"><span>'.Language::get('Member status').'</span></a>';
-    self::$menus['users']['member'] = '<a href="index.php?module=member"><span>'.Language::get('Member List').'</span></a>';
-    self::$menus['users']['register'] = '<a href="index.php?module=register"><span>'.Language::get('Register').'</span></a>';
+    self::$menus['users']['memberstatus'] = '<a href="index.php?module=memberstatus"><span>{LNG_Member status}</span></a>';
+    self::$menus['users']['member'] = '<a href="index.php?module=member"><span>{LNG_Member List}</span></a>';
+    self::$menus['users']['register'] = '<a href="index.php?module=register"><span>{LNG_Register}</span></a>';
     // tools
     self::$menus['tools']['install'] = array();
-    self::$menus['tools']['database'] = '<a href="index.php?module=database"><span>'.Language::get('Database').'</span></a>';
-    self::$menus['tools']['language'] = '<a href="index.php?module=language"><span>'.Language::get('Language').'</span></a>';
-    self::$menus['tools']['debug'] = '<a href="index.php?module=debug"><span>'.Language::get('Debug tool').'</span></a>';
+    self::$menus['tools']['database'] = '<a href="index.php?module=database"><span>{LNG_Database}</span></a>';
+    self::$menus['tools']['language'] = '<a href="index.php?module=language"><span>{LNG_Language}</span></a>';
+    self::$menus['tools']['debug'] = '<a href="index.php?module=debug"><span>{LNG_Debug tool}</span></a>';
     self::$menus['modules'] = array();
     // โมดูลที่ติดตั้งแล้ว
     foreach (Gcms::$install_modules as $item) {
       // ตรวจสอบไฟล์ config
       if (is_file(ROOT_PATH."modules/$item[owner]/controllers/settings.php")) {
-        self::$menus['modules'][$item['module']]['config'] = '<a href="index.php?module='.$item['owner'].'-settings&amp;id='.$item['id'].'"><span>'.Language::get('Config').'</span></a>';
+        self::$menus['modules'][$item['module']]['config'] = '<a href="index.php?module='.$item['owner'].'-settings&amp;id='.$item['id'].'"><span>{LNG_Config}</span></a>';
       }
       // ตรวจสอบไฟล์ category
       if (is_file(ROOT_PATH."modules/$item[owner]/controllers/category.php")) {
-        self::$menus['modules'][$item['module']]['category'] = '<a href="index.php?module='.$item['owner'].'-category&amp;id='.$item['id'].'"><span>'.Language::get('Category').'</span></a>';
+        self::$menus['modules'][$item['module']]['category'] = '<a href="index.php?module='.$item['owner'].'-category&amp;id='.$item['id'].'"><span>{LNG_Category}</span></a>';
       }
       // ตรวจสอบไฟล์ setup
       if (is_file(ROOT_PATH."modules/$item[owner]/controllers/setup.php")) {
-        self::$menus['modules'][$item['module']]['setup'] = '<a href="index.php?module='.$item['owner'].'-setup&amp;id='.$item['id'].'"><span>'.Language::get('Contents').'</span></a>';
+        self::$menus['modules'][$item['module']]['setup'] = '<a href="index.php?module='.$item['owner'].'-setup&amp;id='.$item['id'].'"><span>{LNG_Contents}</span></a>';
       }
     }
     if (!Login::isAdmin()) {
