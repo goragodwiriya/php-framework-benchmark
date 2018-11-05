@@ -1,15 +1,17 @@
 <?php
-/*
+/**
  * @filesource Kotchasan/Cache/Exception.php
- * @link http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Kotchasan\Cache;
 
 /**
- * คลาสสำหรับจัดการข้อผิดพลาดของแคช
+ * คลาสสำหรับจัดการข้อผิดพลาดของแคช.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -17,5 +19,4 @@ namespace Kotchasan\Cache;
  */
 class Exception extends \Exception
 {
-
 }

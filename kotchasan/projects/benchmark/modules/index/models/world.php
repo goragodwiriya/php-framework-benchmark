@@ -1,15 +1,17 @@
 <?php
-/*
- * @filesource index/models/world.php
- * @link http://www.kotchasan.com/
+/**
+ * @filesource modules/index/models/world.php
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Index\World;
 
 /**
- * คลาสสำหรับเชื่อมต่อกับฐานข้อมูลของ GCMS
+ * คลาสสำหรับเชื่อมต่อกับฐานข้อมูลของ GCMS.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -17,10 +19,10 @@ namespace Index\World;
  */
 class Model extends \Kotchasan\Orm\Field
 {
-  /**
-   * table name
-   *
-   * @var string
-   */
-  protected $table = 'world';
+    /**
+     * table name.
+     *
+     * @var string
+     */
+    protected $table = 'world';
 }

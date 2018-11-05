@@ -1,41 +1,46 @@
 #!/bin/sh
 
 list="
-cake-3.1
 laravel-5.1
 symfony-2.7
 fuel-1.8
-yii-2.0
+cake-3.3
 codeigniter-3.0
-slim-3.0
+yii-2.0
 ice-1.1.5
+slim-3.0
 kotchasan
+#doophp
 phalcon-2.0
+somtum
 noframework
 "
 
 php7="
-slim-3.0
-cake-3.1
 laravel-5.1
 symfony-2.7
 fuel-1.8
+cake-3.3
 yii-2.0
 codeigniter-3.0
+slim-3.0
 #phalcon-2.0
 #ice-1.1.5
+#doophp
 kotchasan
+somtum
+noframework
 "
 
 orm="
-cake-3.1
+cake-3.3
 laravel-5.1
 yii-2.0
 kotchasan
 "
 
 select="
-cake-3.1
+cake-3.3
 laravel-5.1
 yii-2.0
 kotchasan
@@ -43,8 +48,8 @@ kotchasan
 
 cms="
 wordpress
-gcms
-kcms
+gcms-10.2
+gcms-11.1.2
 "
 
 db="

@@ -3,13 +3,14 @@
 }
 body {
   margin: 0 auto;
-  font-family: 'Angsana New', Tahoma, Loma, 'Times New Roman', Times, serif;
+  font-family: Tahoma, Loma, "Times New Roman", Times, serif;
   font-size: 12pt;
   color: #000;
   max-width: 210mm;
 }
 h1 {
   font-size: 2em;
+  text-align: center;
 }
 h2 {
   font-size: 1.8em;
@@ -32,35 +33,37 @@ h6 {
 }
 footer {
   margin: 10px 0;
-  background-color: #EEE;
+  background-color: #eee;
   padding: 10px;
 }
 footer p {
   margin: 0;
   color: #666;
 }
-.create, time {
+.create,
+time {
   color: #666;
 }
 .php {
   color: #808000;
 }
 .asp {
-  color: #F0F;
+  color: #f0f;
 }
 .css {
-  color: #C0F;
+  color: #c0f;
 }
 .comment {
   color: #008000;
 }
 .xml {
-  color: #C60;
+  color: #c60;
 }
 .html {
   color: #008080;
 }
-.sql, .tags {
+.sql,
+.tags {
   color: #000080;
 }
 .htaccess {
@@ -69,14 +72,15 @@ footer p {
 .comment {
   color: #393;
 }
-.visited, .count {
+.visited,
+.count {
   color: #669517;
 }
 .reply {
   color: #906;
 }
 .ip {
-  color: #FFA444;
+  color: #ffa444;
 }
 i {
   font-style: italic;
@@ -88,7 +92,7 @@ a {
 em {
   font-style: inherit;
   font-family: inherit;
-  color: #F00;
+  color: #f00;
 }
 strong {
   font-weight: bold;
@@ -108,7 +112,7 @@ u {
   text-decoration: underline;
 }
 .right {
-  text-align: right !important
+  text-align: right !important;
 }
 .left {
   text-align: left !important;
@@ -117,18 +121,46 @@ u {
   text-align: center !important;
 }
 code {
-  background-color: #EAFEE9;
-  border-left: 4px solid #F480D1;
-  margin-top: 10px;
+  background-color: #eafee9;
+  border-left: 4px solid #f480d1;
   padding: 5px 0 5px 5px;
   display: block;
+  margin: 10px 0;
 }
 blockquote {
   display: block;
   font-style: italic;
   position: relative;
-  padding: 5px 20px;
+  padding: 5px 10px 5px 5em;
+  border: 1px dashed #ddd;
   margin: 10px 0;
+}
+blockquote:before {
+  content: "\201C";
+  line-height: 1;
+  font-size: 6em;
+  font-family: Georgia, serif;
+  position: absolute;
+  top: 0;
+  left: 5px;
+  display: block;
+  color: rgba(0, 0, 0, 0.1);
+}
+code + br,
+blockquote + br {
+  display: none;
+}
+code code,
+blockquote blockquote {
+  margin-left: 10px;
+  padding-right: 0;
+}
+code ol,
+blockquote ol,
+code ul,
+blockquote ul {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 blockquote > b {
   font-weight: bold;
@@ -137,10 +169,11 @@ blockquote > b {
   clear: right;
   display: block;
 }
-aside, dl.info {
+aside,
+dl.info {
   position: relative;
-  background-color: #F4F39E;
-  border-color: #DEE184;
+  background-color: #f4f39e;
+  border-color: #dee184;
   margin: 2.5em 0px;
   padding: 1.5em 1em;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
@@ -158,44 +191,48 @@ table {
   border-right: 1px solid #666;
   border-top: 1px solid #666;
 }
-table td, table th, table caption {
+table td,
+table th,
+table caption {
   padding: 5px;
 }
 table caption {
   text-align: left;
 }
-table > thead > tr > th, table caption {
-  background: #EEE;
+table > thead > tr > th,
+table caption {
+  background: #eee;
   border-bottom: 1px solid #666;
 }
 table > thead > tr > th {
   border-left: 1px solid #666;
 }
-table > tbody > tr > td, table > tbody > tr > th {
+table > tbody > tr > td,
+table > tbody > tr > th {
   vertical-align: middle;
   border-bottom: 1px solid #666;
   border-left: 1px solid #666;
-  background-color: #FFF;
+  background-color: #fff;
 }
 table > tbody > tr > th {
   text-align: center;
 }
 table > tbody > tr.bg2 > td {
-  background: #EEE;
+  background: #eee;
 }
 table > tbody > tr.bg2 > th {
-  background: #EEE;
+  background: #eee;
 }
 table > tbody > tr > th {
-  background: #F5F5F5;
+  background: #f5f5f5;
 }
 table > tbody > tr > th.th {
-  background: #EEE;
+  background: #eee;
 }
 table > thead > tr > th.th {
   border-left: 1px solid #666;
 }
 table th > span {
   display: block;
-  color: #F90;
+  color: #f90;
 }

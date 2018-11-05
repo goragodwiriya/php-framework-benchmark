@@ -1,7 +1,9 @@
 # Kotchasan
 
 .htaccess
+.gitignore
+.vscode
 robots.txt
 /datas/*
 /settings/*
-/doc/
+/projects/test/*

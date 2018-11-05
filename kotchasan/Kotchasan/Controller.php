@@ -1,15 +1,17 @@
 <?php
-/*
+/**
  * @filesource Kotchasan/Controller.php
- * @link http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Kotchasan;
 
 /**
- * Controller base class
+ * Controller base class.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -17,5 +19,4 @@ namespace Kotchasan;
  */
 class Controller extends \Kotchasan\KBase
 {
-
 }

@@ -1,8 +1,9 @@
+```if you do not understand please use the Google translate```
 # คชสาร เว็บเฟรมเวิร์ค (Kotchasan Web Framework)
 ช้างนอกจากจะเป็นสัญลักษณ์ของ PHP แล้ว ยังเป็นสัญลักษณ์ประจำชาติของเราอีก
 ผมเลยเลือกที่จะใช้ชื่อนี้เป็นชื่อของ Framework ที่ออกแบบโดยคนไทย 100%
 
-##คุณสมบัติ
+## คุณสมบัติ
 * สถาปัตยกรรม MMVC (Modules Model View Controller) ทำให้การเพิ่มหรือลดโมดูลเป็นไปโดยง่าย ไม่ขึ้นแก่กัน
 * สนับสนุนการทำงานแบบหลายโปรเจ็ค
 * ปฏิบัติตามมาตรฐาน PSR-1, PSR-2, PSR-3, PSR-4, PSR-6, PSR-7
@@ -22,21 +23,38 @@
 
 ## การติดตั้งและนำไปใช้งาน
 ผมออกแบบคชสารเพื่อหลีกเลี่ยงการติดตั้งที่ยุ่งยากตามแบบของ PHP Framework ทั่วไป
-โดยสามารถดาวน์โหลด source code ทั้งหมดจาก github ไปใช้งานได้ทันทีโดยไม่ต้องติดตั้งหรือตั้งค่าใดๆ
+โดยสามารถดาวน์โหลด source code ทั้งหมดจาก GitHub ไปใช้งานได้ทันทีโดยไม่ต้องติดตั้งหรือตั้งค่าใดๆ
 หรือสามารถติดตั้งผ่าน Composer ได้ ```composer require goragod/kotchasan``` https://packagist.org/packages/goragod/kotchasan
 
-##เงื่อนไขการใช้งาน
-* เป็น Open Source สามารถนำไปใช้งานได้ฟรี ไม่มีเงื่อนไข
-* สามารถนำไปพัฒนาต่อยอดเป็นลิขสิทธิ์ของตัวเองได้ (เฉพาะส่วนที่พัฒนาเพิ่มเติมเอง)
+## เงื่อนไขการใช้งาน (License)
+* สามารถนำไปใช้งานได้ฟรี ไม่มีเงื่อนไข
+* สามารถนำไปพัฒนาต่อยอดเป็นลิขสิทธิ์ของตัวเองได้ โดยใช้ชื่ออื่น
 
-##ตัวอย่าง
+## ตัวอย่าง
 โค้ดตัวอย่างทั้งหมดอยู่ในโฟลเดอร์ projects/ ถ้าต้องการทดสอบลองเรียกได้ในนั้น
 ส่วนโปรเจ็ค recordset มีการเรียกใช้ฐานข้อมูลร่วมด้วย ต้องกำหนดค่าฐานข้อมูลที่ settings/database.php ให้ถูกต้องก่อน
 และต้องสร้างตารางฐานข้อมูลด้วย ตามใน projects/orm/modules/index/models/world.php
 
-* http://www.kotchasan.com/projects/welcome/ หน้าต้อนรับของคชสาร
-* http://www.kotchasan.com/projects/site/ สร้างเว็บไซต์ด้วย template และมีเมนู แบบง่ายๆ
-* http://www.kotchasan.com/projects/recordset/ ตัวอย่างการใช้งานฐานข้อมูล (Recordset)
-* http://www.kotchasan.com/projects/admin/ ตัวอย่างการใช้งานฟอร์ม Login
-* http://www.kotchasan.com/projects/youtube/ ตัวอย่างการใช้งาน Youtube API
-* http://www.kotchasan.com/projects/pdf/ ตัวอย่างการแปลง HTML เป็น PDF
+* http://projects.kotchasan.com/welcome/ หน้าต้อนรับของคชสาร
+* http://projects.kotchasan.com/site/ สร้างเว็บไซต์ด้วย template และมีเมนู แบบง่ายๆ
+* http://projects.kotchasan.com/recordset/ ตัวอย่างการใช้งานฐานข้อมูล (Recordset)
+* http://projects.kotchasan.com/admin/ ตัวอย่างการใช้งานฟอร์ม Login
+* http://projects.kotchasan.com/youtube/ ตัวอย่างการใช้งาน Youtube API
+* http://projects.kotchasan.com/api/ ตัวอย่างการสร้างและเรียกใช้ API ด้วยคชสาร
+* http://projects.kotchasan.com/pdf/ ตัวอย่างการแปลง HTML เป็น PDF
+* http://workshop.kotchasan.com/office/admin/ ตัวอย่างการสร้างแอพพลิเคชั่นอย่างง่าย มีระบบสมาชิกและการ Login
+
+## ขอขอบคุณ
+* CKEditor https://ckeditor.com/
+* PHPMailer https://github.com/PHPMailer/PHPMailer
+* FPDF http://www.fpdf.org/
+* IcoMoon https://icomoon.io/
+* คุณ ชลสิทธิ์ จักรศรีพร สำหรับโลโกสวยๆของคชสาร
+
+## การสนับสนุน
+สามารถสนับสนุนผู้จัดทำได้ โดยการบริจาคผ่านบัญชีธนาคาร
+```
+กสิกรไทย สาขากาญจนบุรี
+เลขบัญชี 221-2-78341-5
+ชื่อบัญชี กรกฎ วิริยะ
+```

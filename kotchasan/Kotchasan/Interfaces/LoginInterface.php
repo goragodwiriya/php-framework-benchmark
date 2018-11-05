@@ -1,15 +1,17 @@
 <?php
-/*
+/**
  * @filesource Kotchasan/LoginInterface.php
- * @link http://www.kotchasan.com/
+ *
  * @copyright 2016 Goragod.com
  * @license http://www.kotchasan.com/license/
+ *
+ * @see http://www.kotchasan.com/
  */
 
 namespace Kotchasan;
 
 /**
- * คลาสสำหรับตรวจสอบการ Login
+ * คลาสสำหรับตรวจสอบการ Login.
  *
  * @author Goragod Wiriya <admin@goragod.com>
  *
@@ -17,13 +19,12 @@ namespace Kotchasan;
  */
 interface LoginInterface
 {
-
-  /**
-   * ฟังก์ชั่นตรวจสอบการ login
-   *
-   * @param string $username
-   * @param string $password
-   * @return string|object เข้าระบบสำเร็จคืนค่า Object ข้อมูลสมาชิก, ไม่สำเร็จ คืนค่าข้อความผิดพลาด
-   */
-  public function checkLogin($username, $password);
+    /**
+     * ฟังก์ชั่นตรวจสอบการ login.
+     *
+     * @param array $params ข้อมูลการ login ที่ส่งมา $params = array('username' => '', 'password' => '');
+     *
+     * @return string|array เข้าระบบสำเร็จคืนค่าแอเรย์ข้อมูลสมาชิก, ไม่สำเร็จ คืนค่าข้อความผิดพลาด
+     */
+    public function checkLogin($params);
 }
